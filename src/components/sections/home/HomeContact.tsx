@@ -1,0 +1,138 @@
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
+
+const ORANGE = "#F97316";
+
+export function HomeContact() {
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitted(true);
+  };
+
+  return (
+    <section className="py-24 bg-[#0a0a0a]" id="contact">
+      <div className="container mx-auto px-6 md:px-12">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="mb-14"
+        >
+          <p className="text-xs tracking-[0.3em] uppercase mb-4" style={{ color: ORANGE }}>
+            Get in Touch
+          </p>
+          <h2 className="text-3xl md:text-5xl font-bold leading-tight">
+            Let's Light Up<br />the Sky Together
+          </h2>
+        </motion.div>
+
+        {submitted ? (
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="py-16 text-center border border-white/7"
+            style={{ background: "rgba(255,255,255,0.015)" }}
+          >
+            <p className="text-2xl font-bold mb-2">We've received your message.</p>
+            <p className="text-white/40 text-sm">Our team will reach out within 24 hours.</p>
+          </motion.div>
+        ) : (
+          <motion.form
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            onSubmit={handleSubmit}
+            className="grid grid-cols-1 md:grid-cols-2 gap-5"
+          >
+            {[
+              { label: "Your First Name", name: "firstName", required: true, colSpan: false },
+              { label: "Your Last Name",  name: "lastName",  required: true, colSpan: false },
+              { label: "Phone Number", name: "phone",   required: true, colSpan: false },
+              { label: "Email Address", name: "email",  required: true, colSpan: false },
+            ].map((field) => (
+              <div key={field.name}>
+                <label className="block text-[10px] tracking-[0.2em] uppercase text-white/35 mb-2">
+                  {field.label}{field.required && <span style={{ color: ORANGE }}> *</span>}
+                </label>
+                <input
+                  type={field.name === "email" ? "email" : field.name === "phone" ? "tel" : "text"}
+                  name={field.name}
+                  required={field.required}
+                  className="w-full bg-white/[0.03] border border-white/8 px-4 py-3 text-sm text-white placeholder-white/20 focus:outline-none focus:border-[#F97316]/50 transition-colors duration-200"
+                />
+              </div>
+            ))}
+
+            <div className="md:col-span-2">
+              <label className="block text-[10px] tracking-[0.2em] uppercase text-white/35 mb-2">
+                What's the vibe or concept of your event?
+              </label>
+              <input
+                type="text"
+                name="concept"
+                className="w-full bg-white/[0.03] border border-white/8 px-4 py-3 text-sm text-white placeholder-white/20 focus:outline-none focus:border-[#F97316]/50 transition-colors duration-200"
+                placeholder="e.g. Grand product launch with 500 drones over the marina"
+              />
+            </div>
+
+            <div>
+              <label className="block text-[10px] tracking-[0.2em] uppercase text-white/35 mb-2">
+                What date are you planning for? [ Pick a date ]
+              </label>
+              <input
+                type="date"
+                name="date"
+                className="w-full bg-white/[0.03] border border-white/8 px-4 py-3 text-sm text-white/70 focus:outline-none focus:border-[#F97316]/50 transition-colors duration-200"
+                style={{ colorScheme: "dark" }}
+              />
+            </div>
+
+            <div>
+              <label className="block text-[10px] tracking-[0.2em] uppercase text-white/35 mb-2">
+                Event Location
+              </label>
+              <input
+                type="text"
+                name="location"
+                className="w-full bg-white/[0.03] border border-white/8 px-4 py-3 text-sm text-white placeholder-white/20 focus:outline-none focus:border-[#F97316]/50 transition-colors duration-200"
+                placeholder="City, venue, or region"
+              />
+            </div>
+
+            <div className="md:col-span-2">
+              <label className="block text-[10px] tracking-[0.2em] uppercase text-white/35 mb-2">
+                Share a few more details with us{" "}
+                <span className="text-white/20 normal-case tracking-normal">(up to 100 words)</span>
+              </label>
+              <textarea
+                name="details"
+                rows={4}
+                maxLength={700}
+                className="w-full bg-white/[0.03] border border-white/8 px-4 py-3 text-sm text-white placeholder-white/20 focus:outline-none focus:border-[#F97316]/50 transition-colors duration-200 resize-none"
+                placeholder="Tell us about your event, audience size, special requirements…"
+              />
+            </div>
+
+            <div className="md:col-span-2 flex justify-start">
+              <button
+                type="submit"
+                className="inline-flex items-center gap-3 px-8 py-3.5 text-xs font-bold uppercase tracking-[0.2em] transition-all duration-200 group"
+                style={{ background: ORANGE, color: "#0a0a0a" }}
+                onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.background = "#fff")}
+                onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.background = ORANGE)}
+              >
+                Send Enquiry
+                <ArrowRight size={13} className="transition-transform duration-200 group-hover:translate-x-1" />
+              </button>
+            </div>
+          </motion.form>
+        )}
+      </div>
+    </section>
+  );
+}
