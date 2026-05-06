@@ -35,15 +35,15 @@ const steps = [
 ];
 
 const DroneIcon = ({ size = 12 }: { size?: number }) => (
-  <svg 
-    width={size} 
-    height={size} 
-    viewBox="0 0 24 24" 
-    fill="none" 
-    stroke="currentColor" 
-    strokeWidth="2.5" 
-    strokeLinecap="round" 
-    strokeLinejoin="round" 
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
     className="shrink-0"
     style={{ color: ORANGE }}
   >
@@ -74,7 +74,7 @@ export function Process() {
             How It Works
           </p>
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
-            <h2 className="text-3xl md:text-5xl font-bold leading-tight">
+            <h2 className="text-3xl md:text-5xl leading-tight">
               From Concept to Sky
             </h2>
             <p className="text-white/35 text-sm font-light max-w-xs md:text-right leading-relaxed">

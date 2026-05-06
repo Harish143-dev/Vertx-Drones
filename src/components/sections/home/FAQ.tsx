@@ -51,7 +51,7 @@ export function FAQ() {
           <p className="text-xs tracking-[0.3em] uppercase mb-4" style={{ color: ORANGE }}>
             FAQ
           </p>
-          <h2 className="text-3xl md:text-4xl font-bold">Common Questions</h2>
+          <h2 className="text-3xl md:text-5xl">Common Questions</h2>
         </motion.div>
 
         <div className="max-w-3xl">

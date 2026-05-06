@@ -28,7 +28,7 @@ export function CTABlock() {
             <p className="text-xs tracking-[0.3em] uppercase mb-3" style={{ color: ORANGE }}>
               Ready to Launch?
             </p>
-            <h2 className="text-2xl md:text-4xl font-bold leading-tight">
+            <h2 className="text-3xl md:text-5xl leading-tight">
               Start Your Drone Show
             </h2>
             <p className="text-white/35 text-sm mt-2 font-light max-w-sm">

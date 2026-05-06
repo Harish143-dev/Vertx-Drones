@@ -2,6 +2,14 @@
 @import "tw-animate-css";
 @plugin "@tailwindcss/typography";
 
+@font-face {
+  font-family: 'NextStep';
+  src: url('/fonts/NEXTSTEP.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -122,8 +130,9 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Orbitron', sans-serif;
-    letter-spacing: 0.05em;
+    font-family: 'NextStep', 'Orbitron', sans-serif;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
   }
 }
 

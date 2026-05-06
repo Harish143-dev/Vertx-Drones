@@ -1,31 +1,41 @@
+"use client";
+
 import { motion } from "framer-motion";
-import { Radio, Clock, Cpu, Target } from "lucide-react";
 
 export function Highlights() {
   const highlights = [
-    { label: "Up to 1,000 Drones", icon: Radio },
-    { label: "15-Min Flight Time", icon: Clock },
-    { label: "In-House Technology", icon: Cpu },
-    { label: "Precision Formations", icon: Target }
+    { value: "1000+", label: "Drones Fleet" },
+    { value: "15 MIN",  label: "Flight Time" },
+    { value: "PRO",     label: "In-House Tech" },
+    { value: "PRECISION", label: "Formations" }
   ];
 
   return (
-    <section className="bg-[#0a0a0a] border-b border-white/10 relative z-20">
-      <div className="container mx-auto px-6 md:px-12">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 py-6 md:py-8">
+    <section className="bg-black py-20 border-y border-white/5 relative z-20 overflow-hidden">
+      {/* Decorative Blur */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[100px] bg-[#F97316]/5 blur-[80px] rounded-full pointer-events-none" />
+
+      <div className="container mx-auto px-6 md:px-12 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-px md:bg-white/10">
           {highlights.map((item, i) => (
             <motion.div 
               key={i} 
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="flex items-center gap-4 group justify-center md:justify-start"
+              transition={{ duration: 0.8, delay: i * 0.1 }}
+              className="bg-black py-8 md:py-12 flex flex-col items-center group"
             >
-              <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center shrink-0 group-hover:border-[#F97316]/50 transition-colors">
-                <item.icon size={16} className="text-[#F97316]" />
+              <div className="relative mb-4">
+                <span className="text-4xl md:text-5xl font-bold text-white tracking-tighter transition-all duration-500 group-hover:text-[#F97316]">
+                  {item.value}
+                </span>
+                {/* Micro-glow on hover */}
+                <div className="absolute -inset-2 bg-[#F97316] opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-20" />
               </div>
-              <span className="text-sm md:text-base text-white/70 font-light tracking-wide">{item.label}</span>
+              <span className="text-[10px] md:text-xs uppercase tracking-[0.4em] text-white/30 font-bold group-hover:text-white/60 transition-colors">
+                {item.label}
+              </span>
             </motion.div>
           ))}
         </div>

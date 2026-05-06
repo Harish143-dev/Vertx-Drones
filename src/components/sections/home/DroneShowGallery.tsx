@@ -1,29 +1,22 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-import image1 from "@/assets/images/drone-diamond.png";
-import image2 from "@/assets/images/drone-logo.png";
-import image3 from "@/assets/images/drone-constellation.png";
-import image4 from "@/assets/images/drone-figure.png";
+import video100 from "@/assets/videos/showcase/100drones.mp4";
+import video200 from "@/assets/videos/showcase/200drones.mp4";
+import video300 from "@/assets/videos/showcase/300drones.mp4";
+import video400 from "@/assets/videos/showcase/400drones.mp4";
 
 interface Package {
   drones: number;
   label: string;
-  poster: string;
-  video: string; // drop your .mp4 path here per package
+  video: string;
 }
 
 const packages: Package[] = [
-  { drones: 3500, label: "3,500", poster: image3, video: "" },
-  { drones: 3000, label: "3,000", poster: image2, video: "" },
-  { drones: 2500, label: "2,500", poster: image1, video: "" },
-  { drones: 2000, label: "2,000", poster: image4, video: "" },
-  { drones: 1000, label: "1,000", poster: image2, video: "" },
-  { drones: 500,  label: "500",   poster: image3, video: "" },
-  { drones: 400,  label: "400",   poster: image1, video: "" },
-  { drones: 300,  label: "300",   poster: image4, video: "" },
-  { drones: 200,  label: "200",   poster: image2, video: "" },
-  { drones: 100,  label: "100",   poster: image1, video: "" },
+  { drones: 100, label: "100", video: video100 },
+  { drones: 200, label: "200", video: video200 },
+  { drones: 300, label: "300", video: video300 },
+  { drones: 400, label: "400", video: video400 },
 ];
 
 const ORANGE = "#F97316";
@@ -31,23 +24,21 @@ const MAX = packages.length - 1;
 
 export function DroneShowGallery() {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [direction, setDirection] = useState(0);
   const videoRef = useRef<HTMLVideoElement>(null);
   const current = packages[activeIndex];
 
   const go = (idx: number) => {
-    setDirection(idx > activeIndex ? 1 : -1);
     setActiveIndex(idx);
   };
 
   useEffect(() => {
     if (videoRef.current) {
       videoRef.current.load();
-      if (current.video) videoRef.current.play().catch(() => {});
+      if (current.video) videoRef.current.play().catch(() => { });
     }
   }, [activeIndex, current.video]);
 
-  const fillPct = ((MAX - activeIndex) / MAX) * 100;
+  const fillPct = (activeIndex / MAX) * 100;
 
   return (
     <section className="py-24 bg-[#0a0a0a] relative overflow-hidden">
@@ -90,9 +81,9 @@ export function DroneShowGallery() {
       `}</style>
 
       <div className="container mx-auto px-6 md:px-12 relative z-10 flex flex-col lg:flex-row gap-12 lg:gap-16 lg:items-center">
-        
+
         {/* Left Column: Header & Slider */}
-        <div className="w-full lg:w-5/12 flex flex-col">
+        <div className="w-full lg:w-2xl flex flex-col">
           {/* Header */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -105,7 +96,7 @@ export function DroneShowGallery() {
               Show Packages
             </p>
             <div className="flex flex-col gap-4">
-              <h2 className="text-4xl md:text-5xl font-bold leading-tight">Drone Show Scale</h2>
+              <h2 className="text-3xl md:text-5xl leading-tight">Drone Show Scale</h2>
               <p className="text-white/35 font-light text-sm max-w-xs leading-relaxed">
                 Choose the fleet size and preview the visual impact
               </p>
@@ -138,7 +129,7 @@ export function DroneShowGallery() {
                 <span className="text-white/30 text-sm tracking-widest uppercase">Drones</span>
               </div>
               <span className="text-white/20 text-xs tracking-[0.2em] uppercase">
-                {packages[MAX].label} — {packages[0].label}
+                {packages[0].label} — {packages[MAX].label}
               </span>
             </div>
 
@@ -205,41 +196,21 @@ export function DroneShowGallery() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7, delay: 0.2 }}
-            className="w-full overflow-hidden"
+            className="w-full overflow-hidden relative aspect-video"
             style={{
               border: "1px solid rgba(255,255,255,0.07)",
               boxShadow: `0 0 0 1px rgba(249,115,22,0.05), 0 40px 90px rgba(0,0,0,0.75)`,
             }}
           >
-            <AnimatePresence mode="wait" custom={direction}>
-              <motion.div
-                key={activeIndex}
-                custom={direction}
-                variants={{
-                  enter: (d: number) => ({ opacity: 0, x: d > 0 ? 40 : -40 }),
-                  center: { opacity: 1, x: 0 },
-                  exit:  (d: number) => ({ opacity: 0, x: d > 0 ? -40 : 40 }),
-                }}
-                initial="enter"
-                animate="center"
-                exit="exit"
-                transition={{ duration: 0.45, ease: [0.4, 0, 0.2, 1] }}
-                className="w-full aspect-video"
-              >
-                <video
-                  ref={videoRef}
-                  key={activeIndex}
-                  className="w-full h-full object-cover block"
-                  poster={current.poster}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                >
-                  {current.video && <source src={current.video} type="video/mp4" />}
-                </video>
-              </motion.div>
-            </AnimatePresence>
+            <video
+              ref={videoRef}
+              className="absolute inset-0 w-full h-full object-cover block"
+              autoPlay
+              loop
+              muted
+              playsInline
+              src={current.video}
+            />
           </motion.div>
         </div>
 

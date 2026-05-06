@@ -46,7 +46,7 @@ export function Services() {
             Use Cases
           </p>
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
-            <h2 className="text-3xl md:text-5xl font-bold leading-tight">Every Occasion,<br />Lit from Above</h2>
+            <h2 className="text-3xl md:text-5xl leading-tight">Every Occasion,<br />Lit from Above</h2>
             <p className="text-white/35 text-sm font-light max-w-xs md:text-right leading-relaxed">
               Tailored drone shows for events of every scale and occasion.
             </p>
@@ -65,16 +65,16 @@ export function Services() {
             >
               {/* Background Image */}
               <div className="absolute inset-0 z-0">
-                <img 
-                  src={item.image} 
-                  alt={item.title} 
+                <img
+                  src={item.image}
+                  alt={item.title}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
               </div>
 
               {/* Gradient Overlay */}
               <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/90 via-black/50 to-transparent transition-opacity duration-300" />
-              
+
               <div className="absolute inset-0 z-10 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
               {/* Content */}
