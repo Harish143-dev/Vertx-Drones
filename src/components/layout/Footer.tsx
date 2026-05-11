@@ -9,6 +9,13 @@ export function Footer() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const navigationLinks = [
+    { label: 'Home', href: '/' },
+    { label: 'Portfolio', href: '/portfolio' },
+    { label: 'Show Builder', href: '/simulator' },
+    { label: 'About', href: '/about' },
+  ];
+
   return (
     <footer className="relative bg-black pt-24 pb-12 overflow-hidden border-t border-white/5">
       {/* Decorative Glow */}
@@ -43,10 +50,10 @@ export function Footer() {
           <div className="md:col-span-2 md:col-start-7">
             <h4 className="text-white font-bold text-xs uppercase tracking-[0.3em] mb-8">Navigation</h4>
             <ul className="space-y-4">
-              {['Home', 'Portfolio', 'Simulator', 'About'].map((item) => (
-                <li key={item}>
-                  <Link href={`/${item === 'Home' ? '' : item.toLowerCase()}`} className="text-white/40 hover:text-[#F97316] transition-colors text-sm font-light">
-                    {item}
+              {navigationLinks.map((item) => (
+                <li key={item.label}>
+                  <Link href={item.href} className="text-white/40 hover:text-[#F97316] transition-colors text-sm font-light">
+                    {item.label}
                   </Link>
                 </li>
               ))}

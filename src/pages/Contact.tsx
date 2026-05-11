@@ -1,9 +1,9 @@
 ﻿import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 
-const fadeUp = {
+const fadeUp: Variants = {
   hidden: { opacity: 0, y: 30 },
   show: (i = 0) => ({ opacity: 1, y: 0, transition: { duration: 0.7, delay: i * 0.12, ease: "easeOut" } }),
 };
@@ -32,7 +32,7 @@ export function Contact() {
 
           <motion.div variants={fadeUp} initial="hidden" animate="show" className="mb-16 md:mb-20">
             <p className="text-xs font-medium tracking-[0.3em] text-[#F97316] uppercase mb-4">Get in Touch</p>
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold leading-none tracking-tight">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light leading-[1.1] tracking-tight text-white">
               Let's light<br />
               <span className="text-white/15">your sky.</span>
             </h1>
@@ -81,7 +81,7 @@ export function Contact() {
                       <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                     </svg>
                   </div>
-                  <h3 className="text-2xl font-light tracking-wide">Request Received</h3>
+                  <h3 className="text-xl md:text-2xl font-light tracking-wide">Request Received</h3>
                   <p className="text-white/40 font-light">Our executive team will be in touch within 24 hours.</p>
                   <button onClick={() => setSubmitted(false)}
                     className="text-xs tracking-[0.2em] text-[#F97316] uppercase hover:text-white transition-colors">

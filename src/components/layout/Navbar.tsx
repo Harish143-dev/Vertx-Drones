@@ -40,7 +40,7 @@ export function Navbar() {
     { label: 'Portfolio', href: '/portfolio' },
     { label: 'Corporate', href: '/corporate' },
     { label: 'Wedding', href: '/weddings' },
-    { label: 'Simulator', href: '/simulator' },
+    { label: 'Show Builder', href: '/simulator' },
     { label: 'Blog', href: '/blog' },
   ];
 

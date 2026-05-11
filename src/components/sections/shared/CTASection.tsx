@@ -12,7 +12,7 @@ export function CTASection() {
           viewport={{ once: true }}
           className="max-w-3xl mx-auto"
         >
-          <h2 className="text-4xl md:text-6xl font-light mb-6">Ready to light the sky?</h2>
+          <h2 className="text-3xl md:text-5xl font-light mb-6">Ready to light the sky?</h2>
           <p className="text-xl text-muted-foreground font-light mb-12">
             Contact our executive team to discuss your next major event, cultural production, or brand activation.
           </p>

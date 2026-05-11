@@ -1,15 +1,40 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Loader2 } from "lucide-react";
 
 const ORANGE = "#F97316";
 
 export function HomeContact() {
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSubmitted(true);
+    setIsSubmitting(true);
+    setErrorMsg("");
+
+    const formData = new FormData(e.currentTarget);
+    formData.append("access_key", "e25a8f18-fdd9-49ec-96d5-7c038c34d196");
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await response.json();
+      
+      if (data.success) {
+        setSubmitted(true);
+      } else {
+        setErrorMsg(data.message || "Something went wrong. Please try again.");
+      }
+    } catch (error) {
+      setErrorMsg("Failed to send message. Please try again later.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -25,7 +50,7 @@ export function HomeContact() {
           <p className="text-xs tracking-[0.3em] uppercase mb-4" style={{ color: ORANGE }}>
             Get in Touch
           </p>
-          <h2 className="text-3xl md:text-5xl font-bold leading-tight">
+          <h2 className="text-3xl md:text-5xl font-light leading-tight">
             Let's Light Up<br />the Sky Together
           </h2>
         </motion.div>
@@ -50,10 +75,10 @@ export function HomeContact() {
             className="grid grid-cols-1 md:grid-cols-2 gap-5"
           >
             {[
-              { label: "Your First Name", name: "firstName", required: true, colSpan: false },
-              { label: "Your Last Name",  name: "lastName",  required: true, colSpan: false },
-              { label: "Phone Number", name: "phone",   required: true, colSpan: false },
-              { label: "Email Address", name: "email",  required: true, colSpan: false },
+              { label: "Your First Name", name: "firstName", required: true },
+              { label: "Your Last Name",  name: "lastName",  required: true },
+              { label: "Phone Number", name: "phone",   required: true },
+              { label: "Email Address", name: "email",  required: true },
             ].map((field) => (
               <div key={field.name}>
                 <label className="block text-[10px] tracking-[0.2em] uppercase text-white/35 mb-2">
@@ -110,24 +135,41 @@ export function HomeContact() {
                 <span className="text-white/20 normal-case tracking-normal">(up to 100 words)</span>
               </label>
               <textarea
-                name="details"
+                name="message"
                 rows={4}
                 maxLength={700}
+                required
                 className="w-full bg-white/[0.03] border border-white/8 px-4 py-3 text-sm text-white placeholder-white/20 focus:outline-none focus:border-[#F97316]/50 transition-colors duration-200 resize-none"
                 placeholder="Tell us about your event, audience size, special requirements…"
               />
             </div>
 
+            {errorMsg && (
+              <div className="md:col-span-2 text-red-500 text-sm">
+                {errorMsg}
+              </div>
+            )}
+
             <div className="md:col-span-2 flex justify-start">
               <button
                 type="submit"
-                className="inline-flex items-center gap-3 px-8 py-3.5 text-xs font-bold uppercase tracking-[0.2em] transition-all duration-200 group"
+                disabled={isSubmitting}
+                className="inline-flex items-center justify-center gap-3 px-8 py-3.5 text-xs font-bold uppercase tracking-[0.2em] transition-all duration-200 group disabled:opacity-50 disabled:cursor-not-allowed"
                 style={{ background: ORANGE, color: "#0a0a0a" }}
-                onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.background = "#fff")}
-                onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.background = ORANGE)}
+                onMouseEnter={(e) => !isSubmitting && ((e.currentTarget as HTMLElement).style.background = "#fff")}
+                onMouseLeave={(e) => !isSubmitting && ((e.currentTarget as HTMLElement).style.background = ORANGE)}
               >
-                Send Enquiry
-                <ArrowRight size={13} className="transition-transform duration-200 group-hover:translate-x-1" />
+                {isSubmitting ? (
+                  <>
+                    Sending...
+                    <Loader2 size={13} className="animate-spin" />
+                  </>
+                ) : (
+                  <>
+                    Send Enquiry
+                    <ArrowRight size={13} className="transition-transform duration-200 group-hover:translate-x-1" />
+                  </>
+                )}
               </button>
             </div>
           </motion.form>

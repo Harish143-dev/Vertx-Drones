@@ -24,7 +24,7 @@ export function PortfolioCTA() {
           <p className="text-xs tracking-[0.3em] uppercase mb-6" style={{ color: ORANGE }}>
             Ready?
           </p>
-          <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+          <h2 className="text-3xl md:text-5xl font-light leading-tight mb-6">
             Want a Show
             <br />
             Like This?

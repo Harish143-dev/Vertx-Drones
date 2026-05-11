@@ -27,7 +27,7 @@ export function Testimonials() {
               transition={{ delay: index * 0.2 }}
               className="p-10 glass-panel relative"
             >
-              <div className="text-6xl text-primary/20 absolute top-6 left-6 font-serif leading-none">
+              <div className="text-5xl text-primary/20 absolute top-6 left-6 font-serif leading-none">
                 "
               </div>
               <p className="text-lg md:text-xl font-light text-white/90 leading-relaxed mb-8 relative z-10 pt-4">

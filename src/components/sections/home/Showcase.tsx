@@ -144,7 +144,7 @@ export const Showcase = () => {
               onMouseEnter={() => handleHoverPlay(i, true)}
               onMouseLeave={() => handleHoverPlay(i, false)}
               onClick={() => setActive(it)}
-              className={`group relative overflow-hidden rounded-2xl border border-white/5 bg-white/5 cursor-pointer ${layout[i]}`}
+              className={`group relative overflow-hidden border border-white/5 bg-white/5 cursor-pointer ${layout[i]}`}
             >
               <div className="absolute inset-0 overflow-hidden">
                 <img
