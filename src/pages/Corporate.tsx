@@ -4,7 +4,10 @@ import {
   ArrowRight,
   BadgeCheck,
   BarChart3,
+  BriefcaseBusiness,
   Building2,
+  Eye,
+  Landmark,
   Megaphone,
   Share2,
   Sparkles,
@@ -26,20 +29,48 @@ const fadeUp: Variants = {
   }),
 };
 
+const audiences = [
+  {
+    title: "Brands",
+    copy: "Launch products, campaigns, and identities with a high-impact public reveal.",
+    icon: Sparkles,
+  },
+  {
+    title: "Companies",
+    copy: "Turn summits, annual days, and milestone events into executive-grade moments.",
+    icon: Building2,
+  },
+  {
+    title: "Agencies",
+    copy: "Add a premium outdoor activation layer to campaign, PR, and experiential briefs.",
+    icon: BriefcaseBusiness,
+  },
+  {
+    title: "Government Events",
+    copy: "Create landmark public shows for destinations, tourism, civic days, and festivals.",
+    icon: Landmark,
+  },
+  {
+    title: "Marketing Teams",
+    copy: "Build a launch asset that supports awareness, social reach, and brand recall.",
+    icon: Megaphone,
+  },
+];
+
 const corporateReasons = [
   {
-    title: "High engagement",
-    copy: "A live moment people stop to record.",
+    title: "Audience attention",
+    copy: "A scheduled sky moment that stops the crowd and gives every guest a reason to look up, record, and share.",
     icon: Users,
   },
   {
-    title: "Viral content",
-    copy: "Built for reels, press, and recap films.",
+    title: "Content velocity",
+    copy: "Designed for reels, press photos, launch films, sponsor recaps, and campaign cutdowns from the same live moment.",
     icon: Share2,
   },
   {
-    title: "Premium brand positioning",
-    copy: "A launch signal that feels category-leading.",
+    title: "Premium positioning",
+    copy: "A high-visibility brand signal that feels innovative, category-leading, and worthy of the scale of the occasion.",
     icon: Trophy,
   },
 ];
@@ -47,42 +78,61 @@ const corporateReasons = [
 const useCases = [
   {
     title: "Product launches",
-    copy: "Reveal logos, products, dates, and campaign messages.",
-    tag: "Launch night",
+    copy: "Reveal logos, product silhouettes, launch dates, and campaign lines in a format built for live audience attention and digital replay.",
+    tag: "Launch visibility",
     icon: Sparkles,
   },
   {
-    title: "Brand storytelling",
-    copy: "Turn a campaign idea into a timed aerial sequence.",
-    tag: "Brand film",
+    title: "Campaign amplification",
+    copy: "Turn the big idea into an aerial sequence that gives agencies, creators, media teams, and guests a clear shareable moment.",
+    tag: "Marketing impact",
     icon: Megaphone,
   },
   {
-    title: "Corporate celebrations",
-    copy: "Make annual days, milestones, and summits feel premium.",
-    tag: "Internal events",
+    title: "Corporate milestones",
+    copy: "Make annual days, investor nights, summits, and leadership events feel premium without relying on generic stage production.",
+    tag: "Premium positioning",
     icon: Building2,
   },
   {
-    title: "Government / tourism",
-    copy: "Create landmark shows for cities, festivals, and destinations.",
-    tag: "Public moments",
+    title: "Government and tourism",
+    copy: "Create civic-scale shows for destinations, festivals, public celebrations, and landmark moments that need wide visibility.",
+    tag: "Public reach",
     icon: BadgeCheck,
   },
 ];
 
 const roiPoints = [
   {
-    value: "Social reach",
-    label: "Short-form moments made to travel.",
+    value: "Reach",
+    label: "A show designed to leave the venue through audience videos, short-form content, press photos, and campaign recaps.",
   },
   {
-    value: "Audience engagement",
-    label: "Crowds watch, record, and share.",
+    value: "Engagement",
+    label: "A live focal point that turns passive attendees into active viewers, recorders, and sharers.",
   },
   {
     value: "PR value",
-    label: "One strong image for press and recaps.",
+    label: "A strong visual hook for media coverage, post-event storytelling, internal communications, and stakeholder reports.",
+  },
+  {
+    value: "Brand recall",
+    label: "Your identity appears as the headline moment, not just as signage around the venue.",
+  },
+];
+
+const impactSteps = [
+  {
+    title: "Before",
+    copy: "Use the drone show as the teaser, invite hook, countdown asset, or premium reveal promise.",
+  },
+  {
+    title: "During",
+    copy: "Own the highest-attention moment of the night with branded choreography timed to the audience peak.",
+  },
+  {
+    title: "After",
+    copy: "Extend the campaign through reels, PR stills, recap films, internal decks, and sponsor reports.",
   },
 ];
 
@@ -91,7 +141,7 @@ export default function Corporate() {
     <div className="min-h-screen overflow-hidden bg-[#0a0a0a] text-foreground font-sans">
       <Navbar />
       <main>
-        <section className="relative min-h-[82vh] overflow-hidden pt-28 md:pt-32">
+        <section className="relative min-h-screen overflow-hidden pt-48 md:pt-52">
           <div className="absolute inset-0">
             <img
               src={corporateImg}
@@ -120,7 +170,7 @@ export default function Corporate() {
                 custom={0.12}
                 className="max-w-4xl text-2xl font-light leading-[1.1] tracking-tight text-white sm:text-3xl md:text-4xl lg:text-5xl"
               >
-                Brand the Sky
+                Brand visibility, built for impact.
               </motion.h1>
               <motion.p
                 variants={fadeUp}
@@ -129,7 +179,7 @@ export default function Corporate() {
                 custom={0.24}
                 className="mt-6 max-w-2xl text-base font-light leading-relaxed text-white/55 md:text-lg"
               >
-                Drone shows for launches, campaigns, milestones, and public moments.
+                Premium drone shows for brands, companies, agencies, government events, and marketing teams that need visibility, reach, PR value, and audience engagement.
               </motion.p>
               <motion.div
                 variants={fadeUp}
@@ -142,10 +192,57 @@ export default function Corporate() {
                   href="/contact"
                   className="inline-flex items-center justify-center gap-3 bg-[#F97316] px-7 py-3.5 text-xs font-bold uppercase tracking-[0.18em] text-[#0a0a0a] transition-all duration-300 hover:bg-white"
                 >
-                  Plan Your Brand Show
+                  Plan a Corporate Show
                   <ArrowRight size={15} />
                 </Link>
               </motion.div>
+            </div>
+          </div>
+        </section>
+
+        <section className="border-y border-white/5 bg-[#050505] py-20">
+          <div className="container mx-auto px-6 md:px-12">
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true }}
+              className="mb-10 flex flex-col gap-5 md:flex-row md:items-end md:justify-between"
+            >
+              <div>
+                <p className="mb-4 text-xs uppercase tracking-[0.3em]" style={{ color: ORANGE }}>
+                  Built For
+                </p>
+                <h2 className="max-w-2xl text-3xl font-light leading-tight md:text-5xl">
+                  High-stakes brand moments
+                </h2>
+              </div>
+              <p className="max-w-sm text-sm font-light leading-relaxed text-white/40 md:text-right">
+                Clean execution for teams that need more than spectacle: visibility, attention, and marketing value.
+              </p>
+            </motion.div>
+
+            <div className="grid gap-px border border-white/8 bg-white/8 md:grid-cols-5">
+              {audiences.map((item, index) => {
+                const Icon = item.icon;
+                return (
+                  <motion.article
+                    key={item.title}
+                    variants={fadeUp}
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={{ once: true }}
+                    custom={index * 0.06}
+                    className="min-h-52 bg-[#0a0a0a] p-5 transition-colors duration-300 hover:bg-[#101010]"
+                  >
+                    <Icon className="mb-8 text-[#F97316]" size={22} />
+                    <h3 className="mb-3 text-base font-bold text-white">{item.title}</h3>
+                    <p className="text-xs font-light leading-relaxed text-white/42">
+                      {item.copy}
+                    </p>
+                  </motion.article>
+                );
+              })}
             </div>
           </div>
         </section>
@@ -163,8 +260,11 @@ export default function Corporate() {
                 Why Corporate Drone Shows
               </p>
               <h2 className="text-3xl font-light leading-tight md:text-5xl">
-                Why it works
+                Why brands choose it
               </h2>
+              <p className="mt-5 max-w-2xl text-sm font-light leading-relaxed text-white/42">
+                Corporate buyers do not invest only for visuals. They invest because the show creates a marketing asset, a PR angle, and a premium memory around the brand.
+              </p>
             </motion.div>
 
             <div className="grid gap-4 md:grid-cols-3">
@@ -210,7 +310,7 @@ export default function Corporate() {
                   Where it fits
                 </h2>
                 <p className="mt-5 max-w-sm text-sm font-light leading-relaxed text-white/40">
-                  Clear show formats for the moments brands need people to notice.
+                  Clear show formats for the moments brands, agencies, and public teams need people to notice.
                 </p>
               </motion.div>
 
@@ -266,13 +366,16 @@ export default function Corporate() {
                   ROI Angle
                 </p>
                 <h2 className="max-w-3xl text-3xl font-light leading-tight md:text-5xl">
-                  Measurable impact
+                  Attention you can reuse
                 </h2>
+                <p className="mt-5 max-w-2xl text-sm font-light leading-relaxed text-white/42">
+                  The show becomes a high-value content engine before, during, and after the event. One live moment creates multiple marketing outputs.
+                </p>
               </div>
               <BarChart3 className="hidden text-[#F97316] md:block" size={42} />
             </motion.div>
 
-            <div className="grid gap-4 md:grid-cols-3">
+            <div className="grid gap-4 md:grid-cols-4">
               {roiPoints.map((item, index) => (
                 <motion.div
                   key={item.value}
@@ -283,7 +386,7 @@ export default function Corporate() {
                   custom={index * 0.1}
                   className="border-t border-white/10 pt-6"
                 >
-                  <p className="mb-3 font-display text-2xl text-white md:text-3xl">
+                  <p className="mb-3 font-display text-2xl text-white md:text-[1.7rem]">
                     {item.value}
                   </p>
                   <p className="text-sm font-light leading-relaxed text-white/45">
@@ -291,6 +394,53 @@ export default function Corporate() {
                   </p>
                 </motion.div>
               ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-[#050505] py-24">
+          <div className="container mx-auto px-6 md:px-12">
+            <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+              <motion.div
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true }}
+              >
+                <p className="mb-4 text-xs uppercase tracking-[0.3em]" style={{ color: ORANGE }}>
+                  Marketing Value
+                </p>
+                <h2 className="max-w-2xl text-3xl font-light leading-tight md:text-5xl">
+                  A campaign asset
+                </h2>
+                <p className="mt-5 max-w-md text-sm font-light leading-relaxed text-white/42">
+                  We shape the sequence around what your team needs to communicate: logo, message, launch date, product idea, sponsor visibility, or destination story.
+                </p>
+              </motion.div>
+
+              <div className="space-y-4">
+                {impactSteps.map((item, index) => (
+                  <motion.div
+                    key={item.title}
+                    variants={fadeUp}
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={{ once: true }}
+                    custom={index * 0.08}
+                    className="grid gap-4 border border-white/8 bg-white/[0.02] p-6 sm:grid-cols-[9rem_1fr]"
+                  >
+                    <div className="flex items-center gap-3 text-[#F97316]">
+                      <Eye size={18} />
+                      <p className="text-[10px] font-bold uppercase tracking-[0.22em]">
+                        {item.title}
+                      </p>
+                    </div>
+                    <p className="text-sm font-light leading-relaxed text-white/48">
+                      {item.copy}
+                    </p>
+                  </motion.div>
+                ))}
+              </div>
             </div>
           </div>
         </section>
@@ -306,16 +456,16 @@ export default function Corporate() {
               className="mx-auto max-w-2xl"
             >
               <p className="mb-5 text-xs uppercase tracking-[0.3em]" style={{ color: ORANGE }}>
-                Ready for launch?
+                Ready to own the moment?
               </p>
               <h2 className="mb-8 text-3xl font-light leading-tight md:text-5xl">
-                Plan your brand show
+                Build your brand show.
               </h2>
               <Link
                 href="/contact"
                 className="inline-flex items-center justify-center gap-3 bg-[#F97316] px-9 py-4 text-xs font-bold uppercase tracking-[0.2em] text-[#0a0a0a] transition-all duration-300 hover:bg-white"
               >
-                Plan Your Brand Show
+                Plan a Corporate Show
                 <ArrowRight size={15} />
               </Link>
             </motion.div>

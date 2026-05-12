@@ -1,7 +1,6 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { PortfolioHero } from "@/components/sections/portfolio/PortfolioHero";
-import { PortfolioStats } from "@/components/sections/portfolio/PortfolioStats";
 import { PortfolioGallery } from "@/components/sections/portfolio/PortfolioGallery";
 import { PortfolioCTA } from "@/components/sections/portfolio/PortfolioCTA";
 
@@ -14,8 +13,6 @@ export default function Portfolio() {
         <PortfolioHero />
 
         {/* 2. Stats Strip — animated counters */}
-        <PortfolioStats />
-
         {/* 3. Gallery — filterable project grid + lightbox */}
         <PortfolioGallery />
 

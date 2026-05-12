@@ -6,7 +6,7 @@ const ORANGE = "#F97316";
 
 export function PortfolioHero() {
   return (
-    <section className="relative min-h-[72vh] overflow-hidden bg-[#0a0a0a] pt-28 md:pt-32">
+    <section className="relative min-h-screen overflow-hidden bg-[#0a0a0a] pt-52 md:pt-60">
       <div className="absolute inset-0 z-0">
         <img
           src={heroBg}

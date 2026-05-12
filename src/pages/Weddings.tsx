@@ -53,7 +53,7 @@ export default function Weddings() {
     <div className="min-h-screen overflow-hidden bg-[#0a0a0a] text-foreground font-sans">
       <Navbar />
       <main>
-        <section className="relative min-h-[82vh] overflow-hidden pt-28 md:pt-32">
+        <section className="relative min-h-screen overflow-hidden pt-48 md:pt-52">
           <div className="absolute inset-0">
             <img
               src={weddingImg}
