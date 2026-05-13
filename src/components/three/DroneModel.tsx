@@ -107,7 +107,7 @@ export function FormationPreviewScene({
         : [4, 2.5, 12];
 
   return (
-    <div className="h-[420px] w-full md:h-[540px]" style={{ background: "#020208" }}>
+    <div className="h-[480px] w-full md:h-[620px]" style={{ background: "#020208" }}>
       <Canvas
         dpr={[1, 2]}
         camera={{ position: cameraPosition, fov: 38, near: 0.1, far: 200 }}
@@ -118,7 +118,16 @@ export function FormationPreviewScene({
         <fog attach="fog" args={["#020208", 12, 28]} />
 
         {/* Minimal ambient — just enough to hint at silhouettes */}
-        <ambientLight intensity={0.04} />
+        <ambientLight intensity={0.16} />
+        <directionalLight position={[4, 5, 5]} intensity={1.6} color="#ffffff" />
+        <spotLight
+          position={[-5, 4, 4]}
+          angle={0.42}
+          penumbra={0.8}
+          intensity={3.2}
+          color="#d9f3ff"
+        />
+        <pointLight position={[0, -1.1, 4]} intensity={2.5} color="#F97316" />
 
         {/* Stars background */}
         <NightSkyStars />
@@ -129,9 +138,9 @@ export function FormationPreviewScene({
         <OrbitControls enablePan={false} enableZoom={false} />
         <EffectComposer>
           <Bloom
-            intensity={1.8}
-            luminanceThreshold={0.1}
-            luminanceSmoothing={0.4}
+            intensity={2.15}
+            luminanceThreshold={0.08}
+            luminanceSmoothing={0.46}
             mipmapBlur
           />
         </EffectComposer>
@@ -145,8 +154,8 @@ export function FormationPreviewScene({
    ────────────────────────────────────────────────────────────── */
 function NightSkyStars() {
   const starPositions = useMemo(() => {
-    const positions = new Float32Array(600 * 3);
-    for (let i = 0; i < 600; i++) {
+    const positions = new Float32Array(1200 * 3);
+    for (let i = 0; i < 1200; i++) {
       positions[i * 3] = (Math.random() - 0.5) * 40;
       positions[i * 3 + 1] = Math.random() * 16 + 2;
       positions[i * 3 + 2] = (Math.random() - 0.5) * 40 - 8;
@@ -177,6 +186,16 @@ function NightSkyStars() {
    Shared LED dot geometry (single sphere, reused by all drones)
    ────────────────────────────────────────────────────────────── */
 const ledDotGeo = new THREE.SphereGeometry(0.028, 12, 10);
+const ledHaloGeo = new THREE.SphereGeometry(0.075, 16, 12);
+const microArmGeo = new THREE.BoxGeometry(0.16, 0.006, 0.008);
+const microBodyGeo = new THREE.BoxGeometry(0.038, 0.018, 0.032);
+const microNavGeo = new THREE.SphereGeometry(0.012, 8, 6);
+const microRotorGeo = new THREE.TorusGeometry(0.045, 0.004, 6, 18);
+const microDroneMaterial = new THREE.MeshBasicMaterial({
+  color: "#05070a",
+  transparent: true,
+  opacity: 0.82,
+});
 
 function FormationSwarm({
   droneCount,
@@ -228,6 +247,7 @@ function FormationSwarm({
           key={`${shape}-${droneCount}-${index}`}
           position={point}
           index={index}
+          droneCount={droneCount}
           color={colorPalette[index % colorPalette.length]}
         />
       ))}
@@ -242,13 +262,15 @@ function FormationSwarm({
 function DroneLED({
   position,
   index,
+  droneCount,
   color,
 }: {
   position: THREE.Vector3;
   index: number;
+  droneCount: number;
   color: string;
 }) {
-  const ref = useRef<THREE.Mesh>(null);
+  const ref = useRef<THREE.Group>(null);
 
   // Unique animation offsets for each drone
   const phase = useMemo(() => seededNoise(index * 7 + 13, 6.28), [index]);
@@ -270,6 +292,28 @@ function DroneLED({
       }),
     [color]
   );
+  const haloMat = useMemo(
+    () =>
+      new THREE.MeshBasicMaterial({
+        color,
+        transparent: true,
+        opacity: 0.2,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false,
+      }),
+    [color]
+  );
+  const navMat = useMemo(
+    () =>
+      new THREE.MeshBasicMaterial({
+        color,
+        transparent: true,
+        opacity: 0.9,
+      }),
+    [color]
+  );
+  const detailStride = droneCount <= 300 ? 1 : droneCount <= 500 ? 2 : droneCount <= 1000 ? 4 : 6;
+  const showMicroDrone = index % detailStride === 0;
 
   useFrame(({ clock }) => {
     const t = clock.elapsedTime;
@@ -284,13 +328,51 @@ function DroneLED({
   });
 
   return (
-    <mesh
+    <group
       ref={ref}
-      geometry={ledDotGeo}
       position={[position.x, position.y, position.z]}
     >
-      <primitive object={mat} attach="material" />
-    </mesh>
+      <mesh geometry={ledHaloGeo}>
+        <primitive object={haloMat} attach="material" />
+      </mesh>
+      {showMicroDrone && (
+        <group rotation={[0, phase, 0]}>
+          <mesh geometry={microBodyGeo}>
+            <primitive object={microDroneMaterial} attach="material" />
+          </mesh>
+          <mesh geometry={microArmGeo}>
+            <primitive object={microDroneMaterial} attach="material" />
+          </mesh>
+          <mesh geometry={microArmGeo} rotation={[0, Math.PI / 2, 0]}>
+            <primitive object={microDroneMaterial} attach="material" />
+          </mesh>
+          {[
+            [-0.08, 0.002, -0.08],
+            [0.08, 0.002, -0.08],
+            [-0.08, 0.002, 0.08],
+            [0.08, 0.002, 0.08],
+          ].map((rotorPosition, rotorIndex) => (
+            <mesh
+              key={rotorIndex}
+              geometry={microRotorGeo}
+              position={rotorPosition as [number, number, number]}
+              rotation={[Math.PI / 2, 0, 0]}
+            >
+              <primitive object={microDroneMaterial} attach="material" />
+            </mesh>
+          ))}
+          <mesh geometry={microNavGeo} position={[0.075, 0.012, 0]}>
+            <primitive object={navMat} attach="material" />
+          </mesh>
+          <mesh geometry={microNavGeo} position={[-0.075, 0.012, 0]}>
+            <primitive object={navMat} attach="material" />
+          </mesh>
+        </group>
+      )}
+      <mesh geometry={ledDotGeo}>
+        <primitive object={mat} attach="material" />
+      </mesh>
+    </group>
   );
 }
 
@@ -461,15 +543,40 @@ function createFormationPoints(shape: FormationShape, droneCount: number) {
    3D GENERATIVE ALGORITHMS
    ────────────────────────────────────────────────────────────── */
 
+function linePoint(
+  start: [number, number, number],
+  end: [number, number, number],
+  t: number,
+  jitter = 0.035
+) {
+  return new THREE.Vector3(
+    start[0] + (end[0] - start[0]) * t + (Math.random() - 0.5) * jitter,
+    start[1] + (end[1] - start[1]) * t + (Math.random() - 0.5) * jitter,
+    start[2] + (end[2] - start[2]) * t + (Math.random() - 0.5) * jitter
+  );
+}
+
+function pushStroke(
+  points: THREE.Vector3[],
+  amount: number,
+  start: [number, number, number],
+  end: [number, number, number],
+  jitter = 0.035
+) {
+  for (let i = 0; i < amount; i++) {
+    points.push(linePoint(start, end, Math.random(), jitter));
+  }
+}
+
 function generateBird3D(count: number): THREE.Vector3[] {
   const points: THREE.Vector3[] = [];
 
   // Proportional allocation
-  const headCount  = Math.floor(count * 0.05);
-  const neckCount  = Math.floor(count * 0.04);
-  const bodyCount  = Math.floor(count * 0.10);
-  const wingCount  = Math.floor(count * 0.60);
-  const tailCount  = Math.floor(count * 0.10);
+  const headCount  = Math.floor(count * 0.045);
+  const neckCount  = Math.floor(count * 0.035);
+  const bodyCount  = Math.floor(count * 0.09);
+  const wingCount  = Math.floor(count * 0.42);
+  const tailCount  = Math.floor(count * 0.09);
   const featherCount = count - headCount - neckCount - bodyCount - wingCount - tailCount;
 
   // Helper: point inside ellipsoid
@@ -523,21 +630,45 @@ function generateBird3D(count: number): THREE.Vector3[] {
   }
 
   // 6. Primary feathers — individual quills along trailing wing edge
-  const quillCount = 10;
+  const quillCount = 16;
   for (let i = 0; i < featherCount; i++) {
     const side  = i % 2 === 0 ? -1 : 1;
-    const qi    = Math.floor(Math.random() * quillCount);
-    const span  = 0.35 + (qi / quillCount) * 0.65;
-    const rootX = span * 4.2 * side;
-    const rootY = Math.pow(span, 1.8) * 1.2 + 0.4;
-    const rootZ = span * 0.8 + 0.5;
-    const t     = Math.random();
-    const featherLen = 0.6 * (1 - span * 0.4);
-    points.push(new THREE.Vector3(
-      rootX + t * 0.1 * side,
-      rootY - t * featherLen * 0.3,
-      rootZ + t * featherLen
-    ));
+
+    if (i < featherCount * 0.6) {
+      const qi    = Math.floor(Math.random() * quillCount);
+      const span  = 0.28 + (qi / quillCount) * 0.72;
+      const rootX = span * 4.25 * side;
+      const rootY = Math.pow(span, 1.85) * 1.2 + 0.42;
+      const rootZ = span * 0.8 + 0.5;
+      const t     = Math.random();
+      const featherLen = 0.58 + (1 - span) * 0.62;
+      points.push(new THREE.Vector3(
+        rootX + t * 0.22 * side,
+        rootY - t * featherLen * 0.36,
+        rootZ + t * featherLen
+      ));
+    } else if (i < featherCount * 0.86) {
+      const span = Math.random();
+      points.push(new THREE.Vector3(
+        side * (0.35 + span * 4.2),
+        Math.pow(span, 1.8) * 1.25 + 0.46,
+        span * 0.86 - 0.54 + (Math.random() - 0.5) * 0.05
+      ));
+    } else if (i < featherCount * 0.94) {
+      const t = Math.random();
+      points.push(new THREE.Vector3(
+        (Math.random() - 0.5) * 0.18,
+        1.1 + (Math.random() - 0.5) * 0.08,
+        -1.48 - t * 0.55
+      ));
+    } else {
+      const a = Math.random() * Math.PI * 2;
+      points.push(new THREE.Vector3(
+        Math.cos(a) * 0.08,
+        1.18 + Math.sin(a) * 0.08,
+        -1.42
+      ));
+    }
   }
 
   return points;
@@ -547,8 +678,9 @@ function generateTree3D(count: number): THREE.Vector3[] {
   const points: THREE.Vector3[] = [];
 
   const trunkCount   = Math.floor(count * 0.12);
-  const branchCount  = Math.floor(count * 0.18);
-  const canopyCount  = count - trunkCount - branchCount;
+  const rootCount    = Math.floor(count * 0.08);
+  const branchCount  = Math.floor(count * 0.24);
+  const canopyCount  = count - trunkCount - rootCount - branchCount;
 
   // 1. Trunk — tapered cylinder
   for (let i = 0; i < trunkCount; i++) {
@@ -564,18 +696,31 @@ function generateTree3D(count: number): THREE.Vector3[] {
   }
 
   // 2. Main branches — 5 large limbs spreading out
+  for (let i = 0; i < rootCount; i++) {
+    const rootAngle = (i % 7) * (Math.PI * 2 / 7);
+    const t = Math.random();
+    const spread = 0.25 + t * 1.35;
+    points.push(new THREE.Vector3(
+      Math.cos(rootAngle) * spread + (Math.random() - 0.5) * 0.08,
+      -2.35 + t * 0.18,
+      Math.sin(rootAngle) * spread + (Math.random() - 0.5) * 0.08
+    ));
+  }
+
   const branchDirs = [
-    [1, 0], [-1, 0], [0, 1], [0, -1], [0.7, 0.7]
+    [1, 0], [-1, 0], [0, 1], [0, -1], [0.7, 0.7],
+    [-0.7, 0.7], [0.7, -0.7], [-0.7, -0.7]
   ];
   for (let i = 0; i < branchCount; i++) {
-    const bd  = branchDirs[i % 5];
+    const bd  = branchDirs[i % branchDirs.length];
     const t   = Math.random();
-    const bLen = 1.6;
-    const thick = (Math.random() - 0.5) * 0.12;
+    const bLen = i % 3 === 0 ? 2.0 : 1.45;
+    const fork = i % 3 === 0 ? 0.35 : 0.12;
+    const thick = (Math.random() - 0.5) * 0.11;
     points.push(new THREE.Vector3(
-      bd[0] * t * bLen + thick,
-      t * 0.9 + 0.1,
-      bd[1] * t * bLen + thick
+      bd[0] * t * bLen + thick + Math.sin(t * Math.PI) * fork * bd[1],
+      t * 1.15 + 0.05,
+      bd[1] * t * bLen + thick + Math.sin(t * Math.PI) * fork * bd[0]
     ));
   }
 
@@ -587,6 +732,8 @@ function generateTree3D(count: number): THREE.Vector3[] {
     { x:  0,    y: 1.3, z: -1.4,  r: 1.4 },
     { x: -0.8,  y: 2.8, z: -0.5,  r: 0.9 },
     { x:  0.8,  y: 2.8, z:  0.5,  r: 0.9 },
+    { x: -1.8,  y: 2.0, z: -0.8,  r: 0.75 },
+    { x:  1.8,  y: 2.0, z: -0.8,  r: 0.75 },
   ];
   const weights = clusters.map(c => c.r * c.r * c.r);
   const totalW  = weights.reduce((a, b) => a + b, 0);
@@ -599,7 +746,8 @@ function generateTree3D(count: number): THREE.Vector3[] {
     const u = Math.random(), v = Math.random();
     const theta = u * 2 * Math.PI;
     const phi   = Math.acos(2 * v - 1);
-    const r     = Math.cbrt(Math.random()) * c.r;
+    const edgeBias = Math.random() < 0.32 ? 0.82 + Math.random() * 0.18 : Math.cbrt(Math.random());
+    const r     = edgeBias * c.r;
     points.push(new THREE.Vector3(
       c.x + r * Math.sin(phi) * Math.cos(theta),
       c.y + r * Math.sin(phi) * Math.sin(theta),
@@ -613,10 +761,11 @@ function generateTree3D(count: number): THREE.Vector3[] {
 function generateLogo3D(count: number): THREE.Vector3[] {
   const points: THREE.Vector3[] = [];
 
-  const bodyCount   = Math.floor(count * 0.15);
-  const armsCount   = Math.floor(count * 0.25);
-  const rotorsCount = Math.floor(count * 0.35);
-  const textCount   = count - bodyCount - armsCount - rotorsCount;
+  const bodyCount   = Math.floor(count * 0.12);
+  const armsCount   = Math.floor(count * 0.18);
+  const rotorsCount = Math.floor(count * 0.24);
+  const textCount   = Math.floor(count * 0.32);
+  const detailCount = count - bodyCount - armsCount - rotorsCount - textCount;
 
   // 1. Central body — flattened box drone body
   for (let i = 0; i < bodyCount; i++) {
@@ -685,6 +834,35 @@ function generateLogo3D(count: number): THREE.Vector3[] {
     ));
   }
 
+  for (let i = 0; i < detailCount; i++) {
+    const mode = i % 4;
+    if (mode === 0) {
+      const side = i % 8 < 4 ? -1 : 1;
+      const t = Math.random();
+      pushStroke(points, 1, [side * 3.05, 0.5, -0.38], [side * 3.05, 0.5, 0.38], 0.025);
+      points[points.length - 1].y += Math.sin(t * Math.PI) * 0.16;
+    } else if (mode === 1) {
+      const ang = armAngles[i % 4];
+      const cx = Math.cos(ang) * armLen;
+      const cz = Math.sin(ang) * armLen;
+      const blade = (i % 2 === 0 ? 1 : -1) * 0.72;
+      points.push(new THREE.Vector3(
+        cx + Math.cos(ang + Math.PI / 2) * blade * Math.random(),
+        0.54 + (Math.random() - 0.5) * 0.04,
+        cz + Math.sin(ang + Math.PI / 2) * blade * Math.random()
+      ));
+    } else if (mode === 2) {
+      pushStroke(points, 1, [-4.6, -2.9, 0], [4.6, -2.9, 0], 0.045);
+    } else {
+      const a = Math.random() * Math.PI * 2;
+      points.push(new THREE.Vector3(
+        Math.cos(a) * 0.42,
+        0.54 + Math.sin(a) * 0.1,
+        Math.sin(a) * 0.42
+      ));
+    }
+  }
+
   return points;
 }
 
@@ -721,10 +899,12 @@ function generateNumbers3D(count: number): THREE.Vector3[] {
     // Thick extrusion — tube around each segment
     const tubeR  = 0.18;
     const tubeA  = Math.random() * Math.PI * 2;
-    const scatZ  = (Math.random() - 0.5) * 0.9;
+    const layer = i % 5;
+    const scatZ = (layer - 2) * 0.18 + (Math.random() - 0.5) * 0.08;
+    const bevel = layer === 0 || layer === 4 ? 0.08 : 0;
     points.push(new THREE.Vector3(
-      startX + di * spacing + lx + Math.cos(tubeA) * tubeR * Math.random(),
-      ly          + Math.sin(tubeA) * tubeR * Math.random(),
+      startX + di * spacing + lx + Math.cos(tubeA) * (tubeR + bevel) * Math.random(),
+      ly          + Math.sin(tubeA) * (tubeR + bevel) * Math.random(),
       scatZ
     ));
   }
