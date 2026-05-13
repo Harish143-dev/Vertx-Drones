@@ -3,8 +3,7 @@ import { motion } from "framer-motion";
 export function Hero() {
 
   const headline = "India's Most Advanced Drone Light Shows";
-  const description = "Elevating brand storytelling with mesmerizing aerial choreography. We transform the night sky into your limitless digital canvas.";
-
+  const description = "Up to 1,000 drones. 15 minutes of synchronized aerial storytelling.";
   return (
     <section className="relative min-h-screen flex flex-col overflow-hidden bg-[#0a0a0a]">
       {/* Background Video */}
@@ -58,28 +57,28 @@ export function Hero() {
                 href="/contact"
                 className="px-8 py-3 bg-[#F97316] text-[#0a0a0a] font-bold hover:bg-white transition-all shadow-[0_0_20px_rgba(249,115,22,0.3)] hover:shadow-[0_0_30px_rgba(249,115,22,0.5)] uppercase tracking-widest text-xs flex items-center justify-center"
               >
-                Book a Show
+              Get a Quote
               </a>
               <a
                 href="/contact?quote=true"
                 className="px-8 py-3 border border-white/20 text-white font-medium hover:bg-white/10 transition-all uppercase tracking-widest text-xs flex items-center justify-center"
               >
-                Get a Quote
+              Book a Show 
               </a>
             </motion.div>
           </div>
 
-          {/* Right: Description */}
-          {/* <motion.div
+          {/* Right: Description    */}
+          { <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.4, ease: "easeOut" }}
-            className="md:max-w-[40%] md:text-right"
+            className="md:max-w-[30%] md:text-right"
           >
             <p className="text-sm md:text-base text-white/80 font-light leading-relaxed">
               {description}
             </p>
-          </motion.div> */}
+          </motion.div>}
 
         </div>
       </div>

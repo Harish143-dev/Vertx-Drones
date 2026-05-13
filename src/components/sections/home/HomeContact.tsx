@@ -166,7 +166,7 @@ export function HomeContact() {
                   </>
                 ) : (
                   <>
-                    Send Enquiry
+                    Let's Talk
                     <ArrowRight size={13} className="transition-transform duration-200 group-hover:translate-x-1" />
                   </>
                 )}

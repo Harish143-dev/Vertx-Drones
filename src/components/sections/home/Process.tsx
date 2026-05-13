@@ -7,29 +7,29 @@ const steps = [
   {
     number: "01",
     title: "Plan",
-    timing: "2 weeks before the event",
-    description: "A safe flight zone and the best viewing spots are confirmed. Permissions are secured, and we collaborate with you to ensure full compliance.",
-    bullets: ["Location Recce", "Permissions", "Theme of the Event"],
+    timing: "2 weeks out",
+    description: "We confirm the location, assess airspace, secure DGCA permissions, and lock the event theme. All of this is done before a single drone is programmed.",
+    bullets: ["Location Recce", "Permissions Secured", "Event Theme Set"],
   },
   {
     number: "02",
     title: "Design",
-    timing: "1-2 weeks before the event",
-    description: "Once the show concept is approved, our creative team gets to work on crafting custom animations, programming the drone movements, and mixing perfectly synchronous audio.",
+    timing: "1-2 weeks out",
+    description: "Custom animations, choreography, and synchronized audio. Your story is mapped formation by formation.",
     bullets: ["Storyboarding", "Animation & Show Programming", "Sound Production"],
   },
   {
     number: "03",
-    title: "Arrival & Assembly",
-    timing: "2 days before the event",
-    description: "The equipment and operations team arrive on-site. We begin preparations for the actual deployment of the drone fleet.",
+    title: "Pre-Show Setup",
+    timing: "2 days out",
+    description: "Equipment arrives on site. Fleet assembled. Area prepped. No surprises on show day.",
     bullets: ["Equipment Transport", "On-Site Setup"],
   },
   {
     number: "04",
     title: "Final Checks",
-    timing: "1 day before the event",
-    description: "Final safety checks and multiple test flights are conducted to ensure flawless execution on show night.",
+    timing: "1 day out",
+    description: "Multiple test flights. Safety verification. Every drone accounted for.",
     bullets: ["Testing & Trials", "Final Safety Checks"],
   },
 ];
@@ -70,15 +70,12 @@ export function Process() {
           transition={{ duration: 0.6 }}
           className="mb-14"
         >
-          <p className="text-xs tracking-[0.3em] uppercase mb-4" style={{ color: ORANGE }}>
-            How It Works
-          </p>
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
             <h2 className="text-3xl md:text-5xl leading-tight">
               From Concept to Sky
             </h2>
             <p className="text-white/35 text-sm font-light max-w-xs md:text-right leading-relaxed">
-              From concept to sky—every step is carefully crafted.
+              Every drone show follows the same process. Nothing gets improvised on the day.
             </p>
           </div>
         </motion.div>
@@ -98,7 +95,7 @@ export function Process() {
               <div className="mb-6">
                 <span
                   className="text-4xl font-bold"
-                  style={{ color: `${ORANGE}22`, fontFamily: "'Orbitron', sans-serif" }}
+                  style={{ color: `${ORANGE}`, fontFamily: "'Orbitron', sans-serif" }}
                 >
                   {step.number}
                 </span>
@@ -130,15 +127,10 @@ export function Process() {
           style={{ background: `${ORANGE}08` }}
         >
           <div>
-            <p className="text-xs tracking-[0.3em] uppercase mb-1" style={{ color: ORANGE }}>The Big Day</p>
             <h3 className="text-xl md:text-2xl font-bold text-white mb-1">The Grand Finale</h3>
             <p className="text-sm text-white/40 font-light mb-2">
-              The big day! The sky comes alive as your vision takes flight—literally.
+              The sky comes alive. Your drone show, exactly as designed.
             </p>
-            <div className="flex items-center gap-2.5 text-sm font-medium text-white/80">
-              <DroneIcon size={16} />
-              Drone Light Show Live!
-            </div>
           </div>
         </motion.div>
       </div>
