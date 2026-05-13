@@ -13,7 +13,7 @@ const useCases: CardItem[] = [
     id: "corporate-events",
     title: "Corporate Events",
     description:
-      "Product launches, annual summits, and executive gatherings elevated with bespoke aerial choreography that reflects your brand identity.",
+      "Corporate drone shows work best for brand launches, product reveals, and company celebrations. Shows your audience films and shares before the evening is over.",
     imgSrc: corporateImg,
     linkHref: "/corporate",
   },
@@ -21,23 +21,23 @@ const useCases: CardItem[] = [
     id: "weddings",
     title: "Weddings",
     description:
-      "Create an unforgettable moment as the sky tells your love story, perfectly timed, deeply personal, and breathtaking for every guest.",
+      "Wedding drone shows in India are now a fixture at HNI weddings. Couple name reveals, grand entries, formations personalized to the couple. Guests bring it up at the next family gathering.",
     imgSrc: weddingsImg,
     linkHref: "/weddings",
   },
   {
     id: "festivals",
-    title: "Festivals",
+    title:"National Celebrations and Festivals",
     description:
-      "From music festivals to cultural celebrations, transform the night sky into a shared experience that unites thousands in a single moment.",
-    imgSrc: festivalsImg,
+      "Large-scale public shows synced to music, lights, and live performances.",
+    imgSrc: festivalsImg, 
     linkHref: "/portfolio",
   },
   {
     id: "sports-events",
     title: "Sports Events",
     description:
-      "Amplify the energy of major sporting events with dramatic aerial formations that energise crowds and create iconic broadcast moments.",
+      "Pre-match spectacles and championship reveals that set the tone before a single game is played.",
     imgSrc: sportsImg,
     linkHref: "/portfolio",
   },
@@ -54,21 +54,10 @@ export function Services() {
           transition={{ duration: 0.6 }}
           className="mb-14"
         >
-          <p
-            className="mb-4 text-xs uppercase tracking-[0.3em]"
-            style={{ color: "#F97316" }}
-          >
-            Use Cases
-          </p>
           <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
             <h2 className="text-3xl leading-tight md:text-5xl">
-              Every Occasion,
-              <br />
-              Lit from Above
+              Drone Shows for Every Event
             </h2>
-            <p className="max-w-xs text-sm font-light leading-relaxed text-white/35 md:text-right">
-              Tailored drone shows for events of every scale and occasion.
-            </p>
           </div>
         </motion.div>
 

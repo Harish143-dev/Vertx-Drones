@@ -25,15 +25,9 @@ export function CTABlock() {
           style={{ background: "rgba(255,255,255,0.015)" }}
         >
           <div>
-            <p className="text-xs tracking-[0.3em] uppercase mb-3" style={{ color: ORANGE }}>
-              Ready to Launch?
-            </p>
             <h2 className="text-3xl md:text-5xl leading-tight">
-              Start Your Drone Show
+              Ready to Light Up the Sky?
             </h2>
-            <p className="text-white/35 text-sm mt-2 font-light max-w-sm">
-              From concept to sky — let's build something unforgettable together.
-            </p>
           </div>
 
           <div className="flex flex-col sm:flex-row gap-3 shrink-0">
@@ -44,7 +38,7 @@ export function CTABlock() {
               onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.background = "#fff")}
               onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.background = ORANGE)}
             >
-              Get a Quote
+              Start Your Drone Show
               <ArrowRight size={13} className="transition-transform duration-200 group-hover:translate-x-1" />
             </Link>
 

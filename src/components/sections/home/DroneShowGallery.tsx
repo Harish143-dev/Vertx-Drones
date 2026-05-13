@@ -92,13 +92,10 @@ export function DroneShowGallery() {
             transition={{ duration: 0.7 }}
             className="mb-12 lg:mb-16"
           >
-            <p className="text-xs tracking-[0.3em] uppercase mb-4" style={{ color: ORANGE }}>
-              Show Packages
-            </p>
             <div className="flex flex-col gap-4">
-              <h2 className="text-3xl md:text-5xl leading-tight">Drone Show Scale</h2>
+              <h2 className="text-3xl md:text-5xl leading-tight">See Your Drone Show Before It Flies</h2>
               <p className="text-white/35 font-light text-sm max-w-xs leading-relaxed">
-                Choose the fleet size and preview the visual impact
+                Pick 100, 200, 300, or 400 drones. Choose your formations. See exactly what your sky will look like before you decide anything.
               </p>
             </div>
           </motion.div>

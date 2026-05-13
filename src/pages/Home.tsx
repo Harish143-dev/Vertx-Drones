@@ -30,11 +30,11 @@ export function Home() {
         {/* 6. How It Works â€” 4-step process */}
         <Process />
 
-        {/* 7. CTA Block */}
-        <CTABlock />
-
-        {/* 8. Drone Show Scale / Packages */}
+        {/* 7. Drone Show Scale / Packages */}
         <DroneShowGallery />
+
+        {/* 8. CTA Block */}
+        <CTABlock />
 
         {/* 9. FAQ */}
         <FAQ />

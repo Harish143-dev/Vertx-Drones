@@ -17,16 +17,15 @@ type Item = {
   title: string;
   category: string;
   location: string;
-  year: string;
   drones: string;
 };
 
 const SAMPLE = "/mp_.mp4"; // Using the local video we found earlier
 
 const items: Item[] = [
-  { src: imgBeats, video: SAMPLE, title: "Sky Vows", category: "Wedding", location: "Chennai", year: "2025", drones: "300" },
-  { src: imgChampions, video: SAMPLE, title: "Aurora Launch", category: "Brand Activation", location: "Bangalore", year: "2025", drones: "500" },
-  { src: imgNeon, video: SAMPLE, title: "Tricolour Above", category: "National Event", location: "New Delhi", year: "2026", drones: "800" },
+  { src: imgBeats, video: SAMPLE, title: "New Year Drone Light Show", category: "Public celebration", location: "Pondicherry Government", drones: "150" },
+  { src: imgChampions, video: SAMPLE, title: "Corporate Brand Activation", category: "Synchronized branding", location: "Four Points by Sheraton", drones: "50" },
+  { src: imgNeon, video: SAMPLE, title: "Wedding Drone Show", category: "Personalized aerial story", location: "Hyderabad", drones: "100 to 150" },
 ];
 
 export const Showcase = () => {
@@ -124,15 +123,11 @@ export const Showcase = () => {
       <div className="container mx-auto px-6 md:px-12 relative">
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8">
-          <div className="max-w-2xl">
-            <span className="text-xs tracking-[0.3em] uppercase text-[#F97316]/90">Selected Portfolio</span>
+          <div className="max-w-5xl">
             <h2 className="mt-8 text-3xl md:text-5xl tracking-tight leading-[0.95] uppercase">
-              Shows that moved the sky
+              Drone Light Shows Delivered Across India
             </h2>
           </div>
-          <p className="text-white/60 font-light max-w-sm md:text-right">
-            A curated selection of cinematic drone performances staged across India.
-          </p>
         </div>
 
         {/* Grid */}
@@ -175,7 +170,6 @@ export const Showcase = () => {
                 <span className="px-3 py-1 rounded-full border border-white/20 backdrop-blur-md bg-black/30">
                   {it.category}
                 </span>
-                <span className="font-mono">{it.year}</span>
               </div>
 
               {/* Bottom content + play button */}
@@ -185,12 +179,12 @@ export const Showcase = () => {
                     <div className="text-[10px] tracking-[0.3em] uppercase text-[#F97316] mb-2 font-bold">
                       {it.location}
                     </div>
-                    <h3 className="font-display text-2xl md:text-3xl leading-tight truncate uppercase">
+                    <h3 className="font-display text-2xl md:text-xl leading-tight truncate uppercase">
                       {it.title}
                     </h3>
                     <div className="mt-3 h-px w-0 bg-[#F97316] group-hover:w-24 transition-all duration-700" />
                     <div className="mt-3 text-xs text-white/60 font-light">
-                      <span className="font-mono text-white/90 font-bold">{it.drones}</span> drones in formation
+                      <span className="font-mono text-white/90 font-bold">{it.drones}</span> drones
                     </div>
                   </div>
 
@@ -251,7 +245,6 @@ export const Showcase = () => {
               <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black/80 to-transparent">
                 <p className="text-[#F97316] text-xs font-bold uppercase tracking-widest mb-2">{active.category}</p>
                 <h2 className="text-3xl md:text-5xl font-display text-white uppercase">{active.title}</h2>
-                <p className="text-white/60 text-sm mt-2">{active.location} • {active.year} • {active.drones} Drones</p>
               </div>
             </motion.div>
           </motion.div>

@@ -4,32 +4,32 @@ import { Plus, Minus } from "lucide-react";
 
 const faqs = [
   {
-    q: "What if I'm near an airport or no-fly zone?",
-    a: "If your location is near an airport or falls within a no-fly zone, don't worry — we'll assess it based on the airspace classification and applicable aviation regulations. We'll manage all necessary permissions and coordinate with aviation authorities to ensure full compliance. Whether near an airport or within a restricted zone, we've got everything covered to make your show safe, legal, and spectacular.",
+    q: "What if my venue is near an airport or a no-fly zone?",
+    a: "We assess every location against DGCA airspace classifications before confirming a show. If your venue is near an airport or in a restricted zone, we coordinate with aviation authorities to get the clearances sorted. We have operated in red and yellow zones before. It adds lead time, not a cancellation.",
   },
   {
-    q: "Where can I have a drone show?",
-    a: "Drone light shows can be hosted in a wide variety of venues — from open fields and stadiums to beaches, rooftops, urban landmarks, and festival grounds. We customize each show to suit the space. We offer site assessments and will guide you in selecting the best location for your event.",
+    q: "Where can a drone show be held?",
+    a: "Open fields, stadiums, beaches, rooftops, urban plazas, festival grounds. Most outdoor spaces work. We do a site assessment for every event to confirm the flying zone and the best viewing positions for your audience.",
   },
   {
-    q: "How does the weather affect a drone show?",
-    a: "Light wind and clear skies are ideal, but we can fly in mild conditions. Heavy rain, strong winds, or lightning can cause delays or postponements for safety reasons. We monitor weather forecasts closely and will always keep you updated ahead of time.",
+    q: "How does weather affect a drone show?",
+    a: "Light wind and clear skies are ideal. Heavy rain, strong winds, or lightning will ground the show for safety. We postpone within 48 hours and work out rescheduling with you. Weather is tracked closely in the days leading up to every show.",
   },
   {
-    q: "Can I have lasers or fireworks with a drone show?",
-    a: "Yes! We can integrate lasers, fireworks, and even live performances to create a truly immersive experience. These add-ons are carefully coordinated with the drone choreography for maximum visual impact and safety.",
+    q: "Can we combine a drone show with lasers or fireworks?",
+    a: "Yes. We can bring in lasers, fireworks, and live music. Each element is choreographed to the drone movements, not just placed alongside them. Tell us at the brief stage and we will design it in from the start.",
   },
   {
-    q: "How long is a drone light show?",
-    a: "A typical drone show lasts between 10 to 13 minutes, depending on the number of drones and complexity of the animation. The duration can be customized to suit your event schedule.",
+    q: "How long is a drone show?",
+    a: "Our shows run 15 minutes. That is enough for a full narrative arc with a clear opening, story, and finale, without losing the audience.",
   },
   {
-    q: "Are drone light shows safe?",
-    a: "Yes. We follow strict safety protocols including pre-show checks, flight path planning, and airspace permissions. Our drones are programmed with failsafe systems to ensure they land safely in any scenario. The entire operation is managed by certified pilots and technicians.",
+    q: "Are drone shows safe?",
+    a: "Every show runs on DGCA-compliant flight plans with real-time failsafe systems. Drones are programmed with return-to-home protocols that activate automatically if any unit loses signal. Crowd safety distances are confirmed during site recce, well before show day.",
   },
   {
-    q: "What is the process for booking a drone light show?",
-    a: "Whether you have a clear concept or simply want to elevate your event, our team is here to help. We handle everything — from show programming and 3D simulations to securing flight permits, preparing equipment, and managing logistics. On event day, our team sets up, conducts pre-flight tests, and delivers a breathtaking performance.",
+    q: "How do I book a drone show?",
+    a: "Fill the form below or WhatsApp us directly. Once we understand your event, we will share a concept and a full proposal. No commitment needed at that stage.",
   },
 ];
 
@@ -51,7 +51,7 @@ export function FAQ() {
           <p className="text-xs tracking-[0.3em] uppercase mb-4" style={{ color: ORANGE }}>
             FAQ
           </p>
-          <h2 className="text-3xl md:text-5xl">Common Questions</h2>
+          <h2 className="text-3xl md:text-5xl">Questions We Get Asked Most</h2>
         </motion.div>
 
         <div className="max-w-3xl">
