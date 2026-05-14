@@ -17,6 +17,7 @@ import {
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import corporateImg from "@/assets/images/use-cases/corporate.png";
+import { SEO } from "@/components/SEO";
 
 const ORANGE = "#F97316";
 
@@ -139,6 +140,10 @@ const impactSteps = [
 export default function Corporate() {
   return (
     <div className="min-h-screen overflow-hidden bg-[#0a0a0a] text-foreground font-sans">
+      <SEO 
+        title="Corporate Drone Shows" 
+        description="Elevate your brand with premium drone light shows. Perfect for product launches, corporate milestones, and large-scale marketing activations."
+      />
       <Navbar />
       <main>
         <section className="relative min-h-screen overflow-hidden pt-48 md:pt-52">

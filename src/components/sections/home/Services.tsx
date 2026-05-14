@@ -27,7 +27,8 @@ const useCases: CardItem[] = [
   },
   {
     id: "festivals",
-    title:"National Celebrations and Festivals",
+    title: "National Celebrations and Festivals",
+    shortTitle: "Festivals",
     description:
       "Large-scale public shows synced to music, lights, and live performances.",
     imgSrc: festivalsImg, 
@@ -36,6 +37,7 @@ const useCases: CardItem[] = [
   {
     id: "sports-events",
     title: "Sports Events",
+    shortTitle: "Sports",
     description:
       "Pre-match spectacles and championship reveals that set the tone before a single game is played.",
     imgSrc: sportsImg,

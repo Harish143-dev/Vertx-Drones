@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from "react";
-import { ArrowUpRight, Play, X, ArrowRight } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useRef } from "react";
+import { ArrowUpRight, ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
 import { Link } from "wouter";
 
 // Import real assets
@@ -12,6 +12,7 @@ import imgHeritage from "@/assets/images/portfolio/heritage-glow.png";
 import imgVictory from "@/assets/images/portfolio/victory-formation.png";
 
 type Item = {
+  id: number;
   src: string;       // poster image
   video: string;     // video url
   title: string;
@@ -23,15 +24,14 @@ type Item = {
 const SAMPLE = "/mp_.mp4"; // Using the local video we found earlier
 
 const items: Item[] = [
-  { src: imgBeats, video: SAMPLE, title: "New Year Drone Light Show", category: "Public celebration", location: "Pondicherry Government", drones: "150" },
-  { src: imgChampions, video: SAMPLE, title: "Corporate Brand Activation", category: "Synchronized branding", location: "Four Points by Sheraton", drones: "50" },
-  { src: imgNeon, video: SAMPLE, title: "Wedding Drone Show", category: "Personalized aerial story", location: "Hyderabad", drones: "100 to 150" },
+  { id: 11, src: imgBeats, video: SAMPLE, title: "New Year Drone Light Show", category: "Public celebration", location: "Pondicherry Government", drones: "150" },
+  { id: 12, src: imgChampions, video: SAMPLE, title: "Corporate Brand Activation", category: "Synchronized branding", location: "Four Points by Sheraton", drones: "50" },
+  { id: 13, src: imgNeon, video: SAMPLE, title: "Wedding Drone Show", category: "Personalized aerial story", location: "Hyderabad", drones: "100 to 150" },
 ];
 
 export const Showcase = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const hoverVideoRefs = useRef<Array<HTMLVideoElement | null>>([]);
-  const [active, setActive] = useState<Item | null>(null);
 
   // Scroll-driven parallax on each card image
   useEffect(() => {
@@ -58,19 +58,6 @@ export const Showcase = () => {
     };
   }, []);
 
-  // Lock body scroll + ESC to close lightbox
-  useEffect(() => {
-    if (!active) return;
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setActive(null);
-    window.addEventListener("keydown", onKey);
-    return () => {
-      document.body.style.overflow = prev;
-      window.removeEventListener("keydown", onKey);
-    };
-  }, [active]);
-
   const handleHoverPlay = (i: number, play: boolean) => {
     const v = hoverVideoRefs.current[i];
     if (!v) return;
@@ -84,12 +71,9 @@ export const Showcase = () => {
 
   // Editorial asymmetric layout per card index
   const layout = [
-    "md:col-span-6 md:row-span-2 h-[420px] md:h-[580px]",
-    "md:col-span-6 h-[360px] md:h-[280px]",
-    "md:col-span-6 h-[360px] md:h-[280px]",
-    "md:col-span-6 h-[360px] md:h-[280px]",
-    "md:col-span-6 md:row-span-2 h-[420px] md:h-[580px]",
-    "md:col-span-6 h-[360px] md:h-[280px]",
+    "md:col-span-7 md:row-span-2 h-[450px] md:h-[600px]",
+    "md:col-span-5 h-[320px] md:h-[285px]",
+    "md:col-span-5 h-[320px] md:h-[285px]",
   ];
 
   return (
@@ -131,16 +115,15 @@ export const Showcase = () => {
         </div>
 
         {/* Grid */}
-        <div ref={containerRef} className="mt-20 grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 items-center">
+        <div ref={containerRef} className="mt-20 grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-[30px]">
           {items.map((it, i) => (
-            <article
-              key={i}
-              data-parallax
-              onMouseEnter={() => handleHoverPlay(i, true)}
-              onMouseLeave={() => handleHoverPlay(i, false)}
-              onClick={() => setActive(it)}
-              className={`group relative overflow-hidden border border-white/5 bg-white/5 cursor-pointer ${layout[i]}`}
-            >
+            <Link key={i} href={`/portfolio?project=${it.id}`} className={`block ${layout[i]}`}>
+              <article
+                data-parallax
+                onMouseEnter={() => handleHoverPlay(i, true)}
+                onMouseLeave={() => handleHoverPlay(i, false)}
+                className="group relative h-full w-full overflow-hidden border border-white/10 bg-white/5 cursor-pointer"
+              >
               <div className="absolute inset-0 overflow-hidden">
                 <img
                   data-parallax-img
@@ -188,15 +171,37 @@ export const Showcase = () => {
                     </div>
                   </div>
 
-                  <div className="shrink-0 h-12 w-12 rounded-full border border-white/30 grid place-items-center backdrop-blur-md bg-white/10 transition-all duration-500 group-hover:bg-[#F97316] group-hover:border-[#F97316] group-hover:rotate-45">
-                    <ArrowUpRight size={18} className="text-white group-hover:hidden" />
-                    <Play size={16} className="hidden group-hover:block fill-current text-black" />
+                  <div className="shrink-0 flex flex-col items-end gap-2">
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-[#F97316] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      See the show
+                    </span>
+                    <div className="h-12 w-12 rounded-full border border-white/30 grid place-items-center backdrop-blur-md bg-white/10 transition-all duration-500 group-hover:bg-[#F97316] group-hover:border-[#F97316] group-hover:rotate-45">
+                      <ArrowUpRight size={18} className="text-white" />
+                    </div>
                   </div>
                 </div>
               </div>
             </article>
+          </Link>
           ))}
         </div>
+
+        {/* View All Button */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="mt-16 flex justify-center"
+        >
+          <Link
+            href="/portfolio"
+            className="inline-flex items-center gap-3 px-8 py-4 border border-white/10 bg-white/5 text-white text-xs font-bold uppercase tracking-[0.2em] hover:bg-[#F97316] hover:text-[#0a0a0a] hover:border-[#F97316] transition-all duration-300 group"
+          >
+            View all shows
+            <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
+          </Link>
+        </motion.div>
 
         {/* Footer line */}
         {/* <div className="mt-20 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 border-t border-white/10 pt-8">
@@ -213,43 +218,6 @@ export const Showcase = () => {
         </div> */}
       </div>
 
-      {/* Lightbox */}
-      <AnimatePresence>
-        {active && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/95 backdrop-blur-xl"
-            onClick={() => setActive(null)}
-          >
-            <button
-              className="absolute top-8 right-8 text-white/50 hover:text-white transition-colors"
-              onClick={() => setActive(null)}
-            >
-              <X size={32} />
-            </button>
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              className="relative w-full max-w-6xl aspect-video bg-black rounded-2xl overflow-hidden shadow-2xl"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <video
-                src={active.video}
-                controls
-                autoPlay
-                className="w-full h-full object-contain"
-              />
-              <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black/80 to-transparent">
-                <p className="text-[#F97316] text-xs font-bold uppercase tracking-widest mb-2">{active.category}</p>
-                <h2 className="text-3xl md:text-5xl font-display text-white uppercase">{active.title}</h2>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </section>
   );
 };

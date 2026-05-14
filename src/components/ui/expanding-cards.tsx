@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 export interface CardItem {
   id: string | number;
   title: string;
+  shortTitle?: string;
   description: string;
   imgSrc: string;
   linkHref: string;
@@ -93,8 +94,8 @@ export const ExpandingCards = React.forwardRef<
           <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-transparent" />
 
           <article className="absolute inset-0 flex flex-col justify-end gap-2 p-4 md:p-5">
-            <h3 className="absolute bottom-4 left-4 text-sm font-light uppercase tracking-wider text-white/80 opacity-100 transition-all duration-300 ease-out group-data-[active=true]:opacity-0 md:bottom-5 md:left-5 md:origin-left md:-rotate-90">
-              {item.title}
+            <h3 className="absolute bottom-4 left-4 whitespace-nowrap text-sm font-light uppercase tracking-wider text-white/80 opacity-100 transition-all duration-300 ease-out group-data-[active=true]:opacity-0 md:bottom-5 md:left-5 md:origin-left md:-rotate-90">
+              {item.shortTitle || item.title}
             </h3>
 
             <h3 className="text-xl font-bold text-[#F97316] opacity-0 transition-all delay-150 duration-300 ease-out group-data-[active=true]:opacity-100 md:text-2xl">

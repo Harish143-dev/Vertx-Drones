@@ -9,10 +9,16 @@ import { DroneShowGallery } from "@/components/sections/home/DroneShowGallery";
 import { FAQ } from "@/components/sections/home/FAQ";
 import { HomeContact } from "@/components/sections/home/HomeContact";
 import { Footer } from "@/components/layout/Footer";
+import { SEO } from "@/components/SEO";
 
 export function Home() {
   return (
     <div className="min-h-screen bg-background text-foreground overflow-hidden font-sans">
+      <SEO
+        title="Drone Light Shows in India | VertX Drone Light Show"
+        description="VertX drone light shows across India. Weddings, birthdays, corporate events, national celebrations, festivals and government shows. Up to 1,000 drones."
+        canonical="https://vertxdroneshow.in/"
+      />
       <Navbar />
       <main>
         {/* 1. Hero â€” full screen, video-ready */}

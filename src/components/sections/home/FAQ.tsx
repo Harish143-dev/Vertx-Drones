@@ -29,7 +29,7 @@ const faqs = [
   },
   {
     q: "How do I book a drone show?",
-    a: "Fill the form below or WhatsApp us directly. Once we understand your event, we will share a concept and a full proposal. No commitment needed at that stage.",
+    a: "Fill the form below or WhatsApp us directly. Once we understand your event, we share a concept, a 3D simulation of your show, and a full proposal. No commitment needed at that stage.",
   },
 ];
 

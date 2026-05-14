@@ -7,6 +7,7 @@ import weddingImg from "@/assets/images/use-cases/weddings.png";
 import imgEternal from "@/assets/images/portfolio/eternal-vows.png";
 import imgStarlight from "@/assets/images/portfolio/starlight-romance.png";
 import imgRhythm from "@/assets/images/portfolio/rhythm-of-light.png";
+import { SEO } from "@/components/SEO";
 
 const ORANGE = "#F97316";
 
@@ -51,6 +52,10 @@ const gallery = [
 export default function Weddings() {
   return (
     <div className="min-h-screen overflow-hidden bg-[#0a0a0a] text-foreground font-sans">
+      <SEO 
+        title="Wedding Drone Shows" 
+        description="Make your special day unforgettable with a custom drone light show. Name reveals, proposal moments, and cinematic storytelling above your venue."
+      />
       <Navbar />
       <main>
         <section className="relative min-h-screen overflow-hidden pt-48 md:pt-52">

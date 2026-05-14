@@ -51,7 +51,7 @@ export function HomeContact() {
             Get in Touch
           </p>
           <h2 className="text-3xl md:text-5xl font-light leading-tight">
-            Let's Light Up<br />the Sky Together
+            Let's Light Up the Sky Together
           </h2>
         </motion.div>
 
@@ -75,8 +75,8 @@ export function HomeContact() {
             className="grid grid-cols-1 md:grid-cols-2 gap-5"
           >
             {[
-              { label: "Your First Name", name: "firstName", required: true },
-              { label: "Your Last Name",  name: "lastName",  required: true },
+              { label: "First Name", name: "firstName", required: true },
+              { label: "Last Name",  name: "lastName",  required: true },
               { label: "Phone Number", name: "phone",   required: true },
               { label: "Email Address", name: "email",  required: true },
             ].map((field) => (
@@ -107,7 +107,7 @@ export function HomeContact() {
 
             <div>
               <label className="block text-[10px] tracking-[0.2em] uppercase text-white/35 mb-2">
-                What date are you planning for? [ Pick a date ]
+                What date are you planning for?
               </label>
               <input
                 type="date"
@@ -131,7 +131,7 @@ export function HomeContact() {
 
             <div className="md:col-span-2">
               <label className="block text-[10px] tracking-[0.2em] uppercase text-white/35 mb-2">
-                Share a few more details with us{" "}
+                Share a few more details{" "}
                 <span className="text-white/20 normal-case tracking-normal">(up to 100 words)</span>
               </label>
               <textarea

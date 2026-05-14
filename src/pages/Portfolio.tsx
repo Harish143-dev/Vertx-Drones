@@ -3,10 +3,15 @@ import { Footer } from "@/components/layout/Footer";
 import { PortfolioHero } from "@/components/sections/portfolio/PortfolioHero";
 import { PortfolioGallery } from "@/components/sections/portfolio/PortfolioGallery";
 import { PortfolioCTA } from "@/components/sections/portfolio/PortfolioCTA";
+import { SEO } from "@/components/SEO";
 
 export default function Portfolio() {
   return (
     <div className="min-h-screen bg-background text-foreground overflow-hidden font-sans">
+      <SEO 
+        title="Portfolio" 
+        description="Explore our portfolio of breathtaking drone light shows. See how Vertx Drones transforms the night sky into a digital canvas for global brands."
+      />
       <Navbar />
       <main>
         {/* 1. Hero — cinematic header */}

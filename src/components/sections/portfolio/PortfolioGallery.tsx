@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Clock, MapPin, Play, Target, Users, X, Zap } from "lucide-react";
 
@@ -218,6 +218,49 @@ const projects: Project[] = [
     eventType: "Cultural Festival",
     impact: "3,500 drones, 18-minute sequence, 1M+ public and broadcast reach.",
   },
+  {
+    id: 11,
+    title: "New Year Drone Light Show",
+    category: "Festivals",
+    drones: "150",
+    location: "Pondicherry",
+    duration: "15 min",
+    image: imgBeats,
+    description: "A spectacular public celebration for the Pondicherry Government, marking the arrival of the New Year with synchronized aerial displays.",
+    clientName: "Pondicherry Government",
+    objective: "Public New Year celebration and tourism promotion.",
+    eventType: "Public Festival",
+    impact: "150 drones, 15-minute show, thousands of live spectators.",
+  },
+  {
+    id: 12,
+    title: "Corporate Brand Activation",
+    category: "Corporate",
+    drones: "50",
+    location: "Bangalore",
+    duration: "10 min",
+    image: imgChampions,
+    description: "A high-impact brand activation for Four Points by Sheraton, showcasing synchronized branding and logo reveals.",
+    clientName: "Four Points by Sheraton",
+    objective: "Corporate brand visibility and guest engagement.",
+    eventType: "Brand Activation",
+    impact: "50 drones, precision logo formations, executive guest reach.",
+  },
+  {
+    id: 13,
+    title: "Wedding Drone Show",
+    category: "Weddings",
+    drones: "100-150",
+    location: "Hyderabad",
+    duration: "8 min",
+    image: imgNeon,
+    description: "A personalized aerial story for a grand wedding in Hyderabad, featuring couple name reveals and cinematic entries.",
+    clientName: "Private Wedding",
+    objective: "Create a memorable sky moment for a high-profile wedding.",
+    eventType: "Wedding Celebration",
+    impact: "150 drones, custom monogram reveal, grand entry sequence.",
+    tall: true,
+  },
 ];
 
 const categories = ["All", "Corporate", "Weddings", "Festivals", "Sports", "Cultural"];
@@ -225,6 +268,18 @@ const categories = ["All", "Corporate", "Weddings", "Festivals", "Sports", "Cult
 export function PortfolioGallery() {
   const [activeFilter, setActiveFilter] = useState("All");
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+
+  // Deep linking to project via query param
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const projectId = params.get("project");
+    if (projectId) {
+      const project = projects.find((p) => p.id === Number(projectId));
+      if (project) {
+        setSelectedProject(project);
+      }
+    }
+  }, []);
 
   const filtered =
     activeFilter === "All"

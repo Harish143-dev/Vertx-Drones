@@ -4,6 +4,7 @@ import { Link } from "wouter";
 import { ArrowRight, Bird, Diamond, Hash, Leaf, SlidersHorizontal } from "lucide-react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { SEO } from "@/components/SEO";
 import {
   DroneHeroScene,
   FormationPreviewScene,
@@ -39,6 +40,10 @@ export default function Simulator() {
 
   return (
     <div className="min-h-screen overflow-hidden bg-[#0a0a0a] text-foreground font-sans">
+      <SEO 
+        title="Drone Show Simulator" 
+        description="Experience our interactive drone show builder. Preview your spectacular aerial display with custom drone counts and formation shapes."
+      />
       <Navbar />
       <main>
         <section className="relative overflow-hidden pt-28 md:pt-32">

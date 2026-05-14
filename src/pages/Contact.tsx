@@ -1,7 +1,8 @@
-﻿import { useState } from "react";
+import { useState } from "react";
 import { motion, type Variants } from "framer-motion";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { SEO } from "@/components/SEO";
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 30 },
@@ -25,6 +26,10 @@ export function Contact() {
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-foreground font-sans">
+      <SEO 
+        title="Contact Us" 
+        description="Get in touch with Vertx Drones for your next aerial display. We work with corporate producers, brand directors, and event architects worldwide."
+      />
       <Navbar />
 
       <main className="min-h-screen flex flex-col pt-32 pb-24 relative z-10">
