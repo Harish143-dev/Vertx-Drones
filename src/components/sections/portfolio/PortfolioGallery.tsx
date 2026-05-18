@@ -244,7 +244,7 @@ export function PortfolioGallery() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.92, y: 20 }}
               transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
-              className="relative z-10 max-h-[90vh] w-full max-w-4xl overflow-hidden overflow-y-auto border border-white/10 bg-[#0f0f0f]"
+              className="relative z-10 max-h-[90vh] w-full max-w-4xl overflow-hidden overflow-y-auto rounded-lg border border-white/10 bg-[#0f0f0f]"
               onClick={(event) => event.stopPropagation()}
             >
               <button

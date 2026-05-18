@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import heroBg from "@/assets/images/portfolio.png";
 
 const ORANGE = "#F97316";
@@ -65,13 +66,12 @@ export function PortfolioHero() {
               transition={{ duration: 0.7, delay: 0.6, ease: "easeOut" }}
               className="flex flex-col sm:flex-row gap-4"
             >
-              <a
-                href="#portfolio-gallery"
-                className="px-8 py-3 bg-[#F97316] text-[#0a0a0a] font-bold hover:bg-white transition-all shadow-[0_0_20px_rgba(249,115,22,0.3)] hover:shadow-[0_0_30px_rgba(249,115,22,0.5)] uppercase tracking-widest text-xs flex items-center justify-center gap-3"
-              >
-                View Projects
-                <ArrowRight size={15} />
-              </a>
+              <Button asChild size="lg" className="group">
+                <a href="#portfolio-gallery">
+                  View Projects
+                  <ArrowRight size={15} className="transition-transform duration-300 group-hover:translate-x-1 ml-2" />
+                </a>
+              </Button>
             </motion.div>
           </div>
 

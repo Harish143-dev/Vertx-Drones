@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { FaWhatsapp } from "react-icons/fa";
 
 const ORANGE = "#F97316";
 
@@ -28,21 +30,22 @@ export function PortfolioCTA() {
             Every show above started with one conversation. Yours can too.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-3 px-10 py-4 bg-[#F97316] text-[#0a0a0a] font-bold hover:bg-white transition-all duration-300 shadow-[0_0_30px_rgba(249,115,22,0.3)] hover:shadow-[0_0_40px_rgba(249,115,22,0.5)] uppercase tracking-widest text-xs group"
-            >
-              Plan Your Drone Show
-              <ArrowRight size={14} className="transition-transform duration-200 group-hover:translate-x-1" />
-            </Link>
-            <a
-              href="https://wa.me/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 px-10 py-4 border border-white/20 text-white font-bold hover:bg-white/5 transition-all duration-300 uppercase tracking-widest text-xs group"
-            >
-              WhatsApp Us
-            </a>
+            <Button asChild size="lg" className="group">
+              <Link href="/contact">
+                Plan Your Drone Show
+                <ArrowRight size={15} className="transition-transform duration-300 group-hover:translate-x-1 ml-2" />
+              </Link>
+            </Button>
+            <Button asChild variant="outline" size="lg" className="group border-white/20 text-white hover:border-[#25D366] hover:text-[#25D366] hover:bg-transparent shadow-none">
+              <a
+                href="https://wa.me/917358598707"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaWhatsapp size={15} className="mr-2" />
+                WhatsApp Us
+              </a>
+            </Button>
           </div>
           
           <div className="flex flex-wrap items-center justify-center gap-4 text-xs font-light text-white/30">

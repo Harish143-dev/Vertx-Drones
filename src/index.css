@@ -103,7 +103,7 @@
   --app-font-serif: 'Orbitron', sans-serif;
   --app-font-mono: 'Orbitron', monospace;
   --app-font-display: 'Orbitron', sans-serif;
-  --radius: 0rem;
+  --radius: 0.75rem;
 
   --shadow-2xs: 0px 2px 0px 0px hsl(24.6 95% 53.1% / 0.00);
   --shadow-xs: 0px 2px 0px 0px hsl(24.6 95% 53.1% / 0.00);

@@ -1,16 +1,8 @@
-import { motion, type Variants } from "framer-motion";
+import { motion } from "framer-motion";
 import { Landmark, Megaphone, Rocket, Sparkles } from "lucide-react";
+import { fadeUp } from "@/lib/motion";
 
 const ORANGE = "#F97316";
-
-const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 24 },
-  show: (delay = 0) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.65, delay, ease: [0.22, 1, 0.36, 1] },
-  }),
-};
 
 const useCases = [
   {
@@ -55,7 +47,7 @@ export function CorporateUseCases() {
           </h2>
         </motion.div>
 
-        <div className="grid gap-px border border-white/8 bg-white/8 sm:grid-cols-2">
+        <div className="grid gap-px border border-white/8 bg-white/8 sm:grid-cols-2 rounded-lg overflow-hidden">
           {useCases.map((item, index) => {
             const Icon = item.icon;
             return (

@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Loader2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 
 const ORANGE = "#F97316";
 
@@ -24,7 +27,7 @@ export function HomeContact() {
       });
 
       const data = await response.json();
-      
+
       if (data.success) {
         setSubmitted(true);
       } else {
@@ -47,9 +50,7 @@ export function HomeContact() {
           transition={{ duration: 0.7 }}
           className="mb-14"
         >
-          <p className="text-xs tracking-[0.3em] uppercase mb-4" style={{ color: ORANGE }}>
-            Get in Touch
-          </p>
+
           <h2 className="text-3xl md:text-5xl font-light leading-tight">
             Let's Light Up the Sky Together
           </h2>
@@ -76,19 +77,19 @@ export function HomeContact() {
           >
             {[
               { label: "First Name", name: "firstName", required: true },
-              { label: "Last Name",  name: "lastName",  required: true },
-              { label: "Phone Number", name: "phone",   required: true },
-              { label: "Email Address", name: "email",  required: true },
+              { label: "Last Name", name: "lastName", required: true },
+              { label: "Phone Number", name: "phone", required: true },
+              { label: "Email Address", name: "email", required: true },
             ].map((field) => (
               <div key={field.name}>
                 <label className="block text-[10px] tracking-[0.2em] uppercase text-white/35 mb-2">
                   {field.label}{field.required && <span style={{ color: ORANGE }}> *</span>}
                 </label>
-                <input
+                <Input
                   type={field.name === "email" ? "email" : field.name === "phone" ? "tel" : "text"}
                   name={field.name}
                   required={field.required}
-                  className="w-full bg-white/[0.03] border border-white/8 px-4 py-3 text-sm text-white placeholder-white/20 focus:outline-none focus:border-[#F97316]/50 transition-colors duration-200"
+                  className="w-full rounded-lg bg-white/[0.03] border-white/10 px-4 py-6 text-sm text-white placeholder-white/20 focus-visible:ring-1 focus-visible:ring-[#F97316] transition-colors duration-200"
                 />
               </div>
             ))}
@@ -97,36 +98,36 @@ export function HomeContact() {
               <label className="block text-[10px] tracking-[0.2em] uppercase text-white/35 mb-2">
                 What's the vibe or concept of your event?
               </label>
-              <input
-                type="text"
-                name="concept"
-                className="w-full bg-white/[0.03] border border-white/8 px-4 py-3 text-sm text-white placeholder-white/20 focus:outline-none focus:border-[#F97316]/50 transition-colors duration-200"
-                placeholder="e.g. Grand product launch with 500 drones over the marina"
-              />
+                <Input
+                  type="text"
+                  name="concept"
+                  className="w-full rounded-lg bg-white/[0.03] border-white/10 px-4 py-6 text-sm text-white placeholder-white/20 focus-visible:ring-1 focus-visible:ring-[#F97316] transition-colors duration-200"
+                  placeholder="e.g. Grand product launch with 500 drones over the marina"
+                />
             </div>
 
             <div>
               <label className="block text-[10px] tracking-[0.2em] uppercase text-white/35 mb-2">
                 What date are you planning for?
               </label>
-              <input
-                type="date"
-                name="date"
-                className="w-full bg-white/[0.03] border border-white/8 px-4 py-3 text-sm text-white/70 focus:outline-none focus:border-[#F97316]/50 transition-colors duration-200"
-                style={{ colorScheme: "dark" }}
-              />
+                <Input
+                  type="date"
+                  name="date"
+                  className="w-full rounded-lg bg-white/[0.03] border-white/10 px-4 py-6 text-sm text-white/70 focus-visible:ring-1 focus-visible:ring-[#F97316] transition-colors duration-200"
+                  style={{ colorScheme: "dark" }}
+                />
             </div>
 
             <div>
               <label className="block text-[10px] tracking-[0.2em] uppercase text-white/35 mb-2">
                 Event Location
               </label>
-              <input
-                type="text"
-                name="location"
-                className="w-full bg-white/[0.03] border border-white/8 px-4 py-3 text-sm text-white placeholder-white/20 focus:outline-none focus:border-[#F97316]/50 transition-colors duration-200"
-                placeholder="City, venue, or region"
-              />
+                <Input
+                  type="text"
+                  name="location"
+                  className="w-full rounded-lg bg-white/[0.03] border-white/10 px-4 py-6 text-sm text-white placeholder-white/20 focus-visible:ring-1 focus-visible:ring-[#F97316] transition-colors duration-200"
+                  placeholder="City, venue, or region"
+                />
             </div>
 
             <div className="md:col-span-2">
@@ -134,12 +135,12 @@ export function HomeContact() {
                 Share a few more details{" "}
                 <span className="text-white/20 normal-case tracking-normal">(up to 100 words)</span>
               </label>
-              <textarea
+              <Textarea
                 name="message"
                 rows={4}
                 maxLength={700}
                 required
-                className="w-full bg-white/[0.03] border border-white/8 px-4 py-3 text-sm text-white placeholder-white/20 focus:outline-none focus:border-[#F97316]/50 transition-colors duration-200 resize-none"
+                className="w-full rounded-lg bg-white/[0.03] border-white/10 px-4 py-4 text-sm text-white placeholder-white/20 focus-visible:ring-1 focus-visible:ring-[#F97316] transition-colors duration-200 resize-none min-h-[120px]"
                 placeholder="Tell us about your event, audience size, special requirements…"
               />
             </div>
@@ -151,26 +152,24 @@ export function HomeContact() {
             )}
 
             <div className="md:col-span-2 flex justify-start">
-              <button
+              <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="inline-flex items-center justify-center gap-3 px-8 py-3.5 text-xs font-bold uppercase tracking-[0.2em] transition-all duration-200 group disabled:opacity-50 disabled:cursor-not-allowed"
-                style={{ background: ORANGE, color: "#0a0a0a" }}
-                onMouseEnter={(e) => !isSubmitting && ((e.currentTarget as HTMLElement).style.background = "#fff")}
-                onMouseLeave={(e) => !isSubmitting && ((e.currentTarget as HTMLElement).style.background = ORANGE)}
+                size="lg"
+                className="group"
               >
                 {isSubmitting ? (
                   <>
                     Sending...
-                    <Loader2 size={13} className="animate-spin" />
+                    <Loader2 size={15} className="animate-spin ml-2" />
                   </>
                 ) : (
                   <>
                     Let's Talk
-                    <ArrowRight size={13} className="transition-transform duration-200 group-hover:translate-x-1" />
+                    <ArrowRight size={15} className="transition-transform duration-300 group-hover:translate-x-1 ml-2" />
                   </>
                 )}
-              </button>
+              </Button>
             </div>
           </motion.form>
         )}

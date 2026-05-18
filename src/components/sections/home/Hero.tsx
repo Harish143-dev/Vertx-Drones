@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
 
 export function Hero() {
 
@@ -53,18 +54,12 @@ export function Hero() {
               transition={{ duration: 0.7, delay: 0.6, ease: "easeOut" }}
               className="flex flex-col sm:flex-row gap-4"
             >
-              <a
-                href="/contact"
-                className="px-8 py-3 bg-[#F97316] text-[#0a0a0a] font-bold hover:bg-white transition-all shadow-[0_0_20px_rgba(249,115,22,0.3)] hover:shadow-[0_0_30px_rgba(249,115,22,0.5)] uppercase tracking-widest text-xs flex items-center justify-center"
-              >
-              Get a Quote
-              </a>
-              <a
-                href="/contact?quote=true"
-                className="px-8 py-3 border border-white/20 text-white font-medium hover:bg-white/10 transition-all uppercase tracking-widest text-xs flex items-center justify-center"
-              >
-              Book a Show 
-              </a>
+              <Button asChild size="lg">
+                <a href="/contact">Get a Quote</a>
+              </Button>
+              <Button asChild variant="outline" size="lg">
+                <a href="/contact?quote=true">Book a Show</a>
+              </Button>
             </motion.div>
           </div>
 

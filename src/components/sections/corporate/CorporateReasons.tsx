@@ -1,16 +1,8 @@
-import { motion, type Variants } from "framer-motion";
+import { motion } from "framer-motion";
 import { Share2, Trophy, Users } from "lucide-react";
+import { fadeUp } from "@/lib/motion";
 
 const ORANGE = "#F97316";
-
-const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 24 },
-  show: (delay = 0) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.65, delay, ease: [0.22, 1, 0.36, 1] },
-  }),
-};
 
 const corporateReasons = [
   {
@@ -60,9 +52,9 @@ export function CorporateReasons() {
                 whileInView="show"
                 viewport={{ once: true }}
                 custom={index * 0.1}
-                className="border border-white/8 bg-white/[0.02] p-6 md:p-8"
+                className="rounded-lg border border-white/8 bg-white/[0.02] p-6 md:p-8"
               >
-                <div className="mb-8 flex h-12 w-12 items-center justify-center border border-[#F97316]/30 bg-[#F97316]/10 text-[#F97316]">
+                <div className="mb-8 flex h-12 w-12 items-center justify-center rounded-full border border-[#F97316]/30 bg-[#F97316]/10 text-[#F97316]">
                   <Icon size={20} />
                 </div>
                 <h3 className="mb-3 text-lg font-bold text-white md:text-xl">{item.title}</h3>

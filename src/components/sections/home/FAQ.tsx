@@ -48,9 +48,7 @@ export function FAQ() {
           transition={{ duration: 0.6 }}
           className="mb-14"
         >
-          <p className="text-xs tracking-[0.3em] uppercase mb-4" style={{ color: ORANGE }}>
-            FAQ
-          </p>
+
           <h2 className="text-3xl md:text-5xl">Questions We Get Asked Most</h2>
         </motion.div>
 

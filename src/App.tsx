@@ -4,8 +4,9 @@ import Corporate from "@/pages/Corporate";
 import Weddings from "@/pages/Weddings";
 import Simulator from "@/pages/Simulator";
 import About from "@/pages/About";
-import PartnerProgram from "@/pages/PartnerProgram";
+import Partners from "@/pages/Partners";
 import Blog from "@/pages/Blog";
+import BlogPost from "@/pages/BlogPost";
 import { Contact } from "@/pages/Contact";
 import { Switch, Route, Router as WouterRouter } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -25,10 +26,11 @@ function Router() {
       <Route path="/portfolio" component={Portfolio} />
       <Route path="/corporate" component={Corporate} />
       <Route path="/weddings" component={Weddings} />
-      <Route path="/simulator" component={Simulator} />
+      <Route path="/design" component={Simulator} />
       <Route path="/about" component={About} />
-      <Route path="/partner-program" component={PartnerProgram} />
+      <Route path="/partners" component={Partners} />
       <Route path="/blog" component={Blog} />
+      <Route path="/blog/:slug" component={BlogPost} />
       <Route path="/contact" component={Contact} />
       <Route component={NotFound} />
     </Switch>

@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import { Link } from "wouter";
-import { ArrowRight, MessageCircle } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { FaWhatsapp } from "react-icons/fa";
 
 const ORANGE = "#F97316";
 
@@ -21,45 +23,33 @@ export function CTABlock() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="flex flex-col md:flex-row md:items-center justify-between gap-8 border border-white/7 p-8 md:p-12"
+          className="flex flex-col md:flex-row md:items-center justify-between rounded-lg gap-8 border border-white/7 p-8 md:p-12"
           style={{ background: "rgba(255,255,255,0.015)" }}
         >
-          <div>
+          <div className="">
             <h2 className="text-3xl md:text-5xl leading-tight">
               Ready to Light Up the Sky?
             </h2>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-3 shrink-0">
-            <Link
-              href="/contact"
-              className="inline-flex items-center justify-center gap-3 px-7 py-3.5 text-xs font-bold uppercase tracking-[0.18em] transition-all duration-200 group"
-              style={{ background: ORANGE, color: "#0a0a0a" }}
-              onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.background = "#fff")}
-              onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.background = ORANGE)}
-            >
-              Start Your Drone Show
-              <ArrowRight size={13} className="transition-transform duration-200 group-hover:translate-x-1" />
-            </Link>
+          <div className="flex flex-col sm:flex-row gap-4 shrink-0">
+            <Button asChild size="lg" className="group">
+              <Link href="/contact">
+                Start Your Drone Show
+                <ArrowRight size={15} className="transition-transform duration-300 group-hover:translate-x-1 ml-2" />
+              </Link>
+            </Button>
 
-            <a
-              href="https://wa.me/919999999999"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 text-xs font-bold uppercase tracking-[0.18em] border transition-all duration-200"
-              style={{ borderColor: "rgba(255,255,255,0.12)", color: "rgba(255,255,255,0.7)" }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLElement).style.borderColor = "#25D366";
-                (e.currentTarget as HTMLElement).style.color = "#25D366";
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.12)";
-                (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.7)";
-              }}
-            >
-              <MessageCircle size={13} />
-              WhatsApp quick connect
-            </a>
+            <Button asChild variant="outline" size="lg" className="group border-white/20 text-white/70 hover:border-[#25D366] hover:text-[#25D366] hover:bg-transparent shadow-none">
+              <a
+                href="https://wa.me/917358598707"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaWhatsapp size={15} className="mr-2" />
+                WhatsApp quick connect
+              </a>
+            </Button>
           </div>
         </motion.div>
       </div>

@@ -1,17 +1,10 @@
-import { motion, type Variants } from "framer-motion";
+import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { ArrowRight, Play } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { fadeUp } from "@/lib/motion";
 
 const ORANGE = "#F97316";
-
-const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 24 },
-  show: (delay = 0) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.65, delay, ease: [0.22, 1, 0.36, 1] },
-  }),
-};
 
 const proofItems = [
   {
@@ -55,7 +48,7 @@ export function CorporateProof() {
               whileInView="show"
               viewport={{ once: true }}
               custom={index * 0.1}
-              className="group border border-white/8 bg-[#0a0a0a]/60 hover:bg-[#101010]/80 p-8 flex flex-col md:flex-row md:items-center md:justify-between gap-6 transition-all duration-300"
+              className="group border border-white/8 bg-[#0a0a0a]/60 hover:bg-[#101010]/80 p-8 flex flex-col md:flex-row md:items-center md:justify-between gap-6 transition-all duration-300 rounded-lg"
             >
               <div className="space-y-3">
                 <p className="text-[10px] font-bold uppercase tracking-[0.24em]" style={{ color: ORANGE }}>
@@ -93,13 +86,12 @@ export function CorporateProof() {
           viewport={{ once: true }}
           className="mt-14 text-center"
         >
-          <Link
-            href="/portfolio"
-            className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-white/40 hover:text-white transition-colors duration-300 group"
-          >
-            See all past shows
-            <ArrowRight size={14} className="transition-transform duration-200 group-hover:translate-x-1" />
-          </Link>
+          <Button asChild variant="outline" size="lg" className="group">
+            <Link href="/portfolio">
+              See all past shows
+              <ArrowRight size={15} className="transition-transform duration-300 group-hover:translate-x-1 ml-2" />
+            </Link>
+          </Button>
         </motion.div>
       </div>
     </section>

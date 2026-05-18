@@ -1,16 +1,36 @@
+import { useEffect } from "react";
+import { Navbar } from "@/components/layout/Navbar";
+import { Footer } from "@/components/layout/Footer";
 import { SEO } from "@/components/SEO";
 
+import { AboutHero } from "@/components/sections/about/AboutHero";
+import { AboutStory } from "@/components/sections/about/AboutStory";
+import { AboutDifferences } from "@/components/sections/about/AboutDifferences";
+import { AboutExperience } from "@/components/sections/about/AboutExperience";
+import { AboutTeam } from "@/components/sections/about/AboutTeam";
+import { AboutCTA } from "@/components/sections/about/AboutCTA";
+
 export default function About() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
-    <div className="pt-24 min-h-screen">
-      <SEO 
-        title="About Us" 
-        description="Learn about Vertx Drones, the team behind the most spectacular aerial light shows. Our mission is to transform the sky into a digital canvas for global celebrations."
+    <div className="min-h-screen overflow-hidden bg-background text-foreground font-sans">
+      <SEO
+        title="About VertX | Drone Light Show Company India"
+        description="VertX is a drone light show company based in Chennai. In-house production, 1,000-drone fleet, shows delivered for government bodies, corporate brands, and weddings across India."
       />
-      <div className="container mx-auto px-4">
-        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light leading-[1.1] tracking-tight text-white mb-8">About Us</h1>
-        <p>Learn more about VERTX and our mission to light up the sky.</p>
-      </div>
+      <Navbar />
+      <main>
+        <AboutHero />
+        <AboutStory />
+        <AboutDifferences />
+        <AboutExperience />
+        <AboutTeam />
+        <AboutCTA />
+      </main>
+      <Footer />
     </div>
   );
 }

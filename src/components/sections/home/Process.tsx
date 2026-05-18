@@ -81,7 +81,7 @@ export function Process() {
         </motion.div>
 
         {/* Steps */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px border border-white/6"
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px border border-white/6 rounded-lg overflow-hidden"
           style={{ background: "rgba(255,255,255,0.06)" }}>
           {steps.map((step, i) => (
             <motion.div
@@ -123,7 +123,7 @@ export function Process() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="mt-px border border-white/6 p-8 md:p-12 flex flex-col md:flex-row md:items-center gap-6"
+          className="mt-5 border border-white/6 p-8 md:p-12 rounded-lg overflow-hidden flex flex-col md:flex-row md:items-center gap-6"
           style={{ background: `${ORANGE}08` }}
         >
           <div>

@@ -1,15 +1,7 @@
 import { useState, useRef } from "react";
-import { motion, type Variants, useScroll, useMotionValueEvent, useTransform } from "framer-motion";
+import { motion, useScroll, useMotionValueEvent, useTransform } from "framer-motion";
 import { BarChart3, Share2, Flame, Newspaper, Zap } from "lucide-react";
-
-const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 24 },
-  show: (delay = 0) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.65, delay: delay as number, ease: [0.22, 1, 0.36, 1] },
-  }),
-};
+import { fadeUp } from "@/lib/motion";
 
 const roiPoints = [
   {
@@ -108,7 +100,7 @@ export function CorporateROI() {
                 >
                   {/* The Physical Card */}
                   <motion.div
-                    className="w-full h-[320px] bg-card border border-border shadow-[0_-15px_50px_rgba(0,0,0,0.85)] p-8 flex flex-col justify-between group overflow-hidden transition-all duration-500 hover:border-primary/40 relative"
+                    className="w-full h-[320px] bg-card border border-border shadow-[0_-15px_50px_rgba(0,0,0,0.85)] p-8 flex flex-col justify-between group overflow-hidden transition-all duration-500 hover:border-primary/40 relative rounded-lg"
                   >
                     {/* Ambient Glow */}
                     <div className="absolute top-0 right-0 w-64 h-64 bg-primary/[0.03] rounded-full blur-[80px] -translate-y-1/2 translate-x-1/3 pointer-events-none" />
@@ -161,7 +153,7 @@ export function CorporateROI() {
                   whileInView="show"
                   viewport={{ once: true }}
                   custom={index * 0.08}
-                  className="group relative overflow-hidden rounded-3xl border border-border bg-card p-8 transition-all duration-500 flex flex-col justify-between shadow-xl"
+                  className="group relative overflow-hidden rounded-lg border border-border bg-card p-8 transition-all duration-500 flex flex-col justify-between shadow-xl"
                 >
                   <span className="text-6xl font-black text-foreground/5 absolute right-6 top-6 select-none pointer-events-none">
                     {item.number}

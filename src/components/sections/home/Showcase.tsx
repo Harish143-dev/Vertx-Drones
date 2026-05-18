@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import { ArrowUpRight, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
+import { Button } from "@/components/ui/button";
 
 // Import real assets
 import imgBeats from "@/assets/images/portfolio/beats-from-above.png";
@@ -122,67 +123,67 @@ export const Showcase = () => {
                 data-parallax
                 onMouseEnter={() => handleHoverPlay(i, true)}
                 onMouseLeave={() => handleHoverPlay(i, false)}
-                className="group relative h-full w-full overflow-hidden border border-white/10 bg-white/5 cursor-pointer"
+                className="group relative h-full w-full overflow-hidden rounded-lg border border-white/10 bg-white/5 cursor-pointer"
               >
-              <div className="absolute inset-0 overflow-hidden">
-                <img
-                  data-parallax-img
-                  src={it.src}
-                  alt={`${it.title} — ${it.category} drone show in ${it.location}`}
-                  loading="lazy"
-                  className="h-full w-full object-cover scale-[1.15] transition-transform duration-[1.2s] ease-out group-hover:scale-[1.22]"
-                />
-                {/* Hover video preview */}
-                <video
-                  ref={(el) => { hoverVideoRefs.current[i] = el; }}
-                  src={it.video}
-                  muted
-                  loop
-                  playsInline
-                  preload="none"
-                  className="absolute inset-0 h-full w-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-700"
-                />
-              </div>
+                <div className="absolute inset-0 overflow-hidden">
+                  <img
+                    data-parallax-img
+                    src={it.src}
+                    alt={`${it.title} — ${it.category} drone show in ${it.location}`}
+                    loading="lazy"
+                    className="h-full w-full object-cover scale-[1.15] transition-transform duration-[1.2s] ease-out group-hover:scale-[1.22]"
+                  />
+                  {/* Hover video preview */}
+                  <video
+                    ref={(el) => { hoverVideoRefs.current[i] = el; }}
+                    src={it.video}
+                    muted
+                    loop
+                    playsInline
+                    preload="none"
+                    className="absolute inset-0 h-full w-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-700"
+                  />
+                </div>
 
-              {/* Veils */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/20 to-transparent" />
-              <div className="absolute inset-0 bg-gradient-to-br from-[#F97316]/0 via-transparent to-[#F97316]/0 group-hover:from-[#F97316]/10 group-hover:to-[#F97316]/5 transition-all duration-700" />
+                {/* Veils */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/20 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-br from-[#F97316]/0 via-transparent to-[#F97316]/0 group-hover:from-[#F97316]/10 group-hover:to-[#F97316]/5 transition-all duration-700" />
 
-              {/* Top meta */}
-              <div className="absolute top-5 left-5 right-5 flex items-center justify-between text-[10px] tracking-[0.3em] uppercase text-white/70">
-                <span className="px-3 py-1 rounded-full border border-white/20 backdrop-blur-md bg-black/30">
-                  {it.category}
-                </span>
-              </div>
+                {/* Top meta */}
+                <div className="absolute top-5 left-5 right-5 flex items-center justify-between text-[10px] tracking-[0.3em] uppercase text-white/70">
+                  <span className="px-3 py-1 rounded-full border border-white/20 backdrop-blur-md bg-black/30">
+                    {it.category}
+                  </span>
+                </div>
 
-              {/* Bottom content + play button */}
-              <div className="absolute inset-x-0 bottom-0 p-6 md:p-8">
-                <div className="flex items-end justify-between gap-4">
-                  <div className="min-w-0">
-                    <div className="text-[10px] tracking-[0.3em] uppercase text-[#F97316] mb-2 font-bold">
-                      {it.location}
+                {/* Bottom content + play button */}
+                <div className="absolute inset-x-0 bottom-0 p-6 md:p-8">
+                  <div className="flex items-end justify-between gap-4">
+                    <div className="min-w-0">
+                      <div className="text-[10px] tracking-[0.3em] uppercase text-[#F97316] mb-2 font-bold">
+                        {it.location}
+                      </div>
+                      <h3 className="font-display text-2xl md:text-xl leading-tight truncate uppercase">
+                        {it.title}
+                      </h3>
+                      <div className="mt-3 h-px w-0 bg-[#F97316] group-hover:w-24 transition-all duration-700" />
+                      <div className="mt-3 text-xs text-white/60 font-light">
+                        <span className="font-mono text-white/90 font-bold">{it.drones}</span> drones
+                      </div>
                     </div>
-                    <h3 className="font-display text-2xl md:text-xl leading-tight truncate uppercase">
-                      {it.title}
-                    </h3>
-                    <div className="mt-3 h-px w-0 bg-[#F97316] group-hover:w-24 transition-all duration-700" />
-                    <div className="mt-3 text-xs text-white/60 font-light">
-                      <span className="font-mono text-white/90 font-bold">{it.drones}</span> drones
-                    </div>
-                  </div>
 
-                  <div className="shrink-0 flex flex-col items-end gap-2">
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-[#F97316] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      See the show
-                    </span>
-                    <div className="h-12 w-12 rounded-full border border-white/30 grid place-items-center backdrop-blur-md bg-white/10 transition-all duration-500 group-hover:bg-[#F97316] group-hover:border-[#F97316] group-hover:rotate-45">
-                      <ArrowUpRight size={18} className="text-white" />
+                    <div className="shrink-0 flex flex-col items-end gap-2">
+                      <span className="text-[10px] font-bold uppercase tracking-widest text-[#F97316] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        See the show
+                      </span>
+                      <div className="h-12 w-12 rounded-full border border-white/30 grid place-items-center backdrop-blur-md bg-white/10 transition-all duration-500 group-hover:bg-[#F97316] group-hover:border-[#F97316] group-hover:rotate-45">
+                        <ArrowUpRight size={18} className="text-white" />
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </article>
-          </Link>
+              </article>
+            </Link>
           ))}
         </div>
 
@@ -194,13 +195,12 @@ export const Showcase = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="mt-16 flex justify-center"
         >
-          <Link
-            href="/portfolio"
-            className="inline-flex items-center gap-3 px-8 py-4 border border-white/10 bg-white/5 text-white text-xs font-bold uppercase tracking-[0.2em] hover:bg-[#F97316] hover:text-[#0a0a0a] hover:border-[#F97316] transition-all duration-300 group"
-          >
-            View all shows
-            <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
-          </Link>
+          <Button asChild variant="outline" size="lg" className="group">
+            <Link href="/portfolio">
+              View all shows
+              <ArrowRight size={15} className="transition-transform duration-300 group-hover:translate-x-1 ml-2" />
+            </Link>
+          </Button>
         </motion.div>
 
         {/* Footer line */}
