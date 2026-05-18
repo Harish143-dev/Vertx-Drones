@@ -110,7 +110,7 @@ export function CorporateROI() {
                     </span>
 
                     <div className="relative z-10 flex flex-col h-full">
-                      <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl border border-primary/30 bg-primary/10 text-primary shadow-[0_0_15px_rgba(249,115,22,0.1)] transition-all duration-500 group-hover:scale-110 group-hover:shadow-[0_0_25px_rgba(249,115,22,0.25)]">
+                      <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-lg border border-primary/30 bg-primary/10 text-primary shadow-[0_0_15px_rgba(249,115,22,0.1)] transition-all duration-500 group-hover:scale-110 group-hover:shadow-[0_0_25px_rgba(249,115,22,0.25)]">
                         <item.icon size={22} strokeWidth={1.5} />
                       </div>
                       <h3 className="text-2xl font-semibold text-card-foreground tracking-tight mb-3">
@@ -159,7 +159,7 @@ export function CorporateROI() {
                     {item.number}
                   </span>
                   <div className="relative z-10">
-                    <div className="mb-6 flex h-12 w-12 items-center justify-center border border-primary/20 bg-primary/10 text-primary rounded-xl">
+                    <div className="mb-6 flex h-12 w-12 items-center justify-center border border-primary/20 bg-primary/10 text-primary rounded-lg">
                       <Icon size={24} />
                     </div>
                     <h3 className="mb-3 text-xl font-bold text-card-foreground leading-tight">

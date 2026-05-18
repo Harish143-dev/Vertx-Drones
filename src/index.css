@@ -134,6 +134,12 @@
     letter-spacing: 0.12em;
     text-transform: uppercase;
   }
+
+  @media (max-width: 768px) {
+    h1, h2, h3, h4, h5, h6 {
+      letter-spacing: 0.05em;
+    }
+  }
 }
 
 html {

@@ -34,7 +34,7 @@ export function PartnerProcess() {
                 className="relative flex flex-col md:items-start pl-12 md:pl-0"
               >
                 {/* Number Circle */}
-                <div className="absolute rounded-md left-0 top-0 flex h-10 w-10 items-center justify-center border border-primary bg-background text-primary font-bold z-10 md:relative md:mb-6">
+                <div className="absolute rounded-lg left-0 top-0 flex h-10 w-10 items-center justify-center border border-primary bg-background text-primary font-bold z-10 md:relative md:mb-6">
                   0{i + 1}
                 </div>
 

@@ -43,7 +43,7 @@ export function ContactProcess() {
               {/* Highlight bar */}
               <div className="absolute left-0 top-0 h-px w-1/3 bg-primary" />
 
-              <div className="mb-6 flex h-10 w-10 items-center justify-center rounded-md border border-primary bg-primary/10 text-primary font-bold text-sm">
+              <div className="mb-6 flex h-10 w-10 items-center justify-center rounded-lg border border-primary bg-primary/10 text-primary font-bold text-sm">
                 0{i + 1}
               </div>
 

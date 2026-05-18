@@ -173,7 +173,7 @@ export function PortfolioGallery() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
-                className="group relative cursor-pointer overflow-hidden aspect-[16/9] rounded-sm"
+                className="group relative cursor-pointer overflow-hidden aspect-[16/9] rounded-lg"
                 onClick={() => setSelectedProject(project)}
               >
                 {project.video ? (

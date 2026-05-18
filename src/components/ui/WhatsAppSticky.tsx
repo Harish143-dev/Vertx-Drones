@@ -2,14 +2,14 @@ import { motion } from "framer-motion";
 export function WhatsAppSticky() {
   return (
     <motion.a
-      href="https://wa.me/919999999999"
+      href="https://wa.me/917358598707"
       target="_blank"
       rel="noopener noreferrer"
       initial={{ opacity: 0, scale: 0.8, y: 20 }}
       animate={{ opacity: 1, scale: 1, y: 0 }}
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.9 }}
-      className="fixed bottom-8 right-8 z-[100] flex items-center justify-center w-14 h-14 rounded-full bg-[#25D366] text-white shadow-lg transition-shadow hover:shadow-[0_0_20px_rgba(37,211,102,0.4)]"
+      className="fixed bottom-8 right-8 z-[100] hidden md:flex items-center justify-center w-14 h-14 rounded-full bg-[#25D366] text-white shadow-lg transition-shadow hover:shadow-[0_0_20px_rgba(37,211,102,0.4)]"
       title="Contact us on WhatsApp"
     >
       <svg

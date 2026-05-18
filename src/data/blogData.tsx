@@ -73,7 +73,7 @@ export const blogData: BlogPost[] = [
     title: "Drone Shows vs Fireworks: Which Is Right for Your Event?",
     category: "Comparison",
     readTime: "6 min",
-    image: "https://images.unsplash.com/photo-1533468504014-a957241dc47d?q=80&w=800&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1518173946687-a4c8a383392e?q=80&w=800&auto=format&fit=crop",
     metaTitle: "Drone Show vs Fireworks India: Which Should You Choose?",
     metaDescription: "Drone show or fireworks for your event in India? We compare cost, safety, regulations, and visual impact to help you decide.",
     content: () => (
@@ -225,7 +225,7 @@ export const blogData: BlogPost[] = [
     title: "How VertX Delivered a 150-Drone New Year Show for the Pondicherry Government",
     category: "Case Study",
     readTime: "4 min",
-    image: "https://images.unsplash.com/photo-1546903720-e22a7f5bc633?q=80&w=800&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?q=80&w=800&auto=format&fit=crop",
     metaTitle: "Case Study: 150-Drone New Year Show for the Pondicherry Government",
     metaDescription: "How VertX planned and delivered a 150-drone New Year drone show for the Pondicherry Government — from airspace clearance to live execution.",
     content: () => (

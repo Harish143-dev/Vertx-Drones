@@ -80,7 +80,7 @@ export function PartnerTiers() {
               </div>
               <div>
                 <h4 className="mb-1 text-base md:text-lg font-semibold text-foreground">Exclusive Margins</h4>
-                <p className="text-sm font-light text-white/50">[Placeholder: Commission Structure to be verified]</p>
+                <p className="text-sm font-light text-white/50">Industry-leading commission rates and volume incentives.</p>
               </div>
             </div>
 
@@ -90,7 +90,7 @@ export function PartnerTiers() {
               </div>
               <div>
                 <h4 className="mb-1 text-base md:text-lg font-semibold text-foreground">Protected Territory</h4>
-                <p className="text-sm font-light text-white/50">[Placeholder: Exclusivity Terms to be verified]</p>
+                <p className="text-sm font-light text-white/50">Dedicated region mapping and client protection protocols.</p>
               </div>
             </div>
           </motion.div>
