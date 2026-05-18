@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'wouter';
 import { motion, AnimatePresence } from 'framer-motion';
+import { label } from 'three/tsl';
 
 const AnimatedNavLink = ({ href, children, isActive }: { href: string; children: React.ReactNode; isActive?: boolean }) => {
   const defaultTextColor = isActive ? 'text-[#F97316]' : 'text-white/40';
@@ -40,8 +41,10 @@ export function Navbar() {
     { label: 'Portfolio', href: '/portfolio' },
     { label: 'Corporate', href: '/corporate' },
     { label: 'Wedding', href: '/weddings' },
-    { label: 'Show Builder', href: '/simulator' },
+    { label: 'Simulator', href: '/simulator' },
     { label: 'Blog', href: '/blog' },
+    { label: "Partner", href: " /partner" },
+    { label: 'About Us', href: '/about' }
   ];
 
   const dotLogo = (
@@ -64,7 +67,7 @@ export function Navbar() {
         layout
         className={`relative flex items-center justify-between transition-all duration-700 ease-in-out
                    ${scrolled
-            ? 'w-[95%] md:w-[90%] px-8 py-3 rounded-full bg-black/40 backdrop-blur-2xl border border-white/10 shadow-2xl'
+            ? 'w-[95%] md:w-[90%] px-8 bg-black/40 backdrop-blur-2xl py-2.5 border border-white/10 shadow-2xl'
             : 'w-full max-w-[1600px] px-12 py-4 bg-transparent border-transparent'}`}
       >
         {/* Logo Section */}
@@ -87,11 +90,11 @@ export function Navbar() {
 
         {/* Action Button */}
         <div className="hidden lg:flex items-center shrink-0">
-          <div className="relative group">
-            <div className="absolute inset-0 -m-1 rounded-full bg-[#F97316] opacity-0 blur-lg group-hover:opacity-30 transition-opacity duration-500" />
+          <div className="relative group mb-1">
+            <div className="absolute inset-0 bg-[#F97316] opacity-0 blur-lg group-hover:opacity-30 transition-opacity duration-500" />
             <Link
               href="/contact"
-              className="relative z-10 px-8 py-2.5 text-[10px] font-bold uppercase tracking-[0.3em] text-white border border-white/20 rounded-full hover:bg-white hover:text-black transition-all duration-500"
+              className="relative z-10 px-8 py-2.5 text-[10px] font-semibold uppercase tracking-[0.3em] text-white border border-white/20 hover:bg-white hover:text-black transition-all duration-500"
             >
               Contact
             </Link>
@@ -146,7 +149,7 @@ export function Navbar() {
                 <Link
                   href="/contact"
                   onClick={() => setIsOpen(false)}
-                  className="px-14 py-5 bg-white text-black text-[10px] font-bold uppercase tracking-[0.4em] rounded-full shadow-2xl shadow-white/10"
+                  className="px-14 py-5 bg-white text-black text-[10px] font-bold uppercase tracking-[0.4em] shadow-2xl shadow-white/10"
                 >
                   Contact
                 </Link>

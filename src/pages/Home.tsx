@@ -17,7 +17,6 @@ export function Home() {
       <SEO
         title="Drone Light Shows in India | VertX Drone Light Show"
         description="VertX drone light shows across India. Weddings, birthdays, corporate events, national celebrations, festivals and government shows. Up to 1,000 drones."
-        canonical="https://vertxdroneshow.in/"
       />
       <Navbar />
       <main>

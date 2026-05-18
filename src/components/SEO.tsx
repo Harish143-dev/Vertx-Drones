@@ -16,22 +16,30 @@ export const SEO = ({
   image = "/og-image.jpg" // Default OG image
 }: SEOProps) => {
   const siteTitle = "Vertx Drones";
-  const fullTitle = title ? `${title} | ${siteTitle}` : siteTitle;
-  const siteUrl = window.location.origin;
+  
+  // Only append siteTitle if the title doesn't already contain "Vertx" or "VertX"
+  const needsSuffix = title && !title.toLowerCase().includes("vertx");
+  const fullTitle = title 
+    ? (needsSuffix ? `${title} | ${siteTitle}` : title) 
+    : siteTitle;
+    
+  const siteUrl = "https://vertxdroneshow.in";
+  const currentPath = typeof window !== 'undefined' ? window.location.pathname : '';
+  const finalCanonical = canonical || `${siteUrl}${currentPath === '/' ? '' : currentPath}`;
 
   return (
     <Helmet>
       {/* Basic Meta Tags */}
       <title>{fullTitle}</title>
       <meta name="description" content={description} />
-      {canonical && <link rel="canonical" href={canonical} />}
+      <link rel="canonical" href={finalCanonical} />
 
       {/* Open Graph / Facebook */}
       <meta property="og:type" content={type} />
       <meta property="og:title" content={fullTitle} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={`${siteUrl}${image}`} />
-      <meta property="og:url" content={window.location.href} />
+      <meta property="og:url" content={finalCanonical} />
 
       {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />

@@ -21,24 +21,37 @@ export function PortfolioCTA() {
           transition={{ duration: 0.7 }}
           className="max-w-2xl mx-auto"
         >
-          <p className="text-xs tracking-[0.3em] uppercase mb-6" style={{ color: ORANGE }}>
-            Ready?
-          </p>
           <h2 className="text-3xl md:text-5xl font-light leading-tight mb-6">
-            Want a Show
-            <br />
-            Like This?
+            Your Show Is Next
           </h2>
           <p className="text-sm md:text-base text-white/40 font-light leading-relaxed mb-10 max-w-lg mx-auto">
-            Every project starts with a conversation. Tell us about your event and we'll craft a sky-show that leaves your audience speechless.
+            Every show above started with one conversation. Yours can too.
           </p>
-          <Link
-            href="/contact"
-            className="inline-flex items-center gap-3 px-10 py-4 bg-[#F97316] text-[#0a0a0a] font-bold hover:bg-white transition-all duration-300 shadow-[0_0_30px_rgba(249,115,22,0.3)] hover:shadow-[0_0_40px_rgba(249,115,22,0.5)] uppercase tracking-widest text-xs group"
-          >
-            Book Your Show
-            <ArrowRight size={14} className="transition-transform duration-200 group-hover:translate-x-1" />
-          </Link>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-3 px-10 py-4 bg-[#F97316] text-[#0a0a0a] font-bold hover:bg-white transition-all duration-300 shadow-[0_0_30px_rgba(249,115,22,0.3)] hover:shadow-[0_0_40px_rgba(249,115,22,0.5)] uppercase tracking-widest text-xs group"
+            >
+              Plan Your Drone Show
+              <ArrowRight size={14} className="transition-transform duration-200 group-hover:translate-x-1" />
+            </Link>
+            <a
+              href="https://wa.me/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 px-10 py-4 border border-white/20 text-white font-bold hover:bg-white/5 transition-all duration-300 uppercase tracking-widest text-xs group"
+            >
+              WhatsApp Us
+            </a>
+          </div>
+          
+          <div className="flex flex-wrap items-center justify-center gap-4 text-xs font-light text-white/30">
+            <Link href="/weddings" className="hover:text-white/70 transition-colors">wedding drone show</Link>
+            <span>|</span>
+            <Link href="/corporate" className="hover:text-white/70 transition-colors">corporate drone show</Link>
+            <span>|</span>
+            <Link href="/" className="hover:text-white/70 transition-colors">drone light shows</Link>
+          </div>
         </motion.div>
       </div>
     </section>
