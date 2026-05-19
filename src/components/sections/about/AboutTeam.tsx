@@ -13,10 +13,10 @@ export function AboutTeam() {
   return (
     <section className="bg-background py-24 md:py-32">
       <div className="container mx-auto px-6 md:px-12">
-        
+
         {/* Header Section */}
         <div className="mb-16 md:mb-24 text-center">
-          <motion.h2 
+          <motion.h2
             variants={fadeUp}
             initial="hidden"
             whileInView="show"
@@ -38,12 +38,12 @@ export function AboutTeam() {
         </div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-24 max-w-5xl mx-auto">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
           {stats.map((stat, i) => {
-             const Icon = stat.icon;
-             return (
-              <motion.div 
-                key={stat.label} 
+            const Icon = stat.icon;
+            return (
+              <motion.div
+                key={stat.label}
                 variants={fadeUp}
                 initial="hidden"
                 whileInView="show"
@@ -55,12 +55,12 @@ export function AboutTeam() {
                 <span className="text-4xl font-light text-white mb-2">{stat.value}</span>
                 <span className="text-[10px] sm:text-xs uppercase tracking-[0.2em] font-bold text-white/40">{stat.label}</span>
               </motion.div>
-             );
+            );
           })}
         </div>
 
         {/* Founders Block */}
-        <div className="max-w-3xl mx-auto">
+        {/* <div className="max-w-3xl mx-auto">
           <motion.div
             variants={fadeUp}
             initial="hidden"
@@ -100,7 +100,7 @@ export function AboutTeam() {
               </p>
             </div>
           </motion.div>
-        </div>
+        </div> */}
 
       </div>
     </section>

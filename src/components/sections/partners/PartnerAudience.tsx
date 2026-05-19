@@ -16,7 +16,7 @@ export function PartnerAudience() {
       <div className="container mx-auto px-6 md:px-12">
         <div className="mb-16 text-center">
           <h2 className="text-3xl font-light leading-tight md:text-4xl mx-auto max-w-3xl">
-            If you work with events regularly, this program is for you.
+            Who This Is For
           </h2>
         </div>
 

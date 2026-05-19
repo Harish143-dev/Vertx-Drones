@@ -117,30 +117,17 @@ export function ContactFormSection() {
                   <input required type="tel" id="phone" className="rounded-lg border border-border bg-background px-4 py-3 text-sm focus:border-primary focus:outline-none transition-colors" />
                 </div>
 
-                <div className="grid gap-6 md:grid-cols-2">
-                  <div className="flex flex-col gap-2">
-                    <label htmlFor="eventType" className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Event Type <span className="text-primary">*</span></label>
-                    <select required id="eventType" className="rounded-lg border border-border bg-background px-4 py-3 text-sm focus:border-primary focus:outline-none transition-colors appearance-none text-foreground">
-                      <option value="" disabled selected>Select an option</option>
-                      <option value="Wedding">Wedding</option>
-                      <option value="Corporate Event">Corporate Event</option>
-                      <option value="Festival">Festival</option>
-                      <option value="Government Event">Government Event</option>
-                      <option value="Birthday">Birthday</option>
-                      <option value="Other">Other</option>
-                    </select>
-                  </div>
-                  <div className="flex flex-col gap-2">
-                    <label htmlFor="budget" className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Estimated Budget</label>
-                    <select id="budget" className="rounded-lg border border-border bg-background px-4 py-3 text-sm focus:border-primary focus:outline-none transition-colors appearance-none text-foreground">
-                      <option value="" disabled selected>Select an option</option>
-                      <option value="Below 5L">Below 5L</option>
-                      <option value="5L to 10L">5L to 10L</option>
-                      <option value="10L to 20L">10L to 20L</option>
-                      <option value="20L and above">20L and above</option>
-                      <option value="Not sure yet">Not sure yet</option>
-                    </select>
-                  </div>
+                <div className="flex flex-col gap-2">
+                  <label htmlFor="eventType" className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Event Type <span className="text-primary">*</span></label>
+                  <select required id="eventType" className="rounded-lg border border-border bg-background px-4 py-3 text-sm focus:border-primary focus:outline-none transition-colors appearance-none text-foreground">
+                    <option value="" disabled selected>Select an option</option>
+                    <option value="Wedding">Wedding</option>
+                    <option value="Corporate Event">Corporate Event</option>
+                    <option value="Festival">Festival</option>
+                    <option value="Government Event">Government Event</option>
+                    <option value="Birthday">Birthday</option>
+                    <option value="Other">Other</option>
+                  </select>
                 </div>
 
                 <div className="grid gap-6 md:grid-cols-2">

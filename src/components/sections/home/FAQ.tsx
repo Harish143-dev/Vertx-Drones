@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Plus, Minus } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 
 const faqs = [
   {
@@ -33,76 +33,55 @@ const faqs = [
   },
 ];
 
-const ORANGE = "#F97316";
-
 export function FAQ() {
-  const [open, setOpen] = useState<number | null>(null);
+  const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   return (
-    <section className="py-24 bg-[#0a0a0a]">
+    <section className="bg-background py-24 md:py-32">
       <div className="container mx-auto px-6 md:px-12">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-14"
-        >
+        <div className="max-w-4xl">
+          <div className="mb-16">
+            <h2 className="text-3xl md:text-5xl font-light leading-tight tracking-tight">
+              Questions We Get Asked Most
+            </h2>
+          </div>
 
-          <h2 className="text-3xl md:text-5xl">Questions We Get Asked Most</h2>
-        </motion.div>
-
-        <div className="max-w-3xl">
-          {faqs.map((faq, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: i * 0.05 }}
-              className="border-b border-white/7"
-            >
-              <button
-                onClick={() => setOpen(open === i ? null : i)}
-                className="w-full flex items-center justify-between py-5 text-left group"
-              >
-                <span
-                  className="text-sm md:text-base font-medium pr-8 transition-colors duration-200"
-                  style={{ color: open === i ? ORANGE : "rgba(255,255,255,0.85)" }}
-                >
-                  {faq.q}
-                </span>
-                <span
-                  className="flex-shrink-0 w-7 h-7 flex items-center justify-center border transition-all duration-200"
-                  style={{
-                    borderColor: open === i ? ORANGE : "rgba(255,255,255,0.1)",
-                    color: open === i ? ORANGE : "rgba(255,255,255,0.35)",
-                  }}
-                >
-                  {open === i ? <Minus size={13} /> : <Plus size={13} />}
-                </span>
-              </button>
-
-              <AnimatePresence initial={false}>
-                {open === i && (
-                  <motion.div
-                    key="answer"
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
-                    className="overflow-hidden"
+          <div className="flex flex-col border-t border-border">
+            {faqs.map((faq, index) => {
+              const isOpen = openFaq === index;
+              return (
+                <div key={index} className="border-b border-border">
+                  <button
+                    onClick={() => setOpenFaq(isOpen ? null : index)}
+                    className="flex w-full items-center justify-between py-6 text-left transition-colors hover:text-primary"
                   >
-                    <p className="pb-5 text-sm text-white/45 font-light leading-relaxed pr-12">
-                      {faq.a}
-                    </p>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </motion.div>
-          ))}
+                    <h3 className="text-lg md:text-xl font-medium pr-8">{faq.q}</h3>
+                    <ChevronDown 
+                      className={`shrink-0 transition-transform duration-300 ${isOpen ? "rotate-180 text-primary" : "text-muted-foreground"}`} 
+                    />
+                  </button>
+                  <AnimatePresence>
+                    {isOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="overflow-hidden"
+                      >
+                        <p className="pb-8 text-base font-light leading-relaxed text-muted-foreground pr-12">
+                          {faq.a}
+                        </p>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>
   );
 }
+

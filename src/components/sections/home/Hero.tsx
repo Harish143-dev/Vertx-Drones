@@ -23,7 +23,7 @@ export function Hero() {
       <div className="container mx-auto px-6 md:px-12 relative z-10 flex flex-col justify-end flex-1 pb-10 md:pb-16 pt-28">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 md:gap-12">
 
-          {/* Left: Title + CTA */}
+          {/* Left: Title, Description + CTA */}
           <div className="flex flex-col items-start md:max-w-[55%]">
             <motion.h1
               className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light tracking-tight text-white mb-6 leading-[1.1]"
@@ -48,6 +48,15 @@ export function Hero() {
               ))}
             </motion.h1>
 
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.4, ease: "easeOut" }}
+              className="text-sm md:text-base text-white/80 font-light leading-relaxed mb-8 max-w-lg"
+            >
+              {description}
+            </motion.p>
+
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
@@ -62,19 +71,6 @@ export function Hero() {
               </Button>
             </motion.div>
           </div>
-
-          {/* Right: Description    */}
-          { <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.4, ease: "easeOut" }}
-            className="md:max-w-[30%] md:text-right"
-          >
-            <p className="text-sm md:text-base text-white/80 font-light leading-relaxed">
-              {description}
-            </p>
-          </motion.div>}
-
         </div>
       </div>
     </section>
