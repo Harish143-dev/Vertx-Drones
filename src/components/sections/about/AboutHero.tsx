@@ -3,7 +3,7 @@ import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { fadeUp } from "@/lib/motion";
-import aboutImg from "@/assets/images/use-cases/corporate.png"; // Placeholder for the best wide aerial shot
+import aboutImg from "@/assets/images/aboutHero.png"; // Placeholder for the best wide aerial shot
 
 export function AboutHero() {
   const headline = "We Build Drone Shows. End to End.";
@@ -32,7 +32,7 @@ export function AboutHero() {
             We Build Drone Shows.<br />
             End to End.
           </motion.h1>
-          
+
           <motion.p
             variants={fadeUp}
             initial="hidden"
@@ -42,7 +42,7 @@ export function AboutHero() {
           >
             {description}
           </motion.p>
-          
+
           <motion.div
             variants={fadeUp}
             initial="hidden"

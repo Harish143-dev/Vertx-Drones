@@ -4,7 +4,7 @@ import { ArrowRight, Phone } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 import { fadeUp } from "@/lib/motion";
-import contactImg from "@/assets/images/use-cases/corporate.png"; // Placeholder for premium show still
+import contactImg from "@/assets/images/contactHero.png"; // Placeholder for premium show still
 
 export function ContactFormSection() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -28,15 +28,15 @@ export function ContactFormSection() {
         <img
           src={contactImg}
           alt="VertX drone show contact India book a show"
-          className="h-full w-full object-cover opacity-20"
+          className="h-full w-full object-cover opacity-70"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/95 to-background/50" />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/80" />
+        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-background/50" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/60" />
       </div>
 
       <div className="container relative z-10 mx-auto px-6 md:px-12">
         <div className="grid gap-16 lg:grid-cols-2 lg:gap-24 items-start">
-          
+
           {/* Left Column - Intro & Quick Connect */}
           <motion.div
             variants={fadeUp}
@@ -51,7 +51,7 @@ export function ContactFormSection() {
               Fill the form and we will get back to you within 24 hours. Rather talk first? WhatsApp or call us directly.
             </p>
 
-             <div className="border-t border-border pt-12">
+            <div className="border-t border-border pt-12">
               <h2 className="mb-6 text-xl font-semibold text-white">Other Ways to Reach Us</h2>
               <div className="flex flex-col sm:flex-row gap-4 mb-12">
                 <Button asChild variant="outline" size="lg" className="group w-fit border-white/20 text-white hover:border-[#25D366] hover:text-[#25D366] hover:bg-transparent shadow-none">
@@ -159,7 +159,7 @@ export function ContactFormSection() {
                   <textarea id="brief" rows={4} maxLength={1000} placeholder="Up to 150 words..." className="rounded-lg border border-border bg-background px-4 py-3 text-sm focus:border-primary focus:outline-none transition-colors resize-none placeholder:text-muted-foreground/50" />
                 </div>
 
-                 <Button
+                <Button
                   type="submit"
                   disabled={isSubmitting}
                   size="lg"

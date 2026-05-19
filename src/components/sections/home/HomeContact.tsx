@@ -21,17 +21,15 @@ export function HomeContact() {
     formData.append("access_key", "e25a8f18-fdd9-49ec-96d5-7c038c34d196");
 
     try {
-      const response = await fetch("https://api.web3forms.com/submit", {
+      const response = await fetch("https://hook.eu1.make.com/25rrrn6aw6fw8suynquwzk8g5eqsqray", {
         method: "POST",
         body: formData
       });
 
-      const data = await response.json();
-
-      if (data.success) {
+      if (response.ok) {
         setSubmitted(true);
       } else {
-        setErrorMsg(data.message || "Something went wrong. Please try again.");
+        setErrorMsg("Something went wrong. Please try again.");
       }
     } catch (error) {
       setErrorMsg("Failed to send message. Please try again later.");
@@ -98,36 +96,36 @@ export function HomeContact() {
               <label className="block text-[10px] tracking-[0.2em] uppercase text-white/35 mb-2">
                 What's the vibe or concept of your event?
               </label>
-                <Input
-                  type="text"
-                  name="concept"
-                  className="w-full rounded-lg bg-white/[0.03] border-white/10 px-4 py-6 text-sm text-white placeholder-white/20 focus-visible:ring-1 focus-visible:ring-[#F97316] transition-colors duration-200"
-                  placeholder="e.g. Grand product launch with 500 drones over the marina"
-                />
+              <Input
+                type="text"
+                name="concept"
+                className="w-full rounded-lg bg-white/[0.03] border-white/10 px-4 py-6 text-sm text-white placeholder-white/20 focus-visible:ring-1 focus-visible:ring-[#F97316] transition-colors duration-200"
+                placeholder="e.g. Grand product launch with 500 drones over the marina"
+              />
             </div>
 
             <div>
               <label className="block text-[10px] tracking-[0.2em] uppercase text-white/35 mb-2">
                 What date are you planning for?
               </label>
-                <Input
-                  type="date"
-                  name="date"
-                  className="w-full rounded-lg bg-white/[0.03] border-white/10 px-4 py-6 text-sm text-white/70 focus-visible:ring-1 focus-visible:ring-[#F97316] transition-colors duration-200"
-                  style={{ colorScheme: "dark" }}
-                />
+              <Input
+                type="date"
+                name="date"
+                className="w-full rounded-lg bg-white/[0.03] border-white/10 px-4 py-6 text-sm text-white/70 focus-visible:ring-1 focus-visible:ring-[#F97316] transition-colors duration-200"
+                style={{ colorScheme: "dark" }}
+              />
             </div>
 
             <div>
               <label className="block text-[10px] tracking-[0.2em] uppercase text-white/35 mb-2">
                 Event Location
               </label>
-                <Input
-                  type="text"
-                  name="location"
-                  className="w-full rounded-lg bg-white/[0.03] border-white/10 px-4 py-6 text-sm text-white placeholder-white/20 focus-visible:ring-1 focus-visible:ring-[#F97316] transition-colors duration-200"
-                  placeholder="City, venue, or region"
-                />
+              <Input
+                type="text"
+                name="location"
+                className="w-full rounded-lg bg-white/[0.03] border-white/10 px-4 py-6 text-sm text-white placeholder-white/20 focus-visible:ring-1 focus-visible:ring-[#F97316] transition-colors duration-200"
+                placeholder="City, venue, or region"
+              />
             </div>
 
             <div className="md:col-span-2">

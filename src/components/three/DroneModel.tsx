@@ -1,5 +1,5 @@
-import { type MutableRefObject, useMemo, useRef } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { type MutableRefObject, useMemo, useRef, useEffect } from "react";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Environment, ContactShadows, OrbitControls, RoundedBox } from "@react-three/drei";
 import { EffectComposer, Bloom } from "@react-three/postprocessing";
 import * as THREE from "three";
@@ -94,6 +94,18 @@ export function DroneHeroScene({ cameraView = "Wide" }: DroneHeroSceneProps) {
   );
 }
 
+function CameraUpdater({ position }: { position: [number, number, number] }) {
+  const { camera, controls } = useThree();
+  useEffect(() => {
+    camera.position.set(...position);
+    if (controls) {
+      (controls as any).target.set(0, 0.5, 0);
+      (controls as any).update();
+    }
+  }, [camera, controls, position]);
+  return null;
+}
+
 export function FormationPreviewScene({
   droneCount,
   shape,
@@ -101,10 +113,10 @@ export function FormationPreviewScene({
 }: FormationPreviewSceneProps) {
   const cameraPosition: [number, number, number] =
     cameraView === "Top"
-      ? [0, 14, 0.5]
+      ? [0, 14, 0]        // Aerial View: Straight down
       : cameraView === "Front"
-        ? [0, 0.5, 14]
-        : [4, 2.5, 12];
+        ? [0, 0.5, 8]     // Close-Up: Straight on, closer
+        : [0, 2.0, 13];   // Audience View: Straight on, wide
 
   return (
     <div className="h-[480px] w-full md:h-[620px]" style={{ background: "#020208" }}>
@@ -135,12 +147,13 @@ export function FormationPreviewScene({
         {/* The formation */}
         <FormationSwarm droneCount={droneCount} shape={shape} />
 
-        <OrbitControls enablePan={false} enableZoom={false} />
+        <CameraUpdater position={cameraPosition} />
+        <OrbitControls makeDefault enablePan={false} enableZoom={false} target={[0, 0.5, 0]} />
         <EffectComposer>
           <Bloom
-            intensity={2.15}
-            luminanceThreshold={0.08}
-            luminanceSmoothing={0.46}
+            intensity={3.5}
+            luminanceThreshold={0.1}
+            luminanceSmoothing={0.6}
             mipmapBlur
           />
         </EffectComposer>
@@ -197,6 +210,21 @@ const microDroneMaterial = new THREE.MeshBasicMaterial({
   opacity: 0.82,
 });
 
+const ledBaseMat = new THREE.MeshBasicMaterial({
+  color: "#ffffff",
+  transparent: true,
+  opacity: 0.95,
+  toneMapped: false,
+});
+const haloBaseMat = new THREE.MeshBasicMaterial({
+  color: "#ffffff",
+  transparent: true,
+  opacity: 0.45,
+  blending: THREE.AdditiveBlending,
+  depthWrite: false,
+  toneMapped: false,
+});
+
 function FormationSwarm({
   droneCount,
   shape,
@@ -205,12 +233,18 @@ function FormationSwarm({
   shape: FormationShape;
 }) {
   const groupRef = useRef<THREE.Group>(null);
+  
+  const ledMeshRef = useRef<THREE.InstancedMesh>(null);
+  const haloMeshRef = useRef<THREE.InstancedMesh>(null);
+  const bodyMeshRef = useRef<THREE.InstancedMesh>(null);
+  const arm1MeshRef = useRef<THREE.InstancedMesh>(null);
+  const arm2MeshRef = useRef<THREE.InstancedMesh>(null);
+
   const points = useMemo(
     () => createFormationPoints(shape, droneCount),
     [shape, droneCount]
   );
 
-  // Color palette — like real drone shows use multi-colored LEDs
   const colorPalette = useMemo(() => {
     if (shape === "Nature")
       return ["#22ff88", "#55ffaa", "#88ffcc", "#44ff66", "#66ffbb"];
@@ -222,159 +256,107 @@ function FormationSwarm({
     return ["#ff6622", "#ff8844", "#ffaa33", "#ff7733", "#ffcc55"];
   }, [shape]);
 
+  // Set colors when drone count or shape changes
+  useMemo(() => {
+    // Need a tiny delay to ensure refs are attached on first render
+    setTimeout(() => {
+      if (!ledMeshRef.current || !haloMeshRef.current) return;
+      const color = new THREE.Color();
+      for (let i = 0; i < droneCount; i++) {
+        color.set(colorPalette[i % colorPalette.length]);
+        ledMeshRef.current.setColorAt(i, color);
+        haloMeshRef.current.setColorAt(i, color);
+      }
+      if (ledMeshRef.current.instanceColor) ledMeshRef.current.instanceColor.needsUpdate = true;
+      if (haloMeshRef.current.instanceColor) haloMeshRef.current.instanceColor.needsUpdate = true;
+    }, 0);
+  }, [droneCount, colorPalette]);
+
   useFrame(({ clock }) => {
     const t = clock.elapsedTime;
     if (groupRef.current) {
       groupRef.current.rotation.y = Math.sin(t * 0.22) * 0.12;
     }
+
+    const dummy = new THREE.Object3D();
+    
+    if (!ledMeshRef.current) return;
+
+    for (let i = 0; i < droneCount; i++) {
+      if (i >= points.length) break;
+      const point = points[i];
+      
+      const phase = (i * 7.13) % (Math.PI * 2);
+      const hoverAmp = 0.008 + ((i * 3.7) % 0.012);
+      
+      // Simulating GPS drift & wind correction
+      const driftX = Math.sin(t * 0.6 + phase) * 0.12;
+      const driftZ = Math.cos(t * 0.5 + phase) * 0.12;
+      const hoverY = Math.sin(t * 1.8 + phase) * hoverAmp;
+      
+      dummy.position.set(
+        point.x + driftX,
+        point.y + hoverY,
+        point.z + driftZ
+      );
+      
+      const twinkleSpeed = 1.5 + ((i * 11.5) % 2.0);
+      const twinkle = 0.85 + Math.sin(t * twinkleSpeed + phase) * 0.2;
+      
+      dummy.scale.setScalar(twinkle);
+      dummy.rotation.set(0, 0, 0);
+      dummy.updateMatrix();
+      ledMeshRef.current.setMatrixAt(i, dummy.matrix);
+      if (haloMeshRef.current) haloMeshRef.current.setMatrixAt(i, dummy.matrix);
+      
+      const tiltX = Math.cos(t * 0.6 + phase) * 0.08;
+      const tiltZ = -Math.sin(t * 0.5 + phase) * 0.08;
+      
+      dummy.scale.setScalar(1); 
+      dummy.rotation.set(tiltX, phase, tiltZ);
+      dummy.updateMatrix();
+      
+      if (bodyMeshRef.current) bodyMeshRef.current.setMatrixAt(i, dummy.matrix);
+      
+      if (arm1MeshRef.current) {
+        dummy.rotation.set(tiltX, phase, tiltZ);
+        dummy.updateMatrix();
+        arm1MeshRef.current.setMatrixAt(i, dummy.matrix);
+      }
+      if (arm2MeshRef.current) {
+        dummy.rotation.set(tiltX, phase + Math.PI / 2, tiltZ);
+        dummy.updateMatrix();
+        arm2MeshRef.current.setMatrixAt(i, dummy.matrix);
+      }
+    }
+    
+    ledMeshRef.current.instanceMatrix.needsUpdate = true;
+    if (haloMeshRef.current) haloMeshRef.current.instanceMatrix.needsUpdate = true;
+    if (bodyMeshRef.current) bodyMeshRef.current.instanceMatrix.needsUpdate = true;
+    if (arm1MeshRef.current) arm1MeshRef.current.instanceMatrix.needsUpdate = true;
+    if (arm2MeshRef.current) arm2MeshRef.current.instanceMatrix.needsUpdate = true;
   });
 
   return (
     <group ref={groupRef}>
-      {/* Subtle ground reference — dark horizon line */}
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -2.2, 0]}>
         <planeGeometry args={[30, 30]} />
         <meshBasicMaterial color="#040410" transparent opacity={0.6} />
       </mesh>
-      {/* Subtle city skyline silhouette hint */}
       <mesh position={[0, -1.5, -6]}>
         <planeGeometry args={[20, 2.5]} />
         <meshBasicMaterial color="#080812" transparent opacity={0.4} />
       </mesh>
 
-      {points.map((point: THREE.Vector3, index: number) => (
-        <DroneLED
-          key={`${shape}-${droneCount}-${index}`}
-          position={point}
-          index={index}
-          droneCount={droneCount}
-          color={colorPalette[index % colorPalette.length]}
-        />
-      ))}
+      <instancedMesh ref={ledMeshRef} args={[ledDotGeo, ledBaseMat, droneCount]} />
+      <instancedMesh ref={haloMeshRef} args={[ledHaloGeo, haloBaseMat, droneCount]} />
+      <instancedMesh ref={bodyMeshRef} args={[microBodyGeo, microDroneMaterial, droneCount]} />
+      <instancedMesh ref={arm1MeshRef} args={[microArmGeo, microDroneMaterial, droneCount]} />
+      <instancedMesh ref={arm2MeshRef} args={[microArmGeo, microDroneMaterial, droneCount]} />
     </group>
   );
 }
 
-/* ──────────────────────────────────────────────────────────────
-   Individual glowing LED dot — simulates a single drone as
-   seen from the ground during a real drone light show
-   ────────────────────────────────────────────────────────────── */
-function DroneLED({
-  position,
-  index,
-  droneCount,
-  color,
-}: {
-  position: THREE.Vector3;
-  index: number;
-  droneCount: number;
-  color: string;
-}) {
-  const ref = useRef<THREE.Group>(null);
-
-  // Unique animation offsets for each drone
-  const phase = useMemo(() => seededNoise(index * 7 + 13, 6.28), [index]);
-  const hoverAmp = useMemo(
-    () => 0.008 + Math.abs(seededNoise(index * 3 + 7, 0.012)),
-    [index]
-  );
-  const twinkleSpeed = useMemo(
-    () => 1.5 + Math.abs(seededNoise(index * 11 + 5, 2.0)),
-    [index]
-  );
-
-  const mat = useMemo(
-    () =>
-      new THREE.MeshBasicMaterial({
-        color,
-        transparent: true,
-        opacity: 0.95,
-      }),
-    [color]
-  );
-  const haloMat = useMemo(
-    () =>
-      new THREE.MeshBasicMaterial({
-        color,
-        transparent: true,
-        opacity: 0.2,
-        blending: THREE.AdditiveBlending,
-        depthWrite: false,
-      }),
-    [color]
-  );
-  const navMat = useMemo(
-    () =>
-      new THREE.MeshBasicMaterial({
-        color,
-        transparent: true,
-        opacity: 0.9,
-      }),
-    [color]
-  );
-  const detailStride = droneCount <= 300 ? 1 : droneCount <= 500 ? 2 : droneCount <= 1000 ? 4 : 6;
-  const showMicroDrone = index % detailStride === 0;
-
-  useFrame(({ clock }) => {
-    const t = clock.elapsedTime;
-    if (ref.current) {
-      // Subtle hovering bob
-      ref.current.position.y =
-        position.y + Math.sin(t * 1.8 + phase) * hoverAmp;
-      // Gentle twinkling (scale pulsing)
-      const twinkle = 0.85 + Math.sin(t * twinkleSpeed + phase) * 0.15;
-      ref.current.scale.setScalar(twinkle);
-    }
-  });
-
-  return (
-    <group
-      ref={ref}
-      position={[position.x, position.y, position.z]}
-    >
-      <mesh geometry={ledHaloGeo}>
-        <primitive object={haloMat} attach="material" />
-      </mesh>
-      {showMicroDrone && (
-        <group rotation={[0, phase, 0]}>
-          <mesh geometry={microBodyGeo}>
-            <primitive object={microDroneMaterial} attach="material" />
-          </mesh>
-          <mesh geometry={microArmGeo}>
-            <primitive object={microDroneMaterial} attach="material" />
-          </mesh>
-          <mesh geometry={microArmGeo} rotation={[0, Math.PI / 2, 0]}>
-            <primitive object={microDroneMaterial} attach="material" />
-          </mesh>
-          {[
-            [-0.08, 0.002, -0.08],
-            [0.08, 0.002, -0.08],
-            [-0.08, 0.002, 0.08],
-            [0.08, 0.002, 0.08],
-          ].map((rotorPosition, rotorIndex) => (
-            <mesh
-              key={rotorIndex}
-              geometry={microRotorGeo}
-              position={rotorPosition as [number, number, number]}
-              rotation={[Math.PI / 2, 0, 0]}
-            >
-              <primitive object={microDroneMaterial} attach="material" />
-            </mesh>
-          ))}
-          <mesh geometry={microNavGeo} position={[0.075, 0.012, 0]}>
-            <primitive object={navMat} attach="material" />
-          </mesh>
-          <mesh geometry={microNavGeo} position={[-0.075, 0.012, 0]}>
-            <primitive object={navMat} attach="material" />
-          </mesh>
-        </group>
-      )}
-      <mesh geometry={ledDotGeo}>
-        <primitive object={mat} attach="material" />
-      </mesh>
-    </group>
-  );
-}
 
 function DroneModel({ scale = 1 }: { scale?: number }) {
   const rootRef = useRef<THREE.Group>(null);
@@ -571,244 +553,163 @@ function pushStroke(
 function generateBird3D(count: number): THREE.Vector3[] {
   const points: THREE.Vector3[] = [];
 
-  // Proportional allocation
-  const headCount  = Math.floor(count * 0.045);
-  const neckCount  = Math.floor(count * 0.035);
-  const bodyCount  = Math.floor(count * 0.09);
-  const wingCount  = Math.floor(count * 0.42);
-  const tailCount  = Math.floor(count * 0.09);
-  const featherCount = count - headCount - neckCount - bodyCount - wingCount - tailCount;
+  const headCount = Math.floor(count * 0.04);
+  const beakCount = Math.floor(count * 0.03);
+  const neckCount = Math.floor(count * 0.03);
+  const bodyCount = Math.floor(count * 0.12);
+  const tailCount = Math.floor(count * 0.12);
+  const wingCount = count - headCount - beakCount - neckCount - bodyCount - tailCount;
 
-  // Helper: point inside ellipsoid
-  const ellipsoid = (rx: number, ry: number, rz: number, ox = 0, oy = 0, oz = 0) => {
-    const u = Math.random(), v = Math.random();
-    const theta = u * 2 * Math.PI;
-    const phi = Math.acos(2 * v - 1);
-    const r = Math.cbrt(Math.random());
-    return new THREE.Vector3(
-      ox + r * rx * Math.sin(phi) * Math.cos(theta),
-      oy + r * ry * Math.sin(phi) * Math.sin(theta),
-      oz + r * rz * Math.cos(phi)
-    );
+  // Fibonacci sphere helper for perfectly even distribution
+  const fibSphere = (n: number, rx: number, ry: number, rz: number, cx=0, cy=0, cz=0) => {
+    const pts = [];
+    const phi = Math.PI * (3 - Math.sqrt(5));
+    for (let i = 0; i < n; i++) {
+      const y = 1 - (i / (n - 1)) * 2;
+      const rad = Math.sqrt(1 - y * y);
+      const th = phi * i;
+      pts.push(new THREE.Vector3(cx + Math.cos(th)*rad*rx, cy + y*ry, cz + Math.sin(th)*rad*rz));
+    }
+    return pts;
   };
 
-  // 1. Head — small sphere at top-front
-  for (let i = 0; i < headCount; i++) points.push(ellipsoid(0.28, 0.28, 0.28, 0, 1.1, -1.2));
+  // Realistic Cranium (elongated)
+  points.push(...fibSphere(headCount, 0.18, 0.22, 0.28, 0, 1.15, -1.25));
+  
+  // Sharp Beak (V shape using lines)
+  const beakLines = [
+    { p1: [0, 1.18, -1.48] as [number,number,number], p2: [0, 0.95, -1.95] as [number,number,number] },
+    { p1: [0, 0.95, -1.95] as [number,number,number], p2: [0, 1.05, -1.45] as [number,number,number] }
+  ];
+  points.push(...distributeOnLines(beakLines, beakCount));
 
-  // 2. Neck — thin elongated ellipsoid
-  for (let i = 0; i < neckCount; i++) points.push(ellipsoid(0.12, 0.38, 0.12, 0, 0.72, -0.85));
+  // Neck and Body
+  points.push(...fibSphere(neckCount, 0.12, 0.38, 0.15, 0, 0.75, -0.85));
+  points.push(...fibSphere(bodyCount, 0.45, 0.38, 0.9, 0, 0.4, 0));
 
-  // 3. Body — plump torso
-  for (let i = 0; i < bodyCount; i++) points.push(ellipsoid(0.45, 0.38, 0.9, 0, 0.4, 0));
-
-  // 4. Wings — parametric swept surface (each side)
+  // Parametric Wings (Evenly spaced grid mapped to a curve)
   const halfWing = Math.floor(wingCount / 2);
-  for (let side = -1; side <= 1; side += 2) {
-    for (let i = 0; i < halfWing; i++) {
-      const span   = Math.pow(Math.random(), 0.6);          // bias toward tips
-      const chord  = (Math.random() - 0.5);
-      const wLen   = 4.2;
-      const x      = span * wLen * side;
-      // dihedral: wings curve upward toward tips
-      const y      = Math.pow(span, 1.8) * 1.2 + 0.4;
-      // sweep-back + taper
-      const ww     = 1.2 - span * 0.85;
-      const z      = span * 0.8 + chord * ww;
-      const thick  = (Math.random() - 0.5) * 0.07 * (1 - span);
-      points.push(new THREE.Vector3(x, y + thick, z));
+  for (let side of [-1, 1]) {
+    const rows = Math.floor(Math.sqrt(halfWing * 0.3));
+    const cols = Math.floor(halfWing / (rows || 1));
+    const actualCount = rows * cols;
+    
+    for (let i = 0; i < actualCount; i++) {
+      const r = i % rows;
+      const c = Math.floor(i / rows);
+      const span = c / (cols - 1 || 1);
+      const chord = (r / (rows - 1 || 1)) - 0.5;
+      
+      const x = span * 4.2 * side;
+      const y = Math.pow(span, 1.8) * 1.2 + 0.4;
+      const ww = 1.2 - span * 0.85;
+      const z = span * 0.8 + chord * ww;
+      points.push(new THREE.Vector3(x, y, z));
     }
   }
 
-  // 5. Tail fan — spreading plumes
-  for (let i = 0; i < tailCount; i++) {
-    const t   = Math.random();
-    const fan = (Math.random() - 0.5) * 2;
-    const x   = fan * t * 1.4;
-    const y   = -t * 0.6 + 0.1;
-    const z   = t * 2.2 + 1.0;
+  // Tail (Evenly spaced fan)
+  const tailRows = Math.floor(Math.sqrt(tailCount * 0.4));
+  const tailCols = Math.floor(tailCount / (tailRows || 1));
+  for (let i = 0; i < tailRows * tailCols; i++) {
+    const r = i % tailRows;
+    const c = Math.floor(i / tailRows);
+    const t = c / (tailCols - 1 || 1);
+    const fan = (r / (tailRows - 1 || 1)) * 2 - 1;
+    
+    const x = fan * t * 1.4;
+    const y = -t * 0.6 + 0.1;
+    const z = t * 2.2 + 1.0;
     points.push(new THREE.Vector3(x, y, z));
   }
 
-  // 6. Primary feathers — individual quills along trailing wing edge
-  const quillCount = 16;
-  for (let i = 0; i < featherCount; i++) {
-    const side  = i % 2 === 0 ? -1 : 1;
-
-    if (i < featherCount * 0.6) {
-      const qi    = Math.floor(Math.random() * quillCount);
-      const span  = 0.28 + (qi / quillCount) * 0.72;
-      const rootX = span * 4.25 * side;
-      const rootY = Math.pow(span, 1.85) * 1.2 + 0.42;
-      const rootZ = span * 0.8 + 0.5;
-      const t     = Math.random();
-      const featherLen = 0.58 + (1 - span) * 0.62;
-      points.push(new THREE.Vector3(
-        rootX + t * 0.22 * side,
-        rootY - t * featherLen * 0.36,
-        rootZ + t * featherLen
-      ));
-    } else if (i < featherCount * 0.86) {
-      const span = Math.random();
-      points.push(new THREE.Vector3(
-        side * (0.35 + span * 4.2),
-        Math.pow(span, 1.8) * 1.25 + 0.46,
-        span * 0.86 - 0.54 + (Math.random() - 0.5) * 0.05
-      ));
-    } else if (i < featherCount * 0.94) {
-      const t = Math.random();
-      points.push(new THREE.Vector3(
-        (Math.random() - 0.5) * 0.18,
-        1.1 + (Math.random() - 0.5) * 0.08,
-        -1.48 - t * 0.55
-      ));
-    } else {
-      const a = Math.random() * Math.PI * 2;
-      points.push(new THREE.Vector3(
-        Math.cos(a) * 0.08,
-        1.18 + Math.sin(a) * 0.08,
-        -1.42
-      ));
-    }
+  // Fill any missing points due to integer division roundoffs with a subtle aura
+  while (points.length < count) {
+    points.push(new THREE.Vector3(0, 0.4, 0));
   }
 
-  return points;
+  return points.slice(0, count);
 }
 
 function generateTree3D(count: number): THREE.Vector3[] {
   const points: THREE.Vector3[] = [];
 
-  const trunkCount   = Math.floor(count * 0.12);
-  const rootCount    = Math.floor(count * 0.08);
-  const branchCount  = Math.floor(count * 0.24);
-  const canopyCount  = count - trunkCount - rootCount - branchCount;
+  const trunkCount = Math.floor(count * 0.15);
+  const canopyCount = count - trunkCount;
 
-  // 1. Trunk — tapered cylinder
-  for (let i = 0; i < trunkCount; i++) {
-    const h = Math.random();
-    const height = h * 2.5 - 2.5;          // -2.5 → 0
-    const taperR = 0.18 + (1 - h) * 0.22;  // wider at base
-    const a = Math.random() * Math.PI * 2;
-    points.push(new THREE.Vector3(
-      Math.cos(a) * Math.random() * taperR,
-      height,
-      Math.sin(a) * Math.random() * taperR
-    ));
+  // Trunk (Cylindrical Grid)
+  const trunkRings = Math.floor(Math.sqrt(trunkCount * 1.5));
+  const trunkCols = Math.floor(trunkCount / (trunkRings || 1));
+  for (let i = 0; i < trunkRings * trunkCols; i++) {
+    const r = i % trunkCols;
+    const h = Math.floor(i / trunkCols) / (trunkRings - 1 || 1);
+    const height = h * 3.0 - 2.5;
+    const taperR = 0.12 + (1 - h) * 0.18;
+    const a = (r / trunkCols) * Math.PI * 2;
+    points.push(new THREE.Vector3(Math.cos(a)*taperR, height, Math.sin(a)*taperR));
   }
 
-  // 2. Main branches — 5 large limbs spreading out
-  for (let i = 0; i < rootCount; i++) {
-    const rootAngle = (i % 7) * (Math.PI * 2 / 7);
-    const t = Math.random();
-    const spread = 0.25 + t * 1.35;
-    points.push(new THREE.Vector3(
-      Math.cos(rootAngle) * spread + (Math.random() - 0.5) * 0.08,
-      -2.35 + t * 0.18,
-      Math.sin(rootAngle) * spread + (Math.random() - 0.5) * 0.08
-    ));
-  }
-
-  const branchDirs = [
-    [1, 0], [-1, 0], [0, 1], [0, -1], [0.7, 0.7],
-    [-0.7, 0.7], [0.7, -0.7], [-0.7, -0.7]
+  // Canopy (Layered Fibonacci Spheres to form a dense tree top)
+  const layers = [
+    { y: 1.5, r: 1.8, p: 0.4 },
+    { y: 2.4, r: 1.2, p: 0.3 },
+    { y: 0.6, r: 1.4, p: 0.3 }
   ];
-  for (let i = 0; i < branchCount; i++) {
-    const bd  = branchDirs[i % branchDirs.length];
-    const t   = Math.random();
-    const bLen = i % 3 === 0 ? 2.0 : 1.45;
-    const fork = i % 3 === 0 ? 0.35 : 0.12;
-    const thick = (Math.random() - 0.5) * 0.11;
-    points.push(new THREE.Vector3(
-      bd[0] * t * bLen + thick + Math.sin(t * Math.PI) * fork * bd[1],
-      t * 1.15 + 0.05,
-      bd[1] * t * bLen + thick + Math.sin(t * Math.PI) * fork * bd[0]
-    ));
-  }
+  
+  let remainingCanopy = canopyCount;
+  layers.forEach((layer, idx) => {
+    const lCount = idx === layers.length - 1 ? remainingCanopy : Math.floor(canopyCount * layer.p);
+    remainingCanopy -= lCount;
+    
+    const phi = Math.PI * (3 - Math.sqrt(5));
+    for (let i = 0; i < lCount; i++) {
+      const y = 1 - (i / (lCount - 1)) * 2;
+      const rad = Math.sqrt(1 - y * y);
+      const th = phi * i;
+      points.push(new THREE.Vector3(
+        Math.cos(th) * rad * layer.r,
+        layer.y + y * layer.r * 0.7, // squashed vertically
+        Math.sin(th) * rad * layer.r
+      ));
+    }
+  });
 
-  // 3. Canopy — layered spherical clusters (oak-like)
-  const clusters = [
-    { x:  0,    y: 2.0, z:  0,    r: 1.9 },
-    { x: -1.4,  y: 1.2, z:  0.6,  r: 1.3 },
-    { x:  1.4,  y: 1.2, z:  0.6,  r: 1.3 },
-    { x:  0,    y: 1.3, z: -1.4,  r: 1.4 },
-    { x: -0.8,  y: 2.8, z: -0.5,  r: 0.9 },
-    { x:  0.8,  y: 2.8, z:  0.5,  r: 0.9 },
-    { x: -1.8,  y: 2.0, z: -0.8,  r: 0.75 },
-    { x:  1.8,  y: 2.0, z: -0.8,  r: 0.75 },
-  ];
-  const weights = clusters.map(c => c.r * c.r * c.r);
-  const totalW  = weights.reduce((a, b) => a + b, 0);
+  while (points.length < count) points.push(new THREE.Vector3(0, 1.5, 0));
+  return points.slice(0, count);
+}
 
-  for (let i = 0; i < canopyCount; i++) {
-    // weighted random cluster
-    let rw = Math.random() * totalW, ci = 0;
-    for (let j = 0; j < weights.length; j++) { rw -= weights[j]; if (rw <= 0) { ci = j; break; } }
-    const c = clusters[ci];
-    const u = Math.random(), v = Math.random();
-    const theta = u * 2 * Math.PI;
-    const phi   = Math.acos(2 * v - 1);
-    const edgeBias = Math.random() < 0.32 ? 0.82 + Math.random() * 0.18 : Math.cbrt(Math.random());
-    const r     = edgeBias * c.r;
-    points.push(new THREE.Vector3(
-      c.x + r * Math.sin(phi) * Math.cos(theta),
-      c.y + r * Math.sin(phi) * Math.sin(theta),
-      c.z + r * Math.cos(phi)
-    ));
-  }
-
+// Helper function to evenly distribute points along multiple line segments
+function distributeOnLines(lines: {p1: [number,number,number], p2: [number,number,number]}[], totalCount: number): THREE.Vector3[] {
+  let totalLen = 0;
+  const segments = lines.map(l => {
+    const dx = l.p2[0] - l.p1[0], dy = l.p2[1] - l.p1[1], dz = l.p2[2] - l.p1[2];
+    const len = Math.sqrt(dx*dx + dy*dy + dz*dz);
+    totalLen += len;
+    return { ...l, len };
+  });
+  
+  const points: THREE.Vector3[] = [];
+  let remaining = totalCount;
+  
+  segments.forEach((seg, i) => {
+    const isLast = i === segments.length - 1;
+    const ptsCount = isLast ? remaining : Math.round((seg.len / totalLen) * totalCount);
+    remaining -= ptsCount;
+    
+    for(let j=0; j<ptsCount; j++) {
+      const t = ptsCount === 1 ? 0.5 : j / (ptsCount - 1);
+      points.push(new THREE.Vector3(
+        seg.p1[0] + t * (seg.p2[0] - seg.p1[0]),
+        seg.p1[1] + t * (seg.p2[1] - seg.p1[1]),
+        seg.p1[2] + t * (seg.p2[2] - seg.p1[2])
+      ));
+    }
+  });
   return points;
 }
 
 function generateLogo3D(count: number): THREE.Vector3[] {
-  const points: THREE.Vector3[] = [];
-
-  const bodyCount   = Math.floor(count * 0.12);
-  const armsCount   = Math.floor(count * 0.18);
-  const rotorsCount = Math.floor(count * 0.24);
-  const textCount   = Math.floor(count * 0.32);
-  const detailCount = count - bodyCount - armsCount - rotorsCount - textCount;
-
-  // 1. Central body — flattened box drone body
-  for (let i = 0; i < bodyCount; i++) {
-    points.push(new THREE.Vector3(
-      (Math.random() - 0.5) * 0.8,
-      (Math.random() - 0.5) * 0.25 + 0.5,
-      (Math.random() - 0.5) * 0.8
-    ));
-  }
-
-  // 2. Arms — 4 diagonal beams
-  const armAngles = [Math.PI/4, 3*Math.PI/4, 5*Math.PI/4, 7*Math.PI/4];
-  const armLen    = 2.4;
-  for (let i = 0; i < armsCount; i++) {
-    const ang  = armAngles[i % 4];
-    const dist = Math.random() * armLen;
-    const th   = (Math.random() - 0.5) * 0.12;
-    points.push(new THREE.Vector3(
-      Math.cos(ang) * dist + th,
-      0.5 + (Math.random() - 0.5) * 0.1,
-      Math.sin(ang) * dist + th
-    ));
-  }
-
-  // 3. Rotors — full torus rings at each arm tip
-  const rotorR = 0.72;
-  const rotorSegs = 64;
-  for (let i = 0; i < rotorsCount; i++) {
-    const ang = armAngles[i % 4];
-    const cx  = Math.cos(ang) * armLen;
-    const cz  = Math.sin(ang) * armLen;
-    // sample on torus surface
-    const phi = Math.random() * Math.PI * 2;
-    const tubeR = 0.06;
-    const tubeA = Math.random() * Math.PI * 2;
-    points.push(new THREE.Vector3(
-      cx + (rotorR + tubeR * Math.cos(tubeA)) * Math.cos(phi),
-      0.5 + tubeR * Math.sin(tubeA),
-      cz + (rotorR + tubeR * Math.cos(tubeA)) * Math.sin(phi)
-    ));
-  }
-
-  // 4. VERTX text — structured 3D stroke letters
+  // Perfectly aligned 3D stroke letters for "VERTX"
   const letters: Array<Array<[[number,number],[number,number]]>> = [
     [ [[-0.8,1],[0,-1]], [[0.8,1],[0,-1]] ],                                                   // V
     [ [[-0.8,1],[-0.8,-1]], [[-0.8,1],[0.6,1]], [[-0.8,0],[0.4,0]], [[-0.8,-1],[0.6,-1]] ], // E
@@ -816,58 +717,26 @@ function generateLogo3D(count: number): THREE.Vector3[] {
     [ [[-0.8,1],[0.8,1]], [[0,1],[0,-1]] ],                                                    // T
     [ [[-0.8,1],[0.8,-1]], [[0.8,1],[-0.8,-1]] ],                                             // X
   ];
+  
+  const allLines: {p1: [number,number,number], p2: [number,number,number]}[] = [];
   const lSpc = 1.9, startX = -((letters.length - 1) * lSpc) / 2;
-  for (let i = 0; i < textCount; i++) {
-    const li   = i % letters.length;
-    const segs = letters[li];
-    const seg  = segs[Math.floor(Math.random() * segs.length)];
-    const t    = Math.random();
-    const lx   = seg[0][0] + t * (seg[1][0] - seg[0][0]);
-    const ly   = seg[0][1] + t * (seg[1][1] - seg[0][1]);
-    const dep  = (Math.random() - 0.5) * 0.35;
-    const jx   = (Math.random() - 0.5) * 0.06;
-    const jy   = (Math.random() - 0.5) * 0.06;
-    points.push(new THREE.Vector3(
-      startX + li * lSpc + lx * 0.65 + jx,
-      -2.0 + ly * 0.65 + jy,
-      dep
-    ));
-  }
+  
+  letters.forEach((segs, li) => {
+    segs.forEach(seg => {
+      // Add depth layers for the text to make it substantial
+      for (let layer of [-0.2, 0, 0.2]) {
+        allLines.push({
+          p1: [startX + li * lSpc + seg[0][0] * 0.65, -0.2 + seg[0][1] * 0.65, layer],
+          p2: [startX + li * lSpc + seg[1][0] * 0.65, -0.2 + seg[1][1] * 0.65, layer]
+        });
+      }
+    });
+  });
 
-  for (let i = 0; i < detailCount; i++) {
-    const mode = i % 4;
-    if (mode === 0) {
-      const side = i % 8 < 4 ? -1 : 1;
-      const t = Math.random();
-      pushStroke(points, 1, [side * 3.05, 0.5, -0.38], [side * 3.05, 0.5, 0.38], 0.025);
-      points[points.length - 1].y += Math.sin(t * Math.PI) * 0.16;
-    } else if (mode === 1) {
-      const ang = armAngles[i % 4];
-      const cx = Math.cos(ang) * armLen;
-      const cz = Math.sin(ang) * armLen;
-      const blade = (i % 2 === 0 ? 1 : -1) * 0.72;
-      points.push(new THREE.Vector3(
-        cx + Math.cos(ang + Math.PI / 2) * blade * Math.random(),
-        0.54 + (Math.random() - 0.5) * 0.04,
-        cz + Math.sin(ang + Math.PI / 2) * blade * Math.random()
-      ));
-    } else if (mode === 2) {
-      pushStroke(points, 1, [-4.6, -2.9, 0], [4.6, -2.9, 0], 0.045);
-    } else {
-      const a = Math.random() * Math.PI * 2;
-      points.push(new THREE.Vector3(
-        Math.cos(a) * 0.42,
-        0.54 + Math.sin(a) * 0.1,
-        Math.sin(a) * 0.42
-      ));
-    }
-  }
-
-  return points;
+  return distributeOnLines(allLines, count);
 }
 
 function generateNumbers3D(count: number): THREE.Vector3[] {
-  const points: THREE.Vector3[] = [];
   const strCount = String(count);
 
   const segments: Record<string, number[]> = {
@@ -875,6 +744,7 @@ function generateNumbers3D(count: number): THREE.Vector3[] {
     '4':[5,6,1,2], '5':[0,5,6,2,3], '6':[0,5,4,3,2,6], '7':[0,1,2],
     '8':[0,1,2,3,4,5,6], '9':[0,1,2,3,5,6]
   };
+  
   const segLines: [[number,number],[number,number]][] = [
     [[-1,2],[1,2]],   // 0 top
     [[1,2],[1,0]],    // 1 top-right
@@ -888,28 +758,27 @@ function generateNumbers3D(count: number): THREE.Vector3[] {
   const spacing = 3.2;
   const startX  = -((strCount.length - 1) * spacing) / 2;
 
-  for (let i = 0; i < count; i++) {
-    const di   = i % strCount.length;
-    const segs = segments[strCount[di]];
-    const segI = segs[Math.floor(Math.random() * segs.length)];
-    const seg  = segLines[segI];
-    const t    = Math.random();
-    const lx   = seg[0][0] + t * (seg[1][0] - seg[0][0]);
-    const ly   = seg[0][1] + t * (seg[1][1] - seg[0][1]);
-    // Thick extrusion — tube around each segment
-    const tubeR  = 0.18;
-    const tubeA  = Math.random() * Math.PI * 2;
-    const layer = i % 5;
-    const scatZ = (layer - 2) * 0.18 + (Math.random() - 0.5) * 0.08;
-    const bevel = layer === 0 || layer === 4 ? 0.08 : 0;
-    points.push(new THREE.Vector3(
-      startX + di * spacing + lx + Math.cos(tubeA) * (tubeR + bevel) * Math.random(),
-      ly          + Math.sin(tubeA) * (tubeR + bevel) * Math.random(),
-      scatZ
-    ));
+  const allLines: {p1: [number,number,number], p2: [number,number,number]}[] = [];
+
+  // Generate exact lines for the 7-segment display digits
+  for (let i = 0; i < strCount.length; i++) {
+    const char = strCount[i];
+    const segIdxs = segments[char];
+    
+    segIdxs.forEach(segI => {
+      const seg = segLines[segI];
+      
+      // We will create 2 parallel layers to give the numbers a slight 3D thickness
+      for (let layer of [-0.15, 0.15]) {
+        allLines.push({
+          p1: [startX + i * spacing + seg[0][0], seg[0][1], layer],
+          p2: [startX + i * spacing + seg[1][0], seg[1][1], layer]
+        });
+      }
+    });
   }
 
-  return points;
+  return distributeOnLines(allLines, count);
 }
 
 function fallbackFormation(count: number) {

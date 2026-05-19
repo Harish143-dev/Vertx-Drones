@@ -12,8 +12,8 @@ export default function Corporate() {
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-foreground font-sans">
       <SEO 
-        title="Corporate Drone Shows" 
-        description="Elevate your brand with premium drone light shows. Perfect for product launches, corporate milestones, and large-scale marketing activations."
+        title="Corporate Drone Shows in India | VertX Drone Light Show" 
+        description="VertX delivers corporate drone shows across India. Brand activations, product launches, corporate celebrations. High engagement. Viral content. Premium brand positioning."
       />
       <Navbar />
       <main>

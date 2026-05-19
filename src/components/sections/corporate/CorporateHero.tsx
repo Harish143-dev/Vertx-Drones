@@ -3,7 +3,7 @@ import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { fadeUp } from "@/lib/motion";
-import corporateImg from "@/assets/images/use-cases/corporate.png";
+import corporateImg from "@/assets/images/coporateHero.png";
 
 const ORANGE = "#F97316";
 

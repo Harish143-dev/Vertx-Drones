@@ -6,6 +6,7 @@ import { SEO } from "@/components/SEO";
 import { AboutHero } from "@/components/sections/about/AboutHero";
 import { AboutStory } from "@/components/sections/about/AboutStory";
 import { AboutDifferences } from "@/components/sections/about/AboutDifferences";
+import { AboutMission } from "@/components/sections/about/AboutMission";
 import { AboutExperience } from "@/components/sections/about/AboutExperience";
 import { AboutTeam } from "@/components/sections/about/AboutTeam";
 import { AboutCTA } from "@/components/sections/about/AboutCTA";
@@ -26,6 +27,7 @@ export default function About() {
         <AboutHero />
         <AboutStory />
         <AboutDifferences />
+        <AboutMission />
         <AboutExperience />
         <AboutTeam />
         <AboutCTA />

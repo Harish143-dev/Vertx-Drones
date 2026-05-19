@@ -3,7 +3,7 @@ import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { fadeUp } from "@/lib/motion";
-import weddingImg from "@/assets/images/use-cases/weddings.png";
+import weddingImg from "@/assets/images/weddingHero.png";
 
 export function WeddingHero() {
   return (
@@ -12,7 +12,7 @@ export function WeddingHero() {
         <img
           src={weddingImg}
           alt="VertX wedding drone show India couple celebration"
-          className="h-full w-full object-cover opacity-45 mix-blend-luminosity"
+          className="h-full w-full object-cover opacity-45 "
         />
       </div>
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/40 to-background" />
@@ -28,7 +28,7 @@ export function WeddingHero() {
           >
             Make Your Celebration Unforgettable
           </motion.h1>
-          
+
           <motion.p
             variants={fadeUp}
             initial="hidden"
@@ -38,7 +38,7 @@ export function WeddingHero() {
           >
             The sky above your wedding has a story to tell. We help you tell it.
           </motion.p>
-          
+
           <motion.div
             variants={fadeUp}
             initial="hidden"

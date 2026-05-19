@@ -60,6 +60,7 @@ const caseStudies = [
     client: "Political Campaign",
     droneCount: "150",
     eventType: "Government / Political",
+    objective: "Show delivered on brief and on time.",
     location: "Panakudi",
     image: imgBeats,
   }
@@ -101,6 +102,16 @@ export function PortfolioCaseStudies() {
                   className="w-full h-full object-cover opacity-75 group-hover:opacity-100 group-hover:scale-105 transition-all duration-600"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#111] via-transparent to-transparent" />
+
+                {/* Drone Count Badge */}
+                {study.droneCount && (
+                  <div className="absolute top-4 right-4 z-20 rounded-full bg-black/50 backdrop-blur-md border border-white/10 px-3 py-1.5 flex items-center gap-2 shadow-xl">
+                    <span className="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_8px_var(--tw-colors-primary)]" />
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-white">
+                      {study.droneCount} Drones
+                    </span>
+                  </div>
+                )}
               </div>
 
               {/* Content below */}
@@ -124,7 +135,7 @@ export function PortfolioCaseStudies() {
                 )}
 
                 {/* Bottom stats */}
-                <div className="flex items-center gap-5 mt-auto pt-4 border-t border-white/[0.05]">
+                <div className="flex flex-wrap items-center gap-x-5 gap-y-2 mt-auto pt-4 border-t border-white/[0.05]">
                   <span className="flex items-center gap-1.5 text-[10px] text-white/45">
                     <MapPin size={10} style={{ color: ORANGE }} />
                     {study.location}

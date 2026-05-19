@@ -1,6 +1,6 @@
 import { motion, type Variants } from "framer-motion";
 import { ArrowRight, MessageSquare } from "lucide-react";
-import partnerImg from "@/assets/images/use-cases/corporate.png";
+import partnerImg from "@/assets/images/partnerHero.png";
 import { Button } from "@/components/ui/button";
 import { fadeUp } from "@/lib/motion";
 

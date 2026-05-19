@@ -14,9 +14,9 @@ export default function Simulator() {
 
   return (
     <div className="min-h-screen overflow-hidden bg-background text-foreground font-sans">
-      <SEO 
-        title="Design Your Drone Show | VertX Drone Light Show India" 
-        description="Preview your drone show before you book it. Pick your drone count, shapes, and camera view. 100 to 400 drones. See exactly what your sky will look like."
+      <SEO
+        title="Design Your Drone Show | VertX Drone Light Show India"
+        description="Preview your drone show before you book it. Pick your drone count, shapes, and camera view. 100 to 500 drones. See exactly what your sky will look like."
       />
       <Navbar />
       <main>

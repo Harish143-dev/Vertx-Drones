@@ -59,9 +59,6 @@ export function Navbar() {
 
   return (
     <motion.header
-      initial={{ y: -100, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
       className={`fixed top-0 left-0 right-0 z-[100] flex justify-center pt-2 transition-all duration-700`}
     >
       <motion.div

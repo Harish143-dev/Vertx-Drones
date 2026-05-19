@@ -15,15 +15,15 @@ export default function Blog() {
 
   return (
     <div className="min-h-screen overflow-hidden bg-background text-foreground font-sans">
-      <SEO 
-        title="Drone Show Insights and Guides | VertX Blog" 
+      <SEO
+        title="Drone Show Insights and Guides | VertX Blog"
         description="Guides, comparisons, and case studies about drone light shows in India. Pricing, planning, and everything in between."
       />
       <Navbar />
 
       <main className="pt-32 pb-24 lg:pt-40 lg:pb-32">
         <div className="container mx-auto px-6 md:px-12">
-          
+
           <motion.div
             variants={fadeUp}
             initial="hidden"
@@ -50,9 +50,9 @@ export default function Blog() {
                 <Link href={`/blog/${post.slug}`}>
                   <div className="group h-full flex flex-col border border-border bg-card overflow-hidden transition-colors hover:border-primary/50 cursor-pointer rounded-lg">
                     <div className="relative aspect-[16/9] w-full overflow-hidden border-b border-border">
-                      <img 
-                        src={post.image} 
-                        alt={post.title} 
+                      <img
+                        src={post.image}
+                        alt={post.title}
                         className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-105"
                         loading="lazy"
                       />
@@ -62,10 +62,10 @@ export default function Blog() {
                         <span className="text-primary">{post.category}</span>
                         <span>{post.readTime}</span>
                       </div>
-                      <h2 className="mb-6 text-xl font-semibold leading-snug group-hover:text-primary transition-colors">
+                      <h2 className="mb-6 text-base md:text-lg line-clamp-3 font-semibold leading-snug group-hover:text-primary transition-colors">
                         {post.title}
                       </h2>
-                      <div className="mt-auto flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-foreground group-hover:text-primary transition-colors">
+                      <div className="mt-auto flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-foreground group-hover:text-primary transition-colors">
                         Read Article
                         <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
                       </div>

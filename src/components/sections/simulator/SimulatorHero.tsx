@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { fadeUp } from "@/lib/motion";
-import simulatorBg from "@/assets/images/drone-constellation.png";
+import simulatorBg from "@/assets/images/simulatorHero.png";
 
 interface SimulatorHeroProps {
   cameraView: "Wide" | "Top" | "Front";
@@ -35,7 +35,7 @@ export function SimulatorHero({ cameraView }: SimulatorHeroProps) {
           >
             See Your Show Before It Flies
           </motion.h1>
-          
+
           <motion.p
             variants={fadeUp}
             initial="hidden"
@@ -45,7 +45,7 @@ export function SimulatorHero({ cameraView }: SimulatorHeroProps) {
           >
             Pick your drone count. Choose your formations. Watch it come to life before a single drone leaves the ground.
           </motion.p>
-          
+
           <motion.div
             variants={fadeUp}
             initial="hidden"
