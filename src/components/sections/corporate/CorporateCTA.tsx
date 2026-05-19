@@ -19,9 +19,12 @@ export function CorporateCTA() {
           viewport={{ once: true }}
           className="mx-auto max-w-2xl"
         >
-          <h2 className="mb-8 text-3xl font-light leading-tight md:text-5xl">
-            Build your brand show.
+          <h2 className="mb-4 text-3xl font-light leading-tight md:text-5xl">
+            Ready to Make Your Brand Unforgettable?
           </h2>
+          <p className="max-w-2xl text-sm font-light leading-relaxed text-white/42">
+            Tell us your event. We will tell you exactly what we can build for it.
+          </p>
           <div className="flex flex-col items-center justify-center gap-4 sm:flex-row mt-8">
             <Button asChild size="lg" className="group w-full sm:w-auto">
               <Link href="/contact">

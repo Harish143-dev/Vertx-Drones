@@ -36,9 +36,7 @@ export function CorporateReasons() {
           <h2 className="text-3xl font-light leading-tight md:text-5xl text-white">
             Why Brands Choose Corporate Drone Shows
           </h2>
-          <p className="mt-5 max-w-2xl text-sm font-light leading-relaxed text-white/42">
-            Corporate buyers do not invest only for visuals. They invest because the show creates a marketing asset, a PR angle, and a premium memory around the brand.
-          </p>
+
         </motion.div>
 
         <div className="grid gap-4 md:grid-cols-3">
