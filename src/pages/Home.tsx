@@ -38,14 +38,14 @@ export function Home() {
         {/* 7. Drone Show Scale / Packages */}
         <DroneShowGallery />
 
-        {/* 8. CTA Block */}
-        <CTABlock />
-
         {/* 9. FAQ */}
         <FAQ />
 
+        {/* 8. CTA Block */}
+        <CTABlock />
+
         {/* 10. Contact Form */}
-        <HomeContact />
+        {/* <HomeContact /> */}
       </main>
       <Footer />
     </div>

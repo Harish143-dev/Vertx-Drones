@@ -13,7 +13,7 @@ import imgBeats from "@/assets/images/portfolio/beats-from-above.png";
 import imgChampions from "@/assets/images/portfolio/champions-crown.png";
 import imgTemple from "@/assets/images/portfolio/temple-of-light.png";
 
-import video100 from "@/assets/videos/showcase/100drones.mp4";
+import video100 from "@/assets/videos/gallery/Pondicherry.mp4";
 import video200 from "@/assets/videos/showcase/200drones.mp4";
 import video300 from "@/assets/videos/showcase/300drones.mp4";
 import video400 from "@/assets/videos/showcase/400drones.mp4";

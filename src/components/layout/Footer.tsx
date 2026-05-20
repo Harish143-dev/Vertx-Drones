@@ -111,8 +111,6 @@ export function Footer() {
         <div className="mt-12 flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="flex items-center gap-8 text-[10px] uppercase tracking-[0.2em] font-bold text-white/30">
             <span>© {new Date().getFullYear()} VERTX</span>
-            <a href="#" className="hover:text-white transition-colors">Privacy</a>
-            <a href="#" className="hover:text-white transition-colors">Terms</a>
           </div>
 
           {/* Credit Line - Requested by user */}
