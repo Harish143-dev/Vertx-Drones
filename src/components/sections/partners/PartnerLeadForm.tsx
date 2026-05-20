@@ -9,15 +9,41 @@ export function PartnerLeadForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
-    // Simulate API call
-    setTimeout(() => {
+
+    const form = e.currentTarget;
+    const data = {
+      fullName: (form.elements.namedItem("fullName") as HTMLInputElement | null)?.value,
+      companyName: (form.elements.namedItem("companyName") as HTMLInputElement | null)?.value,
+      businessType: (form.elements.namedItem("businessType") as HTMLSelectElement | null)?.value,
+      city: (form.elements.namedItem("city") as HTMLInputElement | null)?.value,
+      phone: (form.elements.namedItem("phone") as HTMLInputElement | null)?.value,
+      email: (form.elements.namedItem("email") as HTMLInputElement | null)?.value,
+      volume: (form.elements.namedItem("volume") as HTMLInputElement | null)?.value,
+      brief: (form.elements.namedItem("brief") as HTMLTextAreaElement | null)?.value,
+    };
+
+    try {
+      const response = await fetch("https://hook.eu1.make.com/bqjuoqjfj6orx3uxn42srg8g3uqxnjcd", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        setIsSubmitted(true);
+      } else {
+        console.error("Failed to submit form");
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+    } finally {
       setIsSubmitting(false);
-      setIsSubmitted(true);
-      console.log("Partner Form Submitted");
-    }, 1500);
+    }
   };
 
   return (

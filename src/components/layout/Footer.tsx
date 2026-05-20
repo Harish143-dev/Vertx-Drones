@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Link } from "wouter";
-import { Instagram, Linkedin, Facebook, ArrowUp } from "lucide-react";
+import { Instagram, Linkedin, Facebook, ArrowUp, Mail } from "lucide-react";
 
 export function Footer() {
   const scrollToTop = () => {
@@ -25,7 +25,7 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 pb-16 border-b border-white/10">
 
           {/* Brand Info */}
-          <div className="md:col-span-5">
+          <div className="md:col-span-5 lg:col-span-4">
             <Link href="/" className="inline-block mb-8">
               <img src="/White.svg" alt="VERTX" className="h-6 w-auto object-contain" />
             </Link>
@@ -37,33 +37,10 @@ export function Footer() {
               <p className="font-bold text-white/60 mb-2 text-xs uppercase tracking-widest">Headquarters</p>
               <p>New #32, 2nd floor, 16th Main Road, West,<br />Kathiravan Colony, Anna Nagar,<br />Chennai, Tamil Nadu 600040</p>
             </div>
-            <div className="flex gap-4">
-              <a
-                href="https://www.facebook.com/share/1CVFdBUyzg/"
-                target="_blank" rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:text-white hover:border-[#F97316] hover:bg-[#F97316]/10 transition-all duration-300"
-              >
-                <Facebook size={18} />
-              </a>
-              <a
-                href="https://www.instagram.com/vertx.de?igsh=MXE3ZWFuMXBueHpjaw=="
-                target="_blank" rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:text-white hover:border-[#F97316] hover:bg-[#F97316]/10 transition-all duration-300"
-              >
-                <Instagram size={18} />
-              </a>
-              <a
-                href="https://www.linkedin.com/company/vertx-drone-entity/"
-                target="_blank" rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:text-white hover:border-[#F97316] hover:bg-[#F97316]/10 transition-all duration-300"
-              >
-                <Linkedin size={18} />
-              </a>
-            </div>
           </div>
 
           {/* Quick Links */}
-          <div className="md:col-span-2 md:col-start-7">
+          <div className="md:col-span-2 lg:col-start-6 lg:col-span-2">
             <h4 className="text-white font-bold text-xs uppercase tracking-[0.3em] mb-8">Navigation</h4>
             <ul className="space-y-4">
               {navigationLinks.map((item) => (
@@ -91,20 +68,42 @@ export function Footer() {
           </div>
 
           {/* Contact CTA */}
-          <div className="md:col-span-2">
-            <h4 className="text-white font-bold text-xs uppercase tracking-[0.3em] mb-8">Connect</h4>
-            <ul className="space-y-4">
-              <li>
-                <a href="mailto:business@vertxdroneshow.in" className="text-white/40 hover:text-[#F97316] transition-colors text-sm font-light">
-                  business@vertxdroneshow.in
-                </a>
-              </li>
-              <li>
-                <Link href="/contact" className="text-[#F97316] hover:text-white transition-colors text-sm font-bold tracking-widest uppercase">
-                  Get a Quote
-                </Link>
-              </li>
-            </ul>
+          <div className="md:col-span-3">
+            <h4 className="text-white font-bold text-xs uppercase tracking-[0.3em] mb-6">Connect</h4>
+            
+            <div className="flex gap-4 mb-8">
+              <a
+                href="mailto:business@vertxdroneshow.in"
+                className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:text-white hover:border-[#F97316] hover:bg-[#F97316]/10 transition-all duration-300"
+              >
+                <Mail size={18} />
+              </a>
+              <a
+                href="https://www.facebook.com/share/1CVFdBUyzg/"
+                target="_blank" rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:text-white hover:border-[#F97316] hover:bg-[#F97316]/10 transition-all duration-300"
+              >
+                <Facebook size={18} />
+              </a>
+              <a
+                href="https://www.instagram.com/vertx.de?igsh=MXE3ZWFuMXBueHpjaw=="
+                target="_blank" rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:text-white hover:border-[#F97316] hover:bg-[#F97316]/10 transition-all duration-300"
+              >
+                <Instagram size={18} />
+              </a>
+              <a
+                href="https://www.linkedin.com/company/vertx-drone-entity/"
+                target="_blank" rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:text-white hover:border-[#F97316] hover:bg-[#F97316]/10 transition-all duration-300"
+              >
+                <Linkedin size={18} />
+              </a>
+            </div>
+
+            <Link href="/contact" className="inline-block px-8 py-3 bg-[#F97316] text-black hover:bg-white transition-colors text-xs font-bold tracking-widest uppercase rounded-sm">
+              Get a Quote
+            </Link>
           </div>
         </div>
 

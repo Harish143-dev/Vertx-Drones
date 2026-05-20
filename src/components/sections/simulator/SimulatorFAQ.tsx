@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 
 const faqs = [
-  { q: "How many drones do I actually need?", a: "100 drones is the starting point for a visible, impactful show. 200 gives you more formation complexity. 300 to 400 is when the show fills the full sky and creates a cinema-scale effect. Use the simulator above to see the difference yourself." },
+  { q: "How many drones do I actually need?", a: "100 drones is the starting point for a visible, impactful show. 200 gives you more formation complexity. 300 to 500 is when the show fills the full sky and creates a cinema-scale effect. Use the simulator above to see the difference yourself." },
   { q: "What shapes and formations can drones make?", a: "Text, logos, portraits, animals, geometric patterns, abstract animations, and full narrative sequences. If it can be drawn, it can be programmed into a drone formation. Our design team works from your brief." },
   { q: "Can I see the show before the event?", a: "Yes. After onboarding, we build a full 3D simulation of your show for your approval. You see every formation before we fly." },
   { q: "How far in advance do I need to book?", a: "Minimum 20 days. For complex shows or locations requiring additional airspace coordination, 30 to 45 days is ideal." },

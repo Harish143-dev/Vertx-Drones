@@ -24,7 +24,7 @@ const caseStudies = [
   {
     id: 2,
     title: "Corporate Brand Activation",
-    client: "Four Points by Sheraton",
+    client: "Hitachi",
     objective: "Deliver synchronized branding and aerial formations for a corporate event",
     droneCount: "50",
     eventType: "Corporate Event",
@@ -60,8 +60,18 @@ const caseStudies = [
     client: "Political Campaign",
     droneCount: "150",
     eventType: "Government / Political",
-    objective: "Show delivered on brief and on time.",
-    location: "Panakudi",
+    objective: "Bring stories, symbols, and campaign spirit to life through a synchronized drone light show experience",
+    location: "Panakudi, Tamil Nadu",
+    image: imgBeats,
+  },
+  {
+    id: 6,
+    title: "Public New Year Celebration",
+    droneCount: "200",
+    eventType: "Public Celebration / Entertainment",
+    objective: "Create a high-impact visual experience to engage large crowds and celebrate New Year festivities through synchronized drone storytelling",
+    location: "Besant Nagar, Chennai",
+    impact: "10000+ people",
     image: imgBeats,
   }
 ];

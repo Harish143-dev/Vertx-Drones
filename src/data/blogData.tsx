@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'wouter';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import fireworkImage from "@/assets/images/blog/blog1.jpeg"
 
 export interface BlogPost {
   slug: string;
@@ -58,9 +60,26 @@ export const blogData: BlogPost[] = [
         <p><Link href="/design" className="text-primary hover:underline">Use the simulator to see it before deciding.</Link></p>
 
         <h2>FAQ</h2>
-        <p><strong>What is the minimum drone count for a show?</strong><br />100 drones is the standard minimum to create recognizable shapes in the sky.</p>
-        <p><strong>Can I add more drones later?</strong><br />Yes, show designs can be scaled up during the planning phase.</p>
-        <p><strong>Does more drones always mean a better show?</strong><br />Not necessarily. A well-designed 200-drone show can outperform a poorly choreographed 500-drone show. It depends on the venue and the narrative.</p>
+        <Accordion type="single" collapsible className="w-full not-prose mb-8">
+          <AccordionItem value="item-1" className="border-border/50">
+            <AccordionTrigger className="text-left text-white/90 hover:no-underline hover:text-primary">What is the minimum drone count for a show?</AccordionTrigger>
+            <AccordionContent className="text-white/60">
+              100 drones is the standard minimum to create recognizable shapes in the sky.
+            </AccordionContent>
+          </AccordionItem>
+          <AccordionItem value="item-2" className="border-border/50">
+            <AccordionTrigger className="text-left text-white/90 hover:no-underline hover:text-primary">Can I add more drones later?</AccordionTrigger>
+            <AccordionContent className="text-white/60">
+              Yes, show designs can be scaled up during the planning phase.
+            </AccordionContent>
+          </AccordionItem>
+          <AccordionItem value="item-3" className="border-border/50">
+            <AccordionTrigger className="text-left text-white/90 hover:no-underline hover:text-primary">Does more drones always mean a better show?</AccordionTrigger>
+            <AccordionContent className="text-white/60">
+              Not necessarily. A well-designed 200-drone show can outperform a poorly choreographed 500-drone show. It depends on the venue and the narrative.
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
 
         <p className="mt-8">
           <Link href="/contact" className="text-primary font-semibold hover:underline">Contact us</Link> to discuss the right scale for your event, or return to our <Link href="/" className="text-primary hover:underline">Homepage</Link>.
@@ -73,7 +92,7 @@ export const blogData: BlogPost[] = [
     title: "Drone Shows vs Fireworks: Which Is Right for Your Event?",
     category: "Comparison",
     readTime: "6 min",
-    image: "https://images.unsplash.com/photo-1518173946687-a4c8a383392e?q=80&w=800&auto=format&fit=crop",
+    image: fireworkImage,
     metaTitle: "Drone Show vs Fireworks India: Which Should You Choose?",
     metaDescription: "Drone show or fireworks for your event in India? We compare cost, safety, regulations, and visual impact to help you decide.",
     content: () => (
@@ -99,7 +118,7 @@ export const blogData: BlogPost[] = [
 
         <h2>Cost comparison</h2>
         <p><strong>Fireworks:</strong> cheaper at entry level, but safety compliance adds up.</p>
-        <p><strong>Drone shows:</strong> higher base cost, includes full production, permits, and crew.</p>
+        <p><strong>Drone shows:</strong> all-inclusive pricing. Production, permits, crew, and execution in one quote.</p>
         <p><Link href="/contact" className="text-primary hover:underline">Contact us</Link> for a direct quote based on your specific needs.</p>
 
         <h2>Regulations and safety</h2>
@@ -114,9 +133,26 @@ export const blogData: BlogPost[] = [
         </ul>
 
         <h2>FAQ</h2>
-        <p><strong>Can you combine a drone show with fireworks?</strong><br />Yes, synchronized shows are increasingly popular for massive events.</p>
-        <p><strong>Which is better for a wedding?</strong><br />Drone shows are preferred due to silence, safety, and personalization.</p>
-        <p><strong>Which is safer?</strong><br />Drone shows carry zero fire risk and are heavily regulated by aviation standards.</p>
+        <Accordion type="single" collapsible className="w-full not-prose mb-8">
+          <AccordionItem value="item-1" className="border-border/50">
+            <AccordionTrigger className="text-left text-white/90 hover:no-underline hover:text-primary">Can you combine a drone show with fireworks?</AccordionTrigger>
+            <AccordionContent className="text-white/60">
+              Yes, synchronized shows are increasingly popular for massive events.
+            </AccordionContent>
+          </AccordionItem>
+          <AccordionItem value="item-2" className="border-border/50">
+            <AccordionTrigger className="text-left text-white/90 hover:no-underline hover:text-primary">Which is better for a wedding?</AccordionTrigger>
+            <AccordionContent className="text-white/60">
+              Drone shows are preferred due to silence, safety, and personalization.
+            </AccordionContent>
+          </AccordionItem>
+          <AccordionItem value="item-3" className="border-border/50">
+            <AccordionTrigger className="text-left text-white/90 hover:no-underline hover:text-primary">Which is safer?</AccordionTrigger>
+            <AccordionContent className="text-white/60">
+              Drone shows carry zero fire risk and are heavily regulated by aviation standards.
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
 
         <p className="mt-8">
           Explore more on our <Link href="/" className="text-primary hover:underline">Homepage</Link> or <Link href="/contact" className="text-primary hover:underline">Contact</Link> us directly.
@@ -150,9 +186,9 @@ export const blogData: BlogPost[] = [
         <p>Shows can range from simple logo or text formations to multi-scene narrative shows, and even custom character or portrait animations. Programming hours scale directly with this complexity.</p>
 
         <h2>Factor 3 — Location</h2>
-        <p><strong>Metro cities:</strong> faster mobilization, lower logistics cost.</p>
-        <p><strong>Remote or destination venues:</strong> higher freight and crew cost.</p>
-        <p><strong>Restricted airspace:</strong> additional permit effort and lead time required.</p>
+        <p>Pricing varies based on distance to the venue</p>
+        <p>Logistics, crew travel, and equipment transport are factored into every quote</p>
+        <p>Restricted airspace zones require additional permit effort and lead time</p>
 
         <h2>Factor 4 — Lead time</h2>
         <p>Standard lead time is 20 days. Rushed timelines are possible but will limit show complexity. Last-minute shows can be accommodated with constraints.</p>
@@ -167,12 +203,29 @@ export const blogData: BlogPost[] = [
 
         <h2>How to get an accurate quote</h2>
         <p>Fill out our brief, and get a detailed response within 24 hours.</p>
-        <p><Link href="/contact" className="inline-block mt-2 px-6 py-2 bg-primary text-background font-bold uppercase text-xs tracking-widest hover:bg-white transition-colors">Get a Quote</Link></p>
+        <p><Link href="/contact" className="inline-block mt-2 px-6 py-2 bg-primary rounded-full !text-black font-bold uppercase text-xs tracking-widest hover:bg-white transition-colors">Get a Quote</Link></p>
 
         <h2>FAQ</h2>
-        <p><strong>Is there a minimum price for a drone show in India?</strong><br />Pricing scales with requirements. Contact us for a baseline estimate.</p>
-        <p><strong>Do prices vary by city?</strong><br />Yes, primarily due to logistics and freight differences.</p>
-        <p><strong>What is included in the quote?</strong><br />Full production, crew, permits, and execution. No hidden fees.</p>
+        <Accordion type="single" collapsible className="w-full not-prose mb-8">
+          <AccordionItem value="item-1" className="border-border/50">
+            <AccordionTrigger className="text-left text-white/90 hover:no-underline hover:text-primary">Is there a minimum price for a drone show in India?</AccordionTrigger>
+            <AccordionContent className="text-white/60">
+              Pricing scales with requirements. Contact us for a baseline estimate.
+            </AccordionContent>
+          </AccordionItem>
+          <AccordionItem value="item-2" className="border-border/50">
+            <AccordionTrigger className="text-left text-white/90 hover:no-underline hover:text-primary">Do prices vary by city?</AccordionTrigger>
+            <AccordionContent className="text-white/60">
+              Yes, primarily due to logistics and freight differences.
+            </AccordionContent>
+          </AccordionItem>
+          <AccordionItem value="item-3" className="border-border/50">
+            <AccordionTrigger className="text-left text-white/90 hover:no-underline hover:text-primary">What is included in the quote?</AccordionTrigger>
+            <AccordionContent className="text-white/60">
+              Full production, crew, permits, and execution. No hidden fees.
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
 
         <p className="mt-8">
           Design your ideas using our <Link href="/design" className="text-primary hover:underline">Simulator</Link> or visit the <Link href="/" className="text-primary hover:underline">Homepage</Link> for more info.

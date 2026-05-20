@@ -64,10 +64,10 @@ export function CorporateUseCases() {
                   <span className="text-[10px] font-bold uppercase tracking-[0.24em] text-white/25">
                     {item.tag}
                   </span>
-                  <Icon
+                  {/* <Icon
                     size={22}
                     className="text-white/20 transition-colors duration-300 group-hover:text-[#F97316]"
-                  />
+                  /> */}
                 </div>
                 <div>
                   <h3 className="mb-3 text-lg font-bold leading-tight text-white md:text-xl">

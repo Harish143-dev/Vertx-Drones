@@ -13,7 +13,7 @@ const proofItems = [
   {
     id: 2,
     category: "Corporate Brand Activation",
-    client: "Four Points by Sheraton",
+    client: "Hitachi",
     drones: "50 drones",
     description: "Deliver synchronized branding and aerial formations for a high-profile corporate event.",
     location: "Mahabalipuram",
@@ -69,7 +69,7 @@ export function CorporateProof() {
                   className="w-full h-full object-cover opacity-75 group-hover:opacity-100 group-hover:scale-105 transition-all duration-600"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#111] via-transparent to-transparent" />
-                
+
                 {/* Drone Count Badge */}
                 {item.drones && (
                   <div className="absolute top-4 right-4 z-20 rounded-full bg-black/50 backdrop-blur-md border border-white/10 px-3 py-1.5 flex items-center gap-2 shadow-xl">

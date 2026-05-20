@@ -32,7 +32,7 @@ export function WeddingProcess() {
             {/* Tech Accents */}
             <Plus size={16} className="absolute left-4 top-4 text-primary/50" />
             <Plus size={16} className="absolute bottom-4 right-4 text-primary/50" />
-            
+
             <div className="flex flex-col gap-8">
               <div>
                 <p className="text-xs uppercase tracking-[0.2em] text-primary mb-2">Scale</p>
@@ -49,6 +49,18 @@ export function WeddingProcess() {
                 <p className="text-2xl font-light">Designed entirely for your brief</p>
               </div>
             </div>
+          </motion.div>
+
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            className="lg:col-span-2 pt-8 lg:pt-12 mt-8 lg:mt-12 border-t border-white/10"
+          >
+            <p className="text-xl md:text-2xl font-light leading-relaxed text-white/70">
+              We deliver wedding drone shows across India. <span className="text-white">Hyderabad, Bangalore, Udaipur, Jaipur</span>, and wherever your wedding takes you.
+            </p>
           </motion.div>
         </div>
       </div>

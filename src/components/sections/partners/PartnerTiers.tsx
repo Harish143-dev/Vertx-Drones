@@ -42,7 +42,7 @@ export function PartnerTiers() {
               Become an Official Partner
             </h2>
             <p className="text-sm md:text-base font-light leading-relaxed text-white/50 max-w-xl">
-              Get listed on vertxdroneshow.in as an official partner. Co-branded collateral, joint marketing, priority booking for your clients, and access to VertX show assets for your own promotions.
+              Work with VertX as an official partner. You bring the client. We handle production, permits, crew, and execution from start to finish.
             </p>
           </motion.div>
 

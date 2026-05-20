@@ -9,16 +9,32 @@ import contactImg from "@/assets/images/contactHero.png"; // Placeholder for pre
 export function ContactFormSection() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
-    // Future API call (e.g., n8n webhook) will go here
-    setTimeout(() => {
+    setErrorMsg("");
+
+    const formData = new FormData(e.currentTarget);
+    formData.append("access_key", "e25a8f18-fdd9-49ec-96d5-7c038c34d196");
+
+    try {
+      const response = await fetch("https://hook.eu1.make.com/n39ic3gs9ahpeonwrc9o7tlazn45qv3x", {
+        method: "POST",
+        body: formData
+      });
+
+      if (response.ok) {
+        setIsSubmitted(true);
+      } else {
+        setErrorMsg("Something went wrong. Please try again.");
+      }
+    } catch (error) {
+      setErrorMsg("Failed to send message. Please try again later.");
+    } finally {
       setIsSubmitting(false);
-      setIsSubmitted(true);
-      console.log("Contact Form Submitted");
-    }, 1500);
+    }
   };
 
   return (
@@ -107,20 +123,26 @@ export function ContactFormSection() {
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="flex flex-col gap-6">
-                <div className="flex flex-col gap-2">
-                  <label htmlFor="fullName" className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Full Name <span className="text-primary">*</span></label>
-                  <input required type="text" id="fullName" className="rounded-lg border border-border bg-background px-4 py-3 text-sm focus:border-primary focus:outline-none transition-colors" />
+                <div className="grid gap-6 md:grid-cols-2">
+                  <div className="flex flex-col gap-2">
+                    <label htmlFor="fullName" className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Full Name <span className="text-primary">*</span></label>
+                    <input required type="text" id="fullName" name="fullName" className="rounded-lg border border-border bg-background px-4 py-3 text-sm focus:border-primary focus:outline-none transition-colors" />
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <label htmlFor="email" className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Email Address <span className="text-primary">*</span></label>
+                    <input required type="email" id="email" name="email" className="rounded-lg border border-border bg-background px-4 py-3 text-sm focus:border-primary focus:outline-none transition-colors" />
+                  </div>
                 </div>
 
                 <div className="flex flex-col gap-2">
                   <label htmlFor="phone" className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Phone Number <span className="text-primary">*</span></label>
-                  <input required type="tel" id="phone" className="rounded-lg border border-border bg-background px-4 py-3 text-sm focus:border-primary focus:outline-none transition-colors" />
+                  <input required type="tel" id="phone" name="phone" className="rounded-lg border border-border bg-background px-4 py-3 text-sm focus:border-primary focus:outline-none transition-colors" />
                 </div>
 
                 <div className="flex flex-col gap-2">
                   <label htmlFor="eventType" className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Event Type <span className="text-primary">*</span></label>
-                  <select required id="eventType" className="rounded-lg border border-border bg-background px-4 py-3 text-sm focus:border-primary focus:outline-none transition-colors appearance-none text-foreground">
-                    <option value="" disabled selected>Select an option</option>
+                  <select required id="eventType" name="eventType" defaultValue="" className="rounded-lg border border-border bg-background px-4 py-3 text-sm focus:border-primary focus:outline-none transition-colors appearance-none text-foreground">
+                    <option value="" disabled>Select an option</option>
                     <option value="Wedding">Wedding</option>
                     <option value="Corporate Event">Corporate Event</option>
                     <option value="Festival">Festival</option>
@@ -133,18 +155,24 @@ export function ContactFormSection() {
                 <div className="grid gap-6 md:grid-cols-2">
                   <div className="flex flex-col gap-2">
                     <label htmlFor="location" className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Event Location <span className="text-primary">*</span></label>
-                    <input required type="text" id="location" className="rounded-lg border border-border bg-background px-4 py-3 text-sm focus:border-primary focus:outline-none transition-colors" />
+                    <input required type="text" id="location" name="location" className="rounded-lg border border-border bg-background px-4 py-3 text-sm focus:border-primary focus:outline-none transition-colors" />
                   </div>
                   <div className="flex flex-col gap-2">
                     <label htmlFor="date" className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Preferred Date <span className="text-primary">*</span></label>
-                    <input required type="date" id="date" className="rounded-lg border border-border bg-background px-4 py-3 text-sm focus:border-primary focus:outline-none transition-colors text-foreground min-h-[46px]" />
+                    <input required type="date" id="date" name="date" className="rounded-lg border border-border bg-background px-4 py-3 text-sm focus:border-primary focus:outline-none transition-colors text-foreground min-h-[46px]" />
                   </div>
                 </div>
 
                 <div className="flex flex-col gap-2">
                   <label htmlFor="brief" className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Tell us about your event</label>
-                  <textarea id="brief" rows={4} maxLength={1000} placeholder="Up to 150 words..." className="rounded-lg border border-border bg-background px-4 py-3 text-sm focus:border-primary focus:outline-none transition-colors resize-none placeholder:text-muted-foreground/50" />
+                  <textarea id="brief" name="message" rows={4} maxLength={1000} placeholder="Up to 150 words..." className="rounded-lg border border-border bg-background px-4 py-3 text-sm focus:border-primary focus:outline-none transition-colors resize-none placeholder:text-muted-foreground/50" />
                 </div>
+
+                {errorMsg && (
+                  <div className="text-red-500 text-sm">
+                    {errorMsg}
+                  </div>
+                )}
 
                 <Button
                   type="submit"

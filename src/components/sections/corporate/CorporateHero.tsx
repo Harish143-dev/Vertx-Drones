@@ -10,7 +10,7 @@ const ORANGE = "#F97316";
 export function CorporateHero() {
   const headline = "Turn Your Brand Into a Sky Spectacle";
   const description =
-    "The most talked-about moment at any event is the one nobody expected. Up to 1,000 drones. Your brand, your story, your sky.";
+    "The most talked-about moment at any event is the one nobody expected. Up to 500 drones. Your brand, your story, your sky.";
 
   return (
     <section className="relative min-h-screen flex flex-col overflow-hidden bg-[#0a0a0a]">
