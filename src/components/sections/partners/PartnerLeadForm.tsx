@@ -104,18 +104,18 @@ export function PartnerLeadForm() {
                 <div className="grid gap-6 md:grid-cols-2">
                   <div className="flex flex-col gap-2">
                     <label htmlFor="fullName" className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Full Name</label>
-                    <input required type="text" id="fullName" className="rounded-lg border border-border bg-background px-4 py-3 text-sm focus:border-primary focus:outline-none transition-colors" />
+                    <input required type="text" id="fullName" name="fullName" className="rounded-lg border border-border bg-background px-4 py-3 text-sm focus:border-primary focus:outline-none transition-colors" />
                   </div>
                   <div className="flex flex-col gap-2">
                     <label htmlFor="companyName" className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Company Name</label>
-                    <input required type="text" id="companyName" className="rounded-lg border border-border bg-background px-4 py-3 text-sm focus:border-primary focus:outline-none transition-colors" />
+                    <input required type="text" id="companyName" name="companyName" className="rounded-lg border border-border bg-background px-4 py-3 text-sm focus:border-primary focus:outline-none transition-colors" />
                   </div>
                 </div>
 
                 <div className="grid gap-6 md:grid-cols-2">
                   <div className="flex flex-col gap-2">
                     <label htmlFor="businessType" className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Business Type</label>
-                    <select required id="businessType" className="rounded-lg border border-border bg-background px-4 py-3 text-sm focus:border-primary focus:outline-none transition-colors appearance-none text-foreground">
+                    <select required id="businessType" name="businessType" className="rounded-lg border border-border bg-background px-4 py-3 text-sm focus:border-primary focus:outline-none transition-colors appearance-none text-foreground">
                       <option value="" disabled selected>Select an option</option>
                       <option value="Event company">Event company</option>
                       <option value="Wedding planner">Wedding planner</option>
@@ -127,29 +127,29 @@ export function PartnerLeadForm() {
                   </div>
                   <div className="flex flex-col gap-2">
                     <label htmlFor="city" className="text-xs font-bold uppercase tracking-wider text-muted-foreground">City</label>
-                    <input required type="text" id="city" className="rounded-lg border border-border bg-background px-4 py-3 text-sm focus:border-primary focus:outline-none transition-colors" />
+                    <input required type="text" id="city" name="city" className="rounded-lg border border-border bg-background px-4 py-3 text-sm focus:border-primary focus:outline-none transition-colors" />
                   </div>
                 </div>
 
                 <div className="grid gap-6 md:grid-cols-2">
                   <div className="flex flex-col gap-2">
                     <label htmlFor="phone" className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Phone Number</label>
-                    <input required type="tel" id="phone" className="rounded-lg border border-border bg-background px-4 py-3 text-sm focus:border-primary focus:outline-none transition-colors" />
+                    <input required type="tel" id="phone" name="phone" className="rounded-lg border border-border bg-background px-4 py-3 text-sm focus:border-primary focus:outline-none transition-colors" />
                   </div>
                   <div className="flex flex-col gap-2">
                     <label htmlFor="email" className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Email Address</label>
-                    <input required type="email" id="email" className="rounded-lg border border-border bg-background px-4 py-3 text-sm focus:border-primary focus:outline-none transition-colors" />
+                    <input required type="email" id="email" name="email" className="rounded-lg border border-border bg-background px-4 py-3 text-sm focus:border-primary focus:outline-none transition-colors" />
                   </div>
                 </div>
 
                 <div className="flex flex-col gap-2">
                   <label htmlFor="volume" className="text-xs font-bold uppercase tracking-wider text-muted-foreground">How many events do you manage per year?</label>
-                  <input required type="text" id="volume" placeholder="e.g., 20+ weddings, 5 corporate events" className="rounded-lg border border-border bg-background px-4 py-3 text-sm focus:border-primary focus:outline-none transition-colors" />
+                  <input required type="text" id="volume" name="volume" placeholder="e.g., 20+ weddings, 5 corporate events" className="rounded-lg border border-border bg-background px-4 py-3 text-sm focus:border-primary focus:outline-none transition-colors" />
                 </div>
 
                 <div className="flex flex-col gap-2">
                   <label htmlFor="brief" className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Brief about your clients and events (up to 100 words)</label>
-                  <textarea required id="brief" rows={4} maxLength={800} className="rounded-lg border border-border bg-background px-4 py-3 text-sm focus:border-primary focus:outline-none transition-colors resize-none" />
+                  <textarea required id="brief" name="brief" rows={4} maxLength={800} className="rounded-lg border border-border bg-background px-4 py-3 text-sm focus:border-primary focus:outline-none transition-colors resize-none" />
                 </div>
 
                 <Button
