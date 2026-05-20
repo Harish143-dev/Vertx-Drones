@@ -26,7 +26,7 @@ export function PartnerLeadForm() {
     };
 
     try {
-      const response = await fetch("https://hook.eu1.make.com/bqjuoqjfj6orx3uxn42srg8g3uqxnjcd", {
+      const response = await fetch("https://hook.eu1.make.com/7qdx1ds2csrhbatn4phgx045lyblp1qo", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -49,10 +49,10 @@ export function PartnerLeadForm() {
   return (
     <section id="partner-form" className="bg-[#0a0a0a] py-24 md:py-32 relative overflow-hidden">
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
-      
+
       <div className="container mx-auto px-6 md:px-12 relative z-10">
         <div className="grid gap-16 lg:grid-cols-2">
-          
+
           <motion.div
             variants={fadeUp}
             initial="hidden"
@@ -66,7 +66,7 @@ export function PartnerLeadForm() {
             <p className="mb-12 text-sm md:text-base font-light text-white/50 max-w-md leading-relaxed">
               Fill out the application below. Our partnership team will review it and contact you within 24 hours to schedule a discovery call.
             </p>
-            
+
             <div className="flex flex-col sm:flex-row gap-4">
               <Button asChild variant="outline" size="lg" className="group w-fit border-white/20 text-white hover:border-[#25D366] hover:text-[#25D366] hover:bg-transparent shadow-none">
                 <a
