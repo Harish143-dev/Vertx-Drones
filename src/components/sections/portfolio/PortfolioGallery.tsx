@@ -2,21 +2,23 @@ import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Clock, MapPin, Play, Target, Users, X, Zap } from "lucide-react";
 
-import imgSkyline from "@/assets/images/portfolio/skyline-symphony.png";
-import imgEternal from "@/assets/images/portfolio/eternal-vows.png";
-import imgRhythm from "@/assets/images/portfolio/rhythm-of-light.png";
-import imgVictory from "@/assets/images/portfolio/victory-formation.png";
-import imgHeritage from "@/assets/images/portfolio/heritage-glow.png";
-import imgNeon from "@/assets/images/portfolio/neon-horizons.png";
-import imgStarlight from "@/assets/images/portfolio/starlight-romance.png";
-import imgBeats from "@/assets/images/portfolio/beats-from-above.png";
-import imgChampions from "@/assets/images/portfolio/champions-crown.png";
-import imgTemple from "@/assets/images/portfolio/temple-of-light.png";
+import imgSkyline from "@/assets/images/portfolio/skyline-symphony.webp";
+import imgEternal from "@/assets/images/portfolio/eternal-vows.webp";
+import imgRhythm from "@/assets/images/portfolio/rhythm-of-light.webp";
+import imgVictory from "@/assets/images/portfolio/victory-formation.webp";
+import imgHeritage from "@/assets/images/portfolio/heritage-glow.webp";
+import imgNeon from "@/assets/images/portfolio/neon-horizons.webp";
+import imgStarlight from "@/assets/images/portfolio/starlight-romance.webp";
+import imgBeats from "@/assets/images/portfolio/beats-from-above.webp";
+import imgChampions from "@/assets/images/portfolio/champions-crown.webp";
+import imgTemple from "@/assets/images/portfolio/temple-of-light.webp";
 
 import video100 from "@/assets/videos/gallery/Pondicherry.mp4";
 import video200 from "@/assets/videos/showcase/200drones.mp4";
 import video300 from "@/assets/videos/showcase/300drones.mp4";
 import video400 from "@/assets/videos/showcase/400drones.mp4";
+
+import political_1 from "@/assets/videos/gallery/Poltical_1.mp4";
 
 const ORANGE = "#F97316";
 

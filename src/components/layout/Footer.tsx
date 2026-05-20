@@ -57,11 +57,14 @@ export function Footer() {
           <div className="md:col-span-2">
             <h4 className="text-white font-bold text-xs uppercase tracking-[0.3em] mb-8">Offerings</h4>
             <ul className="space-y-4">
-              {['Corporate', 'Weddings', 'National Events', 'Festivals'].map((item) => (
-                <li key={item}>
-                  <span className="text-white/40 hover:text-[#F97316] transition-colors text-sm font-light cursor-default">
-                    {item}
-                  </span>
+              {[
+                { label: 'Corporate', href: '/corporate' },
+                { label: 'Weddings', href: '/weddings' }
+              ].map((item) => (
+                <li key={item.label}>
+                  <Link href={item.href} className="text-white/40 hover:text-[#F97316] transition-colors text-sm font-light">
+                    {item.label}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -70,10 +73,12 @@ export function Footer() {
           {/* Contact CTA */}
           <div className="md:col-span-3">
             <h4 className="text-white font-bold text-xs uppercase tracking-[0.3em] mb-6">Connect</h4>
-            
+
             <div className="flex gap-4 mb-8">
               <a
-                href="mailto:business@vertxdroneshow.in"
+                href="https://mail.google.com/mail/?view=cm&to=business@vertxdroneshow.in"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:text-white hover:border-[#F97316] hover:bg-[#F97316]/10 transition-all duration-300"
               >
                 <Mail size={18} />
@@ -101,7 +106,7 @@ export function Footer() {
               </a>
             </div>
 
-            <Link href="/contact" className="inline-block px-8 py-3 bg-[#F97316] text-black hover:bg-white transition-colors text-xs font-bold tracking-widest uppercase rounded-sm">
+            <Link href="/contact" className="inline-block px-8 py-3 bg-[#F97316] text-black hover:bg-white transition-colors text-xs font-bold tracking-widest uppercase rounded-full">
               Get a Quote
             </Link>
           </div>

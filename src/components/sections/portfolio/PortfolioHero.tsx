@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import heroBg from "@/assets/images/portfolio.png";
+import heroBg from "@/assets/images/portfolio.webp";
 
 const ORANGE = "#F97316";
 

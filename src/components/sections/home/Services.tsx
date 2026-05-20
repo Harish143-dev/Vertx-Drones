@@ -31,7 +31,7 @@ const useCases: CardItem[] = [
     shortTitle: "Festivals",
     description:
       "Large-scale public shows synced to music, lights, and live performances.",
-    imgSrc: festivalsImg, 
+    imgSrc: festivalsImg,
     linkHref: "/portfolio",
   },
   {

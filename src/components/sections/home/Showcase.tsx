@@ -5,12 +5,9 @@ import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 
 // Import real assets
-import imgBeats from "@/assets/images/portfolio/beats-from-above.png";
-import imgChampions from "@/assets/images/portfolio/champions-crown.png";
-import imgNeon from "@/assets/images/portfolio/neon-horizons.png";
-import imgSkyline from "@/assets/images/portfolio/skyline-symphony.png";
-import imgHeritage from "@/assets/images/portfolio/heritage-glow.png";
-import imgVictory from "@/assets/images/portfolio/victory-formation.png";
+import imgBeats from "@/assets/images/portfolio/beats-from-above.webp";
+import imgChampions from "@/assets/images/portfolio/champions-crown.webp";
+import imgNeon from "@/assets/images/portfolio/neon-horizons.webp";
 
 type Item = {
   id: number;

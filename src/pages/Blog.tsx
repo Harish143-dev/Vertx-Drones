@@ -50,6 +50,9 @@ export default function Blog() {
                 <Link href={`/blog/${post.slug}`}>
                   <div className="group h-full flex flex-col border border-border bg-card overflow-hidden transition-colors hover:border-primary/50 cursor-pointer rounded-lg">
                     <div className="relative aspect-[16/9] w-full overflow-hidden border-b border-border">
+                      <div className="absolute top-4 left-4 z-10 bg-primary text-black px-3 py-1.5 text-[10px] font-bold uppercase tracking-widest rounded-sm">
+                        {post.category}
+                      </div>
                       <img
                         src={post.image}
                         alt={post.title}
@@ -59,8 +62,8 @@ export default function Blog() {
                     </div>
                     <div className="flex flex-col flex-grow p-6 md:p-8">
                       <div className="mb-4 flex items-center justify-between text-xs font-bold uppercase tracking-widest text-muted-foreground">
-                        <span className="text-primary">{post.category}</span>
-                        <span>{post.readTime}</span>
+                        <span>{post.date}</span>
+                        <span>{post.readTime} read</span>
                       </div>
                       <h2 className="mb-6 text-base md:text-lg line-clamp-3 font-semibold leading-snug group-hover:text-primary transition-colors">
                         {post.title}

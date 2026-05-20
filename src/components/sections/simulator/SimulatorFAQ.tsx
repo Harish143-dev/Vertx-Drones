@@ -33,7 +33,7 @@ export function SimulatorFAQ() {
                     onClick={() => setOpenFaq(isOpen ? null : index)}
                     className="flex w-full items-center justify-between py-6 text-left transition-colors hover:text-primary"
                   >
-                    <h3 className="text-lg md:text-xl font-medium pr-8">{faq.q}</h3>
+                    <h3 className="text-lg md:text-xl font-normal font-sans normal-case tracking-normal pr-8">{faq.q}</h3>
                     <ChevronDown 
                       className={`shrink-0 transition-transform duration-300 ${isOpen ? "rotate-180 text-primary" : "text-muted-foreground"}`} 
                     />

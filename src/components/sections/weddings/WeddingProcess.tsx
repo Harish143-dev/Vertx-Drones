@@ -59,7 +59,7 @@ export function WeddingProcess() {
             className="lg:col-span-2 pt-8 lg:pt-12 mt-8 lg:mt-12 border-t border-white/10"
           >
             <p className="text-xl md:text-2xl font-light leading-relaxed text-white/70">
-              We deliver wedding drone shows across India. <span className="text-white">Hyderabad, Bangalore, Udaipur, Jaipur</span>, and wherever your wedding takes you.
+              We create wedding drone shows across India — from Hyderabad and Bangalore to Udaipur, Jaipur, and wherever your wedding celebration takes place.
             </p>
           </motion.div>
         </div>

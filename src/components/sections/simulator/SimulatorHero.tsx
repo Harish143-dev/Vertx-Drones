@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { fadeUp } from "@/lib/motion";
-import simulatorBg from "@/assets/images/simulatorHero.png";
+import simulatorBg from "@/assets/images/simulatorHero.webp";
 
 interface SimulatorHeroProps {
   cameraView: "Wide" | "Top" | "Front";

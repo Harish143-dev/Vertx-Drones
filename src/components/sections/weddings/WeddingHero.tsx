@@ -3,7 +3,7 @@ import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { fadeUp } from "@/lib/motion";
-import weddingImg from "@/assets/images/weddingHero.png";
+import weddingImg from "@/assets/images/weddingHero.webp";
 
 export function WeddingHero() {
   return (

@@ -7,6 +7,7 @@ export interface BlogPost {
   slug: string;
   title: string;
   category: string;
+  date: string;
   readTime: string;
   image: string;
   metaTitle: string;
@@ -19,6 +20,7 @@ export const blogData: BlogPost[] = [
     slug: "how-many-drones-for-a-drone-show",
     title: "How Many Drones Do You Actually Need for a Show?",
     category: "Planning Guide",
+    date: "March 15, 2025",
     readTime: "5 min",
     image: "https://images.unsplash.com/photo-1579820010410-c10411aaaa88?q=80&w=800&auto=format&fit=crop",
     metaTitle: "How Many Drones Do You Need for a Drone Show? A Simple Guide",
@@ -91,6 +93,7 @@ export const blogData: BlogPost[] = [
     slug: "drone-show-vs-fireworks-india",
     title: "Drone Shows vs Fireworks: Which Is Right for Your Event?",
     category: "Comparison",
+    date: "March 10, 2025",
     readTime: "6 min",
     image: fireworkImage,
     metaTitle: "Drone Show vs Fireworks India: Which Should You Choose?",
@@ -164,6 +167,7 @@ export const blogData: BlogPost[] = [
     slug: "drone-show-cost-india",
     title: "How Much Does a Drone Show Cost in India? (2025 Guide)",
     category: "Pricing Guide",
+    date: "February 28, 2025",
     readTime: "7 min",
     image: "https://images.unsplash.com/photo-1508614589041-895b88991e3e?q=80&w=800&auto=format&fit=crop",
     metaTitle: "Drone Show Cost in India: What Affects the Price? (2025)",
@@ -237,6 +241,7 @@ export const blogData: BlogPost[] = [
     slug: "drone-show-event-marketing-india",
     title: "Why Drone Shows Are Changing How Brands Think About Events",
     category: "Event Marketing",
+    date: "February 15, 2025",
     readTime: "5 min",
     image: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=800&auto=format&fit=crop",
     metaTitle: "Drone Shows and Event Marketing: Why Brands in India Are Making the Switch",
@@ -277,6 +282,7 @@ export const blogData: BlogPost[] = [
     slug: "pondicherry-government-drone-show-case-study",
     title: "How VertX Delivered a 150-Drone New Year Show for the Pondicherry Government",
     category: "Case Study",
+    date: "January 5, 2025",
     readTime: "4 min",
     image: "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?q=80&w=800&auto=format&fit=crop",
     metaTitle: "Case Study: 150-Drone New Year Show for the Pondicherry Government",

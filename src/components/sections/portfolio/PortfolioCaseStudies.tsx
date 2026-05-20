@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
 import { MapPin, Users } from "lucide-react";
 
-import imgNeon from "@/assets/images/portfolio/neon-horizons.png";
-import imgChampions from "@/assets/images/portfolio/champions-crown.png";
-import imgStarlight from "@/assets/images/portfolio/starlight-romance.png";
-import imgTemple from "@/assets/images/portfolio/temple-of-light.png";
-import imgBeats from "@/assets/images/portfolio/beats-from-above.png";
+import imgNeon from "@/assets/images/portfolio/neon-horizons.webp";
+import imgChampions from "@/assets/images/portfolio/champions-crown.webp";
+import imgStarlight from "@/assets/images/portfolio/starlight-romance.webp";
+import imgTemple from "@/assets/images/portfolio/temple-of-light.webp";
+import imgBeats from "@/assets/images/portfolio/beats-from-above.webp";
 
 const ORANGE = "#F97316";
 

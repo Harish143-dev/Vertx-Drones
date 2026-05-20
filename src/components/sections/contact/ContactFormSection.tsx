@@ -4,7 +4,7 @@ import { ArrowRight, Phone } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 import { fadeUp } from "@/lib/motion";
-import contactImg from "@/assets/images/contactHero.png"; // Placeholder for premium show still
+import contactImg from "@/assets/images/contactHero.webp"; // Placeholder for premium show still
 
 export function ContactFormSection() {
   const [isSubmitting, setIsSubmitting] = useState(false);

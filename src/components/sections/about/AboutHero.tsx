@@ -3,7 +3,7 @@ import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { fadeUp } from "@/lib/motion";
-import aboutImg from "@/assets/images/aboutHero.png"; // Placeholder for the best wide aerial shot
+import aboutImg from "@/assets/images/aboutHero.webp"; // Placeholder for the best wide aerial shot
 
 export function AboutHero() {
   const headline = "We Build Drone Shows. End to End.";

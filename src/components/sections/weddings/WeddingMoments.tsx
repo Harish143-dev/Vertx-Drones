@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
 import { fadeUp } from "@/lib/motion";
 import weddingImg from "@/assets/images/use-cases/weddings.png";
-import imgEternal from "@/assets/images/portfolio/eternal-vows.png";
-import imgStarlight from "@/assets/images/portfolio/starlight-romance.png";
-import imgRhythm from "@/assets/images/portfolio/rhythm-of-light.png";
+import imgEternal from "@/assets/images/portfolio/eternal-vows.webp";
+import imgStarlight from "@/assets/images/portfolio/starlight-romance.webp";
+import imgRhythm from "@/assets/images/portfolio/rhythm-of-light.webp";
 
 const moments = [
   {

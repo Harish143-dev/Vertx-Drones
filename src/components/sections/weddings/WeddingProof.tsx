@@ -2,8 +2,7 @@ import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { ArrowRight, MapPin } from "lucide-react";
 import { fadeUp } from "@/lib/motion";
-import imgEternal from "@/assets/images/portfolio/eternal-vows.png";
-import imgStarlight from "@/assets/images/portfolio/starlight-romance.png";
+import imgEternal from "@/assets/images/portfolio/eternal-vows.webp";
 
 const ORANGE = "#F97316";
 

@@ -4,8 +4,8 @@ import { ArrowRight, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { fadeUp } from "@/lib/motion";
 
-import imgFourPoints from "@/assets/images/portfolio/champions-crown.png";
-import imgPondy from "@/assets/images/portfolio/neon-horizons.png";
+import imgFourPoints from "@/assets/images/portfolio/champions-crown.webp";
+import imgPondy from "@/assets/images/portfolio/neon-horizons.webp";
 
 const ORANGE = "#F97316";
 

@@ -55,58 +55,60 @@ export default function BlogPost() {
 
       <main className="pt-32 pb-24 lg:pt-40 lg:pb-32">
         <article className="container mx-auto px-6 md:px-12">
-          
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            animate="show"
-            className="mb-12 max-w-3xl mx-auto"
-          >
-            <Button asChild variant="ghost" size="sm" className="-ml-3 text-muted-foreground hover:text-white uppercase tracking-widest text-xs font-bold mb-8">
-              <Link href="/blog">
-                <ArrowLeft size={14} className="mr-2" />
-                Back to Insights
-              </Link>
-            </Button>
+          <div className="max-w-4xl mx-auto">
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              animate="show"
+              className="mb-12"
+            >
+              <Button asChild variant="ghost" size="sm" className="-ml-3 text-muted-foreground hover:text-white uppercase tracking-widest text-xs font-bold mb-8">
+                <Link href="/blog">
+                  <ArrowLeft size={14} className="mr-2" />
+                  Back to Insights
+                </Link>
+              </Button>
 
-            <div className="mb-6 flex items-center gap-4 text-xs font-bold uppercase tracking-widest text-primary">
-              <span>{post.category}</span>
-              <span className="text-muted-foreground">•</span>
-              <span className="text-muted-foreground flex items-center gap-1">
-                <Clock size={12} /> {post.readTime}
-              </span>
-            </div>
+              <div className="mb-6 flex flex-wrap items-center gap-3 md:gap-4 text-xs font-bold uppercase tracking-widest text-primary">
+                <span className="bg-primary/10 text-primary px-2 py-1 rounded-sm">{post.category}</span>
+                <span className="text-muted-foreground">•</span>
+                <span className="text-muted-foreground">{post.date}</span>
+                <span className="text-muted-foreground">•</span>
+                <span className="text-muted-foreground flex items-center gap-1">
+                  <Clock size={12} /> {post.readTime} read
+                </span>
+              </div>
 
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light leading-[1.1] tracking-tight text-white mb-12">
-              {post.title}
-            </h1>
-            
-            <div className="relative aspect-[21/9] w-full overflow-hidden rounded-xl border border-border/50 mb-12">
-              <img 
-                src={post.image} 
-                alt={post.title} 
-                className="w-full h-full object-cover"
-              />
-            </div>
-          </motion.div>
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light leading-[1.1] tracking-tight text-white mb-12">
+                {post.title}
+              </h1>
+              
+              <div className="relative aspect-[21/9] w-full overflow-hidden rounded-xl border border-border/50 mb-12">
+                <img 
+                  src={post.image} 
+                  alt={post.title} 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </motion.div>
 
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            animate="show"
-            custom={0.1}
-            className="max-w-3xl mx-auto prose prose-invert prose-lg max-w-none 
-              prose-h2:text-3xl prose-h2:font-light prose-h2:mt-16 prose-h2:mb-6 prose-h2:tracking-tight
-              prose-p:text-white/70 prose-p:font-light prose-p:leading-[1.8] prose-p:mb-8
-              prose-li:text-white/70 prose-li:font-light prose-li:leading-[1.8]
-              prose-strong:text-white prose-strong:font-medium
-              prose-a:text-primary prose-a:no-underline hover:prose-a:underline hover:prose-a:text-primary/80 prose-a:transition-colors
-              prose-ul:list-disc prose-ul:pl-6 prose-ul:mb-8
-              prose-blockquote:border-primary prose-blockquote:bg-primary/5 prose-blockquote:py-4 prose-blockquote:px-6 prose-blockquote:rounded-r-lg prose-blockquote:text-white/90 prose-blockquote:font-light prose-blockquote:not-italic"
-          >
-            <Content />
-          </motion.div>
-
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              animate="show"
+              custom={0.1}
+              className="prose prose-invert prose-lg max-w-none 
+                prose-h2:text-3xl prose-h2:font-light prose-h2:mt-16 prose-h2:mb-6 prose-h2:tracking-tight
+                prose-p:text-white/70 prose-p:font-light prose-p:leading-[1.8] prose-p:mb-8
+                prose-li:text-white/70 prose-li:font-light prose-li:leading-[1.8]
+                prose-strong:text-white prose-strong:font-medium
+                prose-a:text-primary prose-a:no-underline hover:prose-a:underline hover:prose-a:text-primary/80 prose-a:transition-colors
+                prose-ul:list-disc prose-ul:pl-6 prose-ul:mb-8
+                prose-blockquote:border-primary prose-blockquote:bg-primary/5 prose-blockquote:py-4 prose-blockquote:px-6 prose-blockquote:rounded-r-lg prose-blockquote:text-white/90 prose-blockquote:font-light prose-blockquote:not-italic"
+            >
+              <Content />
+            </motion.div>
+          </div>
         </article>
 
         {/* Read Next Section */}
@@ -142,16 +144,20 @@ export default function BlogPost() {
                           className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-105"
                           loading="lazy"
                         />
-                        <div className="absolute top-4 left-4 bg-background/80 backdrop-blur-sm border border-border/50 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest text-primary">
+                        <div className="absolute top-4 left-4 z-10 bg-primary text-black px-3 py-1.5 text-[10px] font-bold uppercase tracking-widest rounded-sm">
                           {relatedPost.category}
                         </div>
                       </div>
                       <div className="flex flex-col flex-grow p-6">
-                        <h3 className="mb-4 text-lg font-semibold leading-snug group-hover:text-primary transition-colors line-clamp-2">
+                        <div className="mb-4 flex items-center justify-between text-xs font-bold uppercase tracking-widest text-muted-foreground">
+                          <span>{relatedPost.date}</span>
+                          <span>{relatedPost.readTime} read</span>
+                        </div>
+                        <h3 className="mb-6 text-lg font-semibold leading-snug group-hover:text-primary transition-colors line-clamp-2">
                           {relatedPost.title}
                         </h3>
-                        <div className="mt-auto flex items-center justify-between text-xs font-bold uppercase tracking-widest text-muted-foreground group-hover:text-primary transition-colors">
-                          <span className="flex items-center gap-1"><Clock size={12} /> {relatedPost.readTime}</span>
+                        <div className="mt-auto flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-foreground group-hover:text-primary transition-colors">
+                          Read Article
                           <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
                         </div>
                       </div>
