@@ -8,7 +8,7 @@ import {
 } from "@/components/three/DroneModel";
 
 // SEO-requested drone counts
-const droneCounts = [100, 200, 300, 400];
+const droneCounts = [100, 200, 400, 500];
 
 // Mapping SEO-requested shape labels to the 3D model's actual supported types
 const shapes = [
@@ -33,7 +33,7 @@ interface SimulatorToolProps {
 }
 
 export function SimulatorTool({ uiCameraView, setUiCameraView }: SimulatorToolProps) {
-  const [droneCount, setDroneCount] = useState(300);
+  const [droneCount, setDroneCount] = useState(200);
   const [activeShapeObj, setActiveShapeObj] = useState(shapes[0]);
 
   return (

@@ -15,7 +15,7 @@ export function Hero() {
         playsInline
         className="absolute inset-0 w-full h-full object-cover opacity-60"
       >
-        <source src="/mp_.mp4" type="video/mp4" />
+        <source src="/hero_section.mp4" type="video/mp4" />
       </video>
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0a0a0a]/40 to-[#0a0a0a]" />
 
@@ -26,7 +26,7 @@ export function Hero() {
           {/* Left: Title, Description + CTA */}
           <div className="flex flex-col items-start md:max-w-[55%]">
             <motion.h1
-              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light tracking-tight text-white mb-6 leading-[1.1]"
+              className="text-3xl md:text-4xl lg:text-5xl font-light tracking-tight text-white mb-6 leading-[1.1]"
               initial="hidden"
               animate="visible"
               variants={{
@@ -52,7 +52,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.4, ease: "easeOut" }}
-              className="text-sm md:text-base text-white/80 font-light leading-relaxed mb-8 max-w-lg"
+              className="text-base md:text-lg text-white/80 font-light leading-relaxed mb-8 max-w-lg"
             >
               {description}
             </motion.p>

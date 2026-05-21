@@ -29,7 +29,7 @@ export function PortfolioHero() {
           <div className="flex flex-col items-start md:max-w-[55%]">
 
             <motion.h1
-              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light tracking-tight text-white mb-2 leading-[1.1]"
+              className="text-3xl md:text-4xl lg:text-5xl font-light tracking-tight text-white mb-2 leading-[1.1]"
               initial="hidden"
               animate="visible"
               variants={{
@@ -55,7 +55,7 @@ export function PortfolioHero() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.45, ease: "easeOut" }}
-              className="mb-8 max-w-xl text-sm md:text-base text-white/80 font-light leading-relaxed"
+              className="mb-8 max-w-xl text-base md:text-lg text-white/80 font-light leading-relaxed"
             >
               {description}
             </motion.p>

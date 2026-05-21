@@ -98,7 +98,7 @@ export default function BlogPost() {
               animate="show"
               custom={0.1}
               className="prose prose-invert prose-lg max-w-none 
-                prose-h2:text-3xl prose-h2:font-light prose-h2:mt-16 prose-h2:mb-6 prose-h2:tracking-tight
+                prose-h2:text-xl md:prose-h2:text-2xl prose-h2:font-medium prose-h2:mt-12 prose-h2:mb-4 prose-h2:tracking-tight
                 prose-p:text-white/70 prose-p:font-light prose-p:leading-[1.8] prose-p:mb-8
                 prose-li:text-white/70 prose-li:font-light prose-li:leading-[1.8]
                 prose-strong:text-white prose-strong:font-medium

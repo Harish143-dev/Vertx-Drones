@@ -2,6 +2,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { SEO } from "@/components/SEO";
 import { CorporateHero } from "@/components/sections/corporate/CorporateHero";
+import { CorporateLogos } from "@/components/sections/corporate/CorporateLogos";
 import { CorporateReasons } from "@/components/sections/corporate/CorporateReasons";
 import { CorporateUseCases } from "@/components/sections/corporate/CorporateUseCases";
 import { CorporateROI } from "@/components/sections/corporate/CorporateROI";
@@ -18,6 +19,7 @@ export default function Corporate() {
       <Navbar />
       <main>
         <CorporateHero />
+        <CorporateLogos />
         <CorporateReasons />
         <CorporateUseCases />
         <CorporateROI />

@@ -24,7 +24,7 @@ export function WeddingHero() {
             initial="hidden"
             animate="show"
             custom={0.15}
-            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light leading-[1.1] tracking-tight text-white mb-4"
+            className="text-3xl md:text-4xl lg:text-5xl font-light leading-[1.1] tracking-tight text-white mb-4"
           >
             Make Your Celebration Unforgettable
           </motion.h1>
@@ -34,7 +34,7 @@ export function WeddingHero() {
             initial="hidden"
             animate="show"
             custom={0.3}
-            className="mb-8 max-w-xl text-sm md:text-base font-light leading-relaxed text-white/70"
+            className="mb-8 max-w-xl text-base md:text-lg font-light leading-relaxed text-white/70"
           >
             The sky above your wedding has a story to tell. We help you tell it.
           </motion.p>

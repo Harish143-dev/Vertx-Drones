@@ -45,7 +45,7 @@ export function Home() {
         <CTABlock />
 
         {/* 10. Contact Form */}
-        {/* <HomeContact /> */}
+        <HomeContact />
       </main>
       <Footer />
     </div>

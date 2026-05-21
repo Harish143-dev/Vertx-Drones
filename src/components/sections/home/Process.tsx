@@ -90,7 +90,7 @@ export function Process() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="bg-[#0a0a0a] p-8 flex flex-col group"
+              className="bg-[#0a0a0a] p-5 flex flex-col group"
             >
               <div className="mb-6">
                 <span
@@ -102,8 +102,8 @@ export function Process() {
               </div>
 
               <p className="text-[10px] tracking-[0.2em] uppercase text-white/25 mb-2">{step.timing}</p>
-              <h3 className="text-lg font-bold text-white mb-3">{step.title}</h3>
-              <p className="text-xs text-white/38 font-light leading-relaxed mb-5 flex-1">{step.description}</p>
+              <h3 className="text-base font-bold text-white mb-3">{step.title}</h3>
+              <p className="text-sm text-white/60 font-normal leading-relaxed mb-5 flex-1">{step.description}</p>
 
               <ul className="space-y-2">
                 {step.bullets.map((b, j) => (
@@ -129,7 +129,7 @@ export function Process() {
           <div>
             <h3 className="text-xl md:text-2xl font-bold text-white mb-1">The Grand Finale</h3>
             <p className="text-sm text-white/40 font-light mb-2">
-              The sky comes alive. Your drone show, exactly as designed.
+              The sky comes alive. Your drone show, exactly as you imagined.
             </p>
           </div>
         </motion.div>

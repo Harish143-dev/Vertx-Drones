@@ -23,7 +23,7 @@ const SAMPLE = "/mp_.mp4"; // Using the local video we found earlier
 
 const items: Item[] = [
   { id: 11, src: imgBeats, video: SAMPLE, title: "New Year Drone Light Show", category: "Public celebration", location: "Pondicherry Government", drones: "150" },
-  { id: 12, src: imgChampions, video: SAMPLE, title: "Corporate Brand Activation", category: "Synchronized branding", location: "Four Points by Sheraton", drones: "50" },
+  { id: 12, src: imgChampions, video: SAMPLE, title: "Hitachi Corporate Event", category: "Synchronized branding", location: "Four Points by Sheraton", drones: "50" },
   { id: 13, src: imgNeon, video: SAMPLE, title: "Wedding Drone Show", category: "Personalized aerial story", location: "Hyderabad", drones: "100 to 150" },
 ];
 
@@ -160,7 +160,7 @@ export const Showcase = () => {
                       <div className="text-[10px] tracking-[0.3em] uppercase text-[#F97316] mb-2 font-bold">
                         {it.location}
                       </div>
-                      <h3 className="font-display text-2xl md:text-xl leading-tight truncate uppercase">
+                      <h3 className="text-xl leading-tight uppercase">
                         {it.title}
                       </h3>
                       <div className="mt-3 h-px w-0 bg-[#F97316] group-hover:w-24 transition-all duration-700" />

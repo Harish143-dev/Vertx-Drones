@@ -24,7 +24,7 @@ export function PortfolioCTA() {
           className="max-w-2xl mx-auto"
         >
           <h2 className="text-3xl md:text-5xl font-light leading-tight mb-6">
-            Your Show Is Next
+            Let's design your sky together
           </h2>
           <p className="text-sm md:text-base text-white/40 font-light leading-relaxed mb-10 max-w-lg mx-auto">
             Every show above started with one conversation. Yours can too.
@@ -47,13 +47,13 @@ export function PortfolioCTA() {
               </a>
             </Button>
           </div>
-          
+
           <div className="flex flex-wrap items-center justify-center gap-4 text-xs font-light text-white/30">
-            <Link href="/weddings" className="hover:text-white/70 transition-colors">wedding drone show</Link>
+            <Link href="/weddings" className="hover:text-white/70 transition-colors">Wedding Drone Show</Link>
             <span>|</span>
-            <Link href="/corporate" className="hover:text-white/70 transition-colors">corporate drone show</Link>
+            <Link href="/corporate" className="hover:text-white/70 transition-colors">Corporate Drone Show</Link>
             <span>|</span>
-            <Link href="/" className="hover:text-white/70 transition-colors">drone light shows</Link>
+            <Link href="/" className="hover:text-white/70 transition-colors">Drone Light Shows</Link>
           </div>
         </motion.div>
       </div>

@@ -59,31 +59,73 @@ export const CustomCursor = () => {
           cursor: none !important;
         }
 
+        @keyframes color-cycle {
+          0% { filter: hue-rotate(0deg); }
+          100% { filter: hue-rotate(360deg); }
+        }
+
+        @keyframes rotate-ring {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+
         .drone-cursor {
           position: fixed;
           left: 0; top: 0;
-          width: 44px; height: 44px;
+          width: 32px; height: 32px;
+          border-radius: 9999px;
+          border: 1.5px solid #00F0FF;
+          background: rgba(0, 240, 255, 0.04);
+          box-shadow: 0 0 12px rgba(0, 240, 255, 0.3), inset 0 0 8px rgba(0, 240, 255, 0.15);
           pointer-events: none;
           z-index: 9999;
           transform: translate(-50%, -50%);
-          transition: transform 0.08s ease-out, opacity 0.2s;
+          transition: transform 0.08s ease-out, opacity 0.2s, background-color 0.2s, border-color 0.2s;
+          animation: color-cycle 6s linear infinite;
         }
+
+        .drone-cursor::after {
+          content: '';
+          position: absolute;
+          inset: 3px;
+          border-radius: 9999px;
+          border: 1px dashed rgba(0, 240, 255, 0.45);
+          animation: rotate-ring 10s linear infinite;
+          transition: inset 0.2s ease, border-color 0.2s ease;
+        }
+
+        /* Hover states */
+        .drone-cursor.hovering {
+          background: rgba(0, 240, 255, 0.1);
+          border-color: #00F0FF;
+          box-shadow: 0 0 20px rgba(0, 240, 255, 0.5), inset 0 0 10px rgba(0, 240, 255, 0.25);
+        }
+
+        .drone-cursor.hovering::after {
+          inset: -4px;
+          border-color: rgba(0, 240, 255, 0.7);
+          animation-duration: 5s;
+        }
+
         .drone-cursor-dot {
           position: fixed;
           left: 0; top: 0;
           width: 6px; height: 6px;
           border-radius: 9999px;
-          background: #1A8FFF;
-          box-shadow: 0 0 12px rgba(26,143,255,0.9), 0 0 24px rgba(26,143,255,0.5);
+          background: #FFFFFF;
+          border: 1px solid #00F0FF;
+          box-shadow: 0 0 10px #00F0FF, 0 0 20px rgba(0, 240, 255, 0.6);
           pointer-events: none;
           z-index: 9999;
           transform: translate(-50%, -50%);
+          animation: color-cycle 6s linear infinite;
+          transition: width 0.2s, height 0.2s, box-shadow 0.2s;
         }
 
-        @keyframes propeller-spin { to { transform: rotate(360deg); } }
-        .propeller {
-          animation: propeller-spin 0.4s linear infinite;
-          transform-origin: center;
+        .drone-cursor-dot.hovering {
+          width: 8px;
+          height: 8px;
+          box-shadow: 0 0 15px #00F0FF, 0 0 30px rgba(0, 240, 255, 0.8);
         }
 
         /* Hide on touch devices — fall back to system cursor */
@@ -95,51 +137,17 @@ export const CustomCursor = () => {
 
       <div
         ref={droneRef}
-        className="drone-cursor"
+        className={`drone-cursor ${hovering ? "hovering" : ""}`}
         style={{ opacity: visible ? 1 : 0, position: "fixed", left: 0, top: 0 }}
         aria-hidden
-      >
-        <svg viewBox="0 0 64 64" width="44" height="44" fill="none">
-          {/* Glow halo */}
-          <circle cx="32" cy="32" r="28" fill="rgba(26,143,255,0.08)" />
-          {/* Arms */}
-          <line x1="20" y1="20" x2="44" y2="44" stroke="#1A8FFF" strokeWidth="1.5" />
-          <line x1="44" y1="20" x2="20" y2="44" stroke="#1A8FFF" strokeWidth="1.5" />
-          {/* Propellers */}
-          <g className="propeller" style={{ transformOrigin: "20px 20px" }}>
-            <ellipse cx="20" cy="20" rx="9" ry="2" fill="rgba(82,170,255,0.55)" />
-            <ellipse cx="20" cy="20" rx="2" ry="9" fill="rgba(82,170,255,0.55)" />
-          </g>
-          <g className="propeller" style={{ transformOrigin: "44px 20px", animationDirection: "reverse" }}>
-            <ellipse cx="44" cy="20" rx="9" ry="2" fill="rgba(82,170,255,0.55)" />
-            <ellipse cx="44" cy="20" rx="2" ry="9" fill="rgba(82,170,255,0.55)" />
-          </g>
-          <g className="propeller" style={{ transformOrigin: "20px 44px", animationDirection: "reverse" }}>
-            <ellipse cx="20" cy="44" rx="9" ry="2" fill="rgba(82,170,255,0.55)" />
-            <ellipse cx="20" cy="44" rx="2" ry="9" fill="rgba(82,170,255,0.55)" />
-          </g>
-          <g className="propeller" style={{ transformOrigin: "44px 44px" }}>
-            <ellipse cx="44" cy="44" rx="9" ry="2" fill="rgba(82,170,255,0.55)" />
-            <ellipse cx="44" cy="44" rx="2" ry="9" fill="rgba(82,170,255,0.55)" />
-          </g>
-          {/* Motors */}
-          <circle cx="20" cy="20" r="3" fill="#070B0F" stroke="#1A8FFF" strokeWidth="1" />
-          <circle cx="44" cy="20" r="3" fill="#070B0F" stroke="#1A8FFF" strokeWidth="1" />
-          <circle cx="20" cy="44" r="3" fill="#070B0F" stroke="#1A8FFF" strokeWidth="1" />
-          <circle cx="44" cy="44" r="3" fill="#070B0F" stroke="#1A8FFF" strokeWidth="1" />
-          {/* Core body */}
-          <rect x="26" y="26" width="12" height="12" rx="2" fill="#070B0F" stroke="#1A8FFF" strokeWidth="1.2" />
-          <circle cx="32" cy="32" r="2" fill="#52AAFF">
-            <animate attributeName="opacity" values="1;0.3;1" dur="1.2s" repeatCount="indefinite" />
-          </circle>
-        </svg>
-      </div>
+      />
       <div
         ref={dotRef}
-        className="drone-cursor-dot"
+        className={`drone-cursor-dot ${hovering ? "hovering" : ""}`}
         style={{ opacity: visible ? 1 : 0, position: "fixed", left: 0, top: 0 }}
         aria-hidden
       />
     </>
   );
 };
+

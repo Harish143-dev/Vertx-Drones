@@ -5,7 +5,7 @@
 @font-face {
   font-family: 'NextStep';
   src: url('/fonts/NEXTSTEP.ttf') format('truetype');
-  font-weight: normal;
+  font-weight: 100 900;
   font-style: normal;
   font-display: swap;
 }
@@ -55,16 +55,27 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+  --animate-marquee: marquee 60s linear infinite;
 }
 
-:root, .dark {
-  --button-outline: rgba(255,255,255, .08);
-  --badge-outline: rgba(255,255,255, .04);
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+:root,
+.dark {
+  --button-outline: rgba(255, 255, 255, .08);
+  --badge-outline: rgba(255, 255, 255, .04);
 
   --opaque-button-border-intensity: 9;
 
-  --elevate-1: rgba(255,255,255, .03);
-  --elevate-2: rgba(255,255,255, .07);
+  --elevate-1: rgba(255, 255, 255, .03);
+  --elevate-2: rgba(255, 255, 255, .07);
 
   /* Pure black base */
   --background: 0 0% 4%;
@@ -129,14 +140,26 @@
     background-color: #0a0a0a;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'NextStep', 'Orbitron', sans-serif;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: 'NextStep', sans-serif;
     letter-spacing: 0.12em;
     text-transform: uppercase;
+    -webkit-text-stroke: 0.7px currentColor;
   }
 
   @media (max-width: 768px) {
-    h1, h2, h3, h4, h5, h6 {
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
       letter-spacing: 0.05em;
     }
   }

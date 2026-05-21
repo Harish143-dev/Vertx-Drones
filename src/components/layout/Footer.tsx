@@ -120,7 +120,7 @@ export function Footer() {
 
           {/* Credit Line - Requested by user */}
           <div className="text-[10px] uppercase tracking-[0.2em] font-bold text-white/30">
-            Design and developed by <a href="https://eyelevel.io" target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-[#F97316] transition-all">Eyelevel Growth Studio</a>
+            Design and developed by <a href="https://theeyelevelstudio.com/" target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-[#F97316] transition-all">Eyelevel Growth Studio</a>
           </div>
 
           <button

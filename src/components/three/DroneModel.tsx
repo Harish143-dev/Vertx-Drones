@@ -1,4 +1,4 @@
-import { type MutableRefObject, useMemo, useRef, useEffect } from "react";
+import { type MutableRefObject, useMemo, useRef, useEffect, useLayoutEffect } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Environment, ContactShadows, OrbitControls, RoundedBox } from "@react-three/drei";
 import { EffectComposer, Bloom } from "@react-three/postprocessing";
@@ -151,9 +151,9 @@ export function FormationPreviewScene({
         <OrbitControls makeDefault enablePan={false} enableZoom={false} target={[0, 0.5, 0]} />
         <EffectComposer>
           <Bloom
-            intensity={3.5}
-            luminanceThreshold={0.1}
-            luminanceSmoothing={0.6}
+            intensity={0.3}
+            luminanceThreshold={0.8}
+            luminanceSmoothing={0.3}
             mipmapBlur
           />
         </EffectComposer>
@@ -200,20 +200,26 @@ function NightSkyStars() {
    ────────────────────────────────────────────────────────────── */
 const ledDotGeo = new THREE.SphereGeometry(0.028, 12, 10);
 const ledHaloGeo = new THREE.SphereGeometry(0.075, 16, 12);
+
+// Translate the arm and body geometries upwards to separate them from the LED at (0,0,0)
+// This eliminates Z-fighting and clipping between the LED and the drone structure.
 const microArmGeo = new THREE.BoxGeometry(0.16, 0.006, 0.008);
+microArmGeo.translate(0, 0.022, 0);
+
 const microBodyGeo = new THREE.BoxGeometry(0.038, 0.018, 0.032);
+microBodyGeo.translate(0, 0.022, 0);
+
 const microNavGeo = new THREE.SphereGeometry(0.012, 8, 6);
 const microRotorGeo = new THREE.TorusGeometry(0.045, 0.004, 6, 18);
+
+// Opaque body material for better visual stability and depth writing
 const microDroneMaterial = new THREE.MeshBasicMaterial({
   color: "#05070a",
-  transparent: true,
-  opacity: 0.82,
 });
 
+// Opaque LED core material completely eliminates transparency sorting flickering
 const ledBaseMat = new THREE.MeshBasicMaterial({
   color: "#ffffff",
-  transparent: true,
-  opacity: 0.95,
   toneMapped: false,
 });
 const haloBaseMat = new THREE.MeshBasicMaterial({
@@ -256,75 +262,114 @@ function FormationSwarm({
     return ["#ff6622", "#ff8844", "#ffaa33", "#ff7733", "#ffcc55"];
   }, [shape]);
 
-  // Set colors when drone count or shape changes
-  useMemo(() => {
-    // Need a tiny delay to ensure refs are attached on first render
-    setTimeout(() => {
-      if (!ledMeshRef.current || !haloMeshRef.current) return;
-      const color = new THREE.Color();
-      for (let i = 0; i < droneCount; i++) {
-        color.set(colorPalette[i % colorPalette.length]);
-        ledMeshRef.current.setColorAt(i, color);
-        haloMeshRef.current.setColorAt(i, color);
-      }
-      if (ledMeshRef.current.instanceColor) ledMeshRef.current.instanceColor.needsUpdate = true;
-      if (haloMeshRef.current.instanceColor) haloMeshRef.current.instanceColor.needsUpdate = true;
-    }, 0);
+  // Set colors synchronously when drone count or shape changes to prevent 1-frame color flickering
+  useLayoutEffect(() => {
+    if (!ledMeshRef.current || !haloMeshRef.current) return;
+    const ledColor = new THREE.Color();
+    const haloColor = new THREE.Color();
+    for (let i = 0; i < droneCount; i++) {
+      const baseColorStr = colorPalette[i % colorPalette.length];
+      ledColor.set(baseColorStr).multiplyScalar(2.0); // HDR intensity for stable bloom
+      haloColor.set(baseColorStr).multiplyScalar(1.2); // softer halo bloom
+      ledMeshRef.current.setColorAt(i, ledColor);
+      haloMeshRef.current.setColorAt(i, haloColor);
+    }
+    if (ledMeshRef.current.instanceColor) ledMeshRef.current.instanceColor.needsUpdate = true;
+    if (haloMeshRef.current.instanceColor) haloMeshRef.current.instanceColor.needsUpdate = true;
   }, [droneCount, colorPalette]);
+
+  // Refs to manage transition state smoothly inside the animation loop
+  const prevPointsRef = useRef<THREE.Vector3[]>([]);
+  const currentPointsRef = useRef<THREE.Vector3[]>([]);
+  const transitionStartTimeRef = useRef<number>(0);
+  const isTransitioningRef = useRef<boolean>(false);
+
+  useEffect(() => {
+    if (currentPointsRef.current.length > 0) {
+      // If we already have a shape rendered, trigger a smooth transition
+      const oldPoints = currentPointsRef.current;
+      const newPoints = points;
+      const adjustedOldPoints: THREE.Vector3[] = [];
+      
+      for (let i = 0; i < newPoints.length; i++) {
+        if (i < oldPoints.length) {
+          adjustedOldPoints.push(oldPoints[i].clone());
+        } else {
+          // If drone count has increased, spawn new drones from random positions on the ground plane
+          adjustedOldPoints.push(
+            new THREE.Vector3((Math.random() - 0.5) * 6, -2.2, (Math.random() - 0.5) * 6)
+          );
+        }
+      }
+      prevPointsRef.current = adjustedOldPoints;
+      transitionStartTimeRef.current = -1; // Flag to initialize timestamp on next animation frame
+      isTransitioningRef.current = true;
+    } else {
+      // Initial load, spawn immediately
+      prevPointsRef.current = points.map((p) => p.clone());
+    }
+    currentPointsRef.current = points.map((p) => p.clone());
+  }, [points]);
 
   useFrame(({ clock }) => {
     const t = clock.elapsedTime;
     if (groupRef.current) {
-      groupRef.current.rotation.y = Math.sin(t * 0.22) * 0.12;
+      groupRef.current.rotation.y = 0;
+    }
+
+    if (isTransitioningRef.current && transitionStartTimeRef.current === -1) {
+      transitionStartTimeRef.current = t;
     }
 
     const dummy = new THREE.Object3D();
     
     if (!ledMeshRef.current) return;
 
+    const transitionDuration = 2.0; // Duration of active flight in seconds
+    const maxStaggerDelay = 0.8; // Maximum delay to distribute drone takeoff times
+    const transTime = isTransitioningRef.current ? t - transitionStartTimeRef.current : 0;
+    let allFinished = true;
+
     for (let i = 0; i < droneCount; i++) {
       if (i >= points.length) break;
-      const point = points[i];
-      
-      const phase = (i * 7.13) % (Math.PI * 2);
-      const hoverAmp = 0.008 + ((i * 3.7) % 0.012);
-      
-      // Simulating GPS drift & wind correction
-      const driftX = Math.sin(t * 0.6 + phase) * 0.12;
-      const driftZ = Math.cos(t * 0.5 + phase) * 0.12;
-      const hoverY = Math.sin(t * 1.8 + phase) * hoverAmp;
-      
-      dummy.position.set(
-        point.x + driftX,
-        point.y + hoverY,
-        point.z + driftZ
-      );
-      
-      const twinkleSpeed = 1.5 + ((i * 11.5) % 2.0);
-      const twinkle = 0.85 + Math.sin(t * twinkleSpeed + phase) * 0.2;
-      
-      dummy.scale.setScalar(twinkle);
+      const targetPoint = points[i];
+      const basePos = new THREE.Vector3();
+
+      if (isTransitioningRef.current) {
+        const startPoint =
+          prevPointsRef.current[i] ||
+          new THREE.Vector3((Math.random() - 0.5) * 6, -2.2, (Math.random() - 0.5) * 6);
+        
+        // Stagger flight takeoff based on index and distance from the center
+        const distanceDelay = (targetPoint.length() / 8) * 0.3; // up to 0.3s delay depending on distance
+        const indexDelay = (i / droneCount) * (maxStaggerDelay - 0.3); // up to 0.5s delay depending on index
+        const delay = distanceDelay + indexDelay;
+
+        const p = THREE.MathUtils.clamp((transTime - delay) / transitionDuration, 0, 1);
+        if (p < 1) {
+          allFinished = false;
+        }
+
+        // easeInOutCubic for organic acceleration and deceleration
+        const easeP = p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
+
+        basePos.lerpVectors(startPoint, targetPoint, easeP);
+      } else {
+        basePos.copy(targetPoint);
+      }
+
+      dummy.position.set(basePos.x, basePos.y, basePos.z);
+      dummy.scale.setScalar(1.0);
       dummy.rotation.set(0, 0, 0);
       dummy.updateMatrix();
+      
       ledMeshRef.current.setMatrixAt(i, dummy.matrix);
       if (haloMeshRef.current) haloMeshRef.current.setMatrixAt(i, dummy.matrix);
-      
-      const tiltX = Math.cos(t * 0.6 + phase) * 0.08;
-      const tiltZ = -Math.sin(t * 0.5 + phase) * 0.08;
-      
-      dummy.scale.setScalar(1); 
-      dummy.rotation.set(tiltX, phase, tiltZ);
-      dummy.updateMatrix();
-      
       if (bodyMeshRef.current) bodyMeshRef.current.setMatrixAt(i, dummy.matrix);
+      if (arm1MeshRef.current) arm1MeshRef.current.setMatrixAt(i, dummy.matrix);
       
-      if (arm1MeshRef.current) {
-        dummy.rotation.set(tiltX, phase, tiltZ);
-        dummy.updateMatrix();
-        arm1MeshRef.current.setMatrixAt(i, dummy.matrix);
-      }
       if (arm2MeshRef.current) {
-        dummy.rotation.set(tiltX, phase + Math.PI / 2, tiltZ);
+        dummy.rotation.set(0, Math.PI / 2, 0);
         dummy.updateMatrix();
         arm2MeshRef.current.setMatrixAt(i, dummy.matrix);
       }
@@ -335,6 +380,11 @@ function FormationSwarm({
     if (bodyMeshRef.current) bodyMeshRef.current.instanceMatrix.needsUpdate = true;
     if (arm1MeshRef.current) arm1MeshRef.current.instanceMatrix.needsUpdate = true;
     if (arm2MeshRef.current) arm2MeshRef.current.instanceMatrix.needsUpdate = true;
+
+    if (isTransitioningRef.current && allFinished) {
+      isTransitioningRef.current = false;
+      currentPointsRef.current = points.map(p => p.clone());
+    }
   });
 
   return (
@@ -348,11 +398,14 @@ function FormationSwarm({
         <meshBasicMaterial color="#080812" transparent opacity={0.4} />
       </mesh>
 
-      <instancedMesh ref={ledMeshRef} args={[ledDotGeo, ledBaseMat, droneCount]} />
-      <instancedMesh ref={haloMeshRef} args={[ledHaloGeo, haloBaseMat, droneCount]} />
+      {/* Render solid structures first to write depth */}
       <instancedMesh ref={bodyMeshRef} args={[microBodyGeo, microDroneMaterial, droneCount]} />
       <instancedMesh ref={arm1MeshRef} args={[microArmGeo, microDroneMaterial, droneCount]} />
       <instancedMesh ref={arm2MeshRef} args={[microArmGeo, microDroneMaterial, droneCount]} />
+
+      {/* Render bright LEDs and transparent glowing halos last */}
+      <instancedMesh ref={ledMeshRef} args={[ledDotGeo, ledBaseMat, droneCount]} />
+      <instancedMesh ref={haloMeshRef} args={[ledHaloGeo, haloBaseMat, droneCount]} />
     </group>
   );
 }
@@ -628,7 +681,7 @@ function generateBird3D(count: number): THREE.Vector3[] {
     points.push(new THREE.Vector3(0, 0.4, 0));
   }
 
-  return points.slice(0, count);
+  return points.map((p) => new THREE.Vector3(-p.x, p.y, -p.z)).slice(0, count);
 }
 
 function generateTree3D(count: number): THREE.Vector3[] {

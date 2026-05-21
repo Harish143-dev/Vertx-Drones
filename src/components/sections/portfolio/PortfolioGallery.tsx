@@ -15,7 +15,7 @@ import imgTemple from "@/assets/images/portfolio/temple-of-light.webp";
 
 import video100 from "@/assets/videos/gallery/Pondicherry.mp4";
 import video200 from "@/assets/videos/showcase/200drones.mp4";
-import video300 from "@/assets/videos/showcase/300drones.mp4";
+import video300 from "@/assets/videos/showcase/400drones.mp4";
 import video400 from "@/assets/videos/showcase/400drones.mp4";
 
 import political_1 from "@/assets/videos/gallery/Poltical_1.mp4";
@@ -158,7 +158,7 @@ export function PortfolioGallery() {
           className="mb-10"
         >
           <h2 className="max-w-3xl text-3xl font-light leading-tight text-white md:text-5xl">
-            Watch the Drone Shows
+            Watch our Drone Shows
           </h2>
         </motion.div>
 
@@ -175,7 +175,7 @@ export function PortfolioGallery() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
-                className="group relative cursor-pointer overflow-hidden aspect-[16/9] rounded-lg"
+                className="group relative cursor-pointer overflow-hidden aspect-[4/3] sm:aspect-[16/9] rounded-lg"
                 onClick={() => setSelectedProject(project)}
               >
                 {project.video ? (

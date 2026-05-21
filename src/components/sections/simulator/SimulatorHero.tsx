@@ -28,7 +28,7 @@ export function SimulatorHero({ cameraView }: SimulatorHeroProps) {
       <div className="container mx-auto px-6 md:px-12 relative z-10 flex flex-col justify-end flex-1 pb-10 md:pb-16 pt-28">
         <div className="max-w-3xl">
           <motion.h1
-            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light tracking-tight text-white mb-4 leading-[1.1]"
+            className="text-3xl md:text-4xl lg:text-5xl font-light tracking-tight text-white mb-4 leading-[1.1]"
             variants={fadeUp}
             initial="hidden"
             animate="show"
@@ -41,7 +41,7 @@ export function SimulatorHero({ cameraView }: SimulatorHeroProps) {
             initial="hidden"
             animate="show"
             custom={0.16}
-            className="mb-8 max-w-xl text-sm md:text-base text-white/80 font-light leading-relaxed"
+            className="mb-8 max-w-xl text-base md:text-lg text-white/80 font-light leading-relaxed"
           >
             Pick your drone count. Choose your formations. Watch it come to life before a single drone leaves the ground.
           </motion.p>

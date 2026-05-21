@@ -3,8 +3,8 @@ import { motion, AnimatePresence } from "framer-motion";
 
 import video100 from "@/assets/videos/showcase/100drones.mp4";
 import video200 from "@/assets/videos/showcase/200drones.mp4";
-import video300 from "@/assets/videos/showcase/300drones.mp4";
 import video400 from "@/assets/videos/showcase/400drones.mp4";
+import video500 from "@/assets/videos/showcase/500drones.mp4";
 
 interface Package {
   drones: number;
@@ -15,8 +15,8 @@ interface Package {
 const packages: Package[] = [
   { drones: 100, label: "100", video: video100 },
   { drones: 200, label: "200", video: video200 },
-  { drones: 300, label: "300", video: video300 },
   { drones: 400, label: "400", video: video400 },
+  { drones: 500, label: "500", video: video500 },
 ];
 
 const ORANGE = "#F97316";
@@ -93,9 +93,9 @@ export function DroneShowGallery() {
             className="mb-12 lg:mb-16"
           >
             <div className="flex flex-col gap-4">
-              <h2 className="text-3xl md:text-5xl leading-tight">See Your Drone Show Before It Flies</h2>
+              <h2 className="text-3xl md:text-4xl leading-tight">PREVIEW YOUR SHOW BEFORE IT HAPPENS</h2>
               <p className="text-white/35 font-light text-sm max-w-xs leading-relaxed">
-                Pick 100, 200, 300, or 400 drones. Choose your formations. See exactly what your sky will look like before you decide anything.
+                Pick 100, 200, 400, or 500 drones. Choose your formations. See exactly what your sky will look like before you decide anything.
               </p>
             </div>
           </motion.div>
@@ -130,28 +130,38 @@ export function DroneShowGallery() {
               </span>
             </div>
 
-            <div className="relative flex items-center" style={{ height: "20px" }}>
-              <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-[2px]" style={{ background: "rgba(255,255,255,0.08)" }} />
-              <div
-                className="absolute top-1/2 -translate-y-1/2 h-[2px] transition-all duration-150"
-                style={{ left: 0, width: `${fillPct}%`, background: `linear-gradient(90deg, rgba(249,115,22,0.3), ${ORANGE})` }}
-              />
-              <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex justify-between pointer-events-none">
-                {packages.map((_, i) => {
-                  const isActive = i === activeIndex;
-                  return (
-                    <div
-                      key={i}
-                      className="w-[1px] transition-all duration-200"
-                      style={{
-                        height: isActive ? "10px" : "6px",
-                        marginTop: isActive ? "-4px" : "-2px",
-                        background: isActive ? ORANGE : "rgba(255,255,255,0.18)",
-                      }}
-                    />
-                  );
-                })}
+            <div className="relative flex items-center w-full" style={{ height: "20px" }}>
+              {/* Custom Track and Ticks wrapped inside a 9px-inset container (half of the 18px thumb width) */}
+              <div className="absolute inset-y-0 left-[9px] right-[9px] pointer-events-none flex items-center">
+                {/* Gray Background Track */}
+                <div className="absolute inset-x-0 h-[2px] w-full" style={{ background: "rgba(255,255,255,0.08)" }} />
+
+                {/* Active Orange Progress Track */}
+                <div
+                  className="absolute h-[2px] transition-all duration-150"
+                  style={{ left: 0, width: `${fillPct}%`, background: `linear-gradient(90deg, rgba(249,115,22,0.3), ${ORANGE})` }}
+                />
+
+                {/* Ticks */}
+                <div className="absolute inset-x-0 flex justify-between w-full">
+                  {packages.map((_, i) => {
+                    const isActive = i === activeIndex;
+                    return (
+                      <div
+                        key={i}
+                        className="w-[1px] transition-all duration-200"
+                        style={{
+                          height: isActive ? "10px" : "6px",
+                          marginTop: isActive ? "-4px" : "-2px",
+                          background: isActive ? ORANGE : "rgba(255,255,255,0.18)",
+                        }}
+                      />
+                    );
+                  })}
+                </div>
               </div>
+
+              {/* Native range input slider */}
               <input
                 type="range"
                 min={0}
@@ -159,29 +169,31 @@ export function DroneShowGallery() {
                 step={1}
                 value={activeIndex}
                 onChange={(e) => go(Number(e.target.value))}
-                className="drone-slider relative z-10"
+                className="drone-slider relative z-10 w-full"
               />
             </div>
 
-            <div className="flex justify-between mt-3 pointer-events-none">
-              {packages.map((pkg, i) => {
-                const isActive = i === activeIndex;
-                return (
-                  <span
-                    key={pkg.drones}
-                    className="text-[9px] font-medium tracking-wide transition-all duration-200"
-                    style={{
-                      color: isActive ? ORANGE : "rgba(255,255,255,0.18)",
-                      transform: isActive ? "scale(1.1)" : "scale(1)",
-                      display: "inline-block",
-                      width: "10%",
-                      textAlign: "center",
-                    }}
-                  >
-                    {pkg.drones >= 1000 ? `${pkg.drones / 1000}k` : pkg.drones}
-                  </span>
-                );
-              })}
+            <div className="relative w-full mt-3 h-4 pointer-events-none">
+              {/* Label container also inset by 9px to match ticks perfectly */}
+              <div className="absolute inset-x-[9px]">
+                {packages.map((pkg, i) => {
+                  const isActive = i === activeIndex;
+                  const percent = (i / MAX) * 100;
+                  return (
+                    <span
+                      key={pkg.drones}
+                      className="absolute text-[9px] font-medium tracking-wide transition-all duration-200"
+                      style={{
+                        left: `${percent}%`,
+                        transform: isActive ? "translate(-50%, 0) scale(1.1)" : "translate(-50%, 0) scale(1)",
+                        color: isActive ? ORANGE : "rgba(255,255,255,0.18)",
+                      }}
+                    >
+                      {pkg.drones >= 1000 ? `${pkg.drones / 1000}k` : pkg.drones}
+                    </span>
+                  );
+                })}
+              </div>
             </div>
           </motion.div>
         </div>

@@ -31,7 +31,7 @@ export function PartnerHero() {
             initial="hidden"
             animate="show"
             custom={0.12}
-            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light leading-[1.1] tracking-tight text-white mb-6"
+            className="text-3xl md:text-4xl lg:text-5xl font-light leading-[1.1] tracking-tight text-white mb-6"
           >
             Your Clients Want Drone Shows.<br />
             You Can Offer Them.
@@ -42,7 +42,7 @@ export function PartnerHero() {
             initial="hidden"
             animate="show"
             custom={0.24}
-            className="mb-8 max-w-xl text-sm md:text-base font-light leading-relaxed text-white/80"
+            className="mb-8 max-w-xl text-base md:text-lg font-light leading-relaxed text-white/80"
           >
             {description}
           </motion.p>
