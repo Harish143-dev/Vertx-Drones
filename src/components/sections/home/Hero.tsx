@@ -64,10 +64,10 @@ export function Hero() {
               className="flex flex-col sm:flex-row gap-4"
             >
               <Button asChild size="lg">
-                <a href="/contact">Get a Quote</a>
+                <a href="#contact">Book a Show</a>
               </Button>
               <Button asChild variant="outline" size="lg">
-                <a href="/contact?quote=true">Book a Show</a>
+                <a href="/contact">Get a Quote</a>
               </Button>
             </motion.div>
           </div>
