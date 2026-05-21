@@ -90,12 +90,12 @@ export function CorporateROI() {
           <div className="w-[58%] pb-[20vh] pt-[15vh]">
             {roiPoints.map((item, index) => {
               // Calculate dynamic top positioning so they stack like a physical deck
-              const stickyTopOffset = `calc(20vh + ${index * 20}px)`;
+              const stickyTopOffset = `calc(25vh + ${index * 20}px)`;
 
               return (
                 <div
                   key={item.value}
-                  className="sticky flex items-start justify-center h-[80vh]"
+                  className="sticky flex items-start justify-center h-[60vh]"
                   style={{ top: stickyTopOffset }}
                 >
                   {/* The Physical Card */}

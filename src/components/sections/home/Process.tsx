@@ -34,7 +34,7 @@ const steps = [
   },
 ];
 
-const DroneIcon = ({ size = 12 }: { size?: number }) => (
+const DroneIcon = ({ size = 12, className = "" }: { size?: number; className?: string }) => (
   <svg
     width={size}
     height={size}
@@ -44,7 +44,7 @@ const DroneIcon = ({ size = 12 }: { size?: number }) => (
     strokeWidth="2.5"
     strokeLinecap="round"
     strokeLinejoin="round"
-    className="shrink-0"
+    className={`shrink-0 ${className}`}
     style={{ color: ORANGE }}
   >
     <path d="M12 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
@@ -107,8 +107,8 @@ export function Process() {
 
               <ul className="space-y-2">
                 {step.bullets.map((b, j) => (
-                  <li key={j} className="flex items-center gap-2.5 text-[13px] text-white/50">
-                    <DroneIcon size={14} />
+                  <li key={j} className="flex items-start gap-2.5 text-[13px] text-white/50">
+                    <DroneIcon size={14} className="mt-1" />
                     {b}
                   </li>
                 ))}

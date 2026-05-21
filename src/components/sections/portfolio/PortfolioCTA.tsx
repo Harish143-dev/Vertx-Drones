@@ -21,7 +21,7 @@ export function PortfolioCTA() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="max-w-2xl mx-auto"
+          className="max-w-3xl mx-auto"
         >
           <h2 className="text-3xl md:text-5xl font-light leading-tight mb-6">
             Let's design your sky together
