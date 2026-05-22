@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 
 // Import real assets
 import imgBeats from "@/assets/images/portfolio/beats-from-above.webp";
-import imgChampions from "@/assets/images/portfolio/champions-crown.webp";
+import hitachi from "@/assets/images/gallery/hitachi.webp";
 import imgNeon from "@/assets/images/portfolio/neon-horizons.webp";
 
 type Item = {
@@ -23,7 +23,7 @@ const SAMPLE = "/mp_.mp4"; // Using the local video we found earlier
 
 const items: Item[] = [
   { id: 11, src: imgBeats, video: SAMPLE, title: "New Year Drone Light Show", category: "Public celebration", location: "Pondicherry Government", drones: "150" },
-  { id: 12, src: imgChampions, video: SAMPLE, title: "Hitachi Corporate Event", category: "Synchronized branding", location: "Four Points by Sheraton", drones: "50" },
+  { id: 12, src: hitachi, video: SAMPLE, title: "Hitachi Corporate Event", category: "Synchronized branding", location: "Four Points by Sheraton", drones: "50" },
   { id: 13, src: imgNeon, video: SAMPLE, title: "Wedding Drone Show", category: "Personalized aerial story", location: "Hyderabad", drones: "100 to 150" },
 ];
 
