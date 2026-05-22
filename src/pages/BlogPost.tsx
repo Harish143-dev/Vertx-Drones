@@ -4,6 +4,7 @@ import { motion, useScroll, useSpring } from "framer-motion";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { SEO } from "@/components/SEO";
+import { Schema, getBlogPostingSchema, getFAQSchema } from "@/components/Schema";
 import { blogData } from "@/data/blogData";
 import { ArrowLeft, ArrowRight, Clock } from "lucide-react";
 import NotFound from "./not-found";
@@ -43,7 +44,20 @@ export default function BlogPost() {
       <SEO 
         title={post.metaTitle} 
         description={post.metaDescription}
+        image={post.image}
       />
+      <Schema 
+        schema={getBlogPostingSchema(
+          post.title,
+          post.metaDescription,
+          post.date,
+          post.image,
+          `https://vertxdroneshow.in/blog/${post.slug}`
+        )}
+      />
+      {post.faqs && (
+        <Schema schema={getFAQSchema(post.faqs)} />
+      )}
       
       {/* Reading Progress Bar */}
       <motion.div

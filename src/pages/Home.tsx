@@ -10,6 +10,7 @@ import { FAQ } from "@/components/sections/home/FAQ";
 import { HomeContact } from "@/components/sections/home/HomeContact";
 import { Footer } from "@/components/layout/Footer";
 import { SEO } from "@/components/SEO";
+import { Schema, getLocalBusinessSchema } from "@/components/Schema";
 
 export function Home() {
   return (
@@ -18,6 +19,7 @@ export function Home() {
         title="Drone Light Shows in India | VertX Drone Light Show"
         description="VertX drone light shows across India. Weddings, birthdays, corporate events, national celebrations, festivals and government shows. Up to 1,000 drones."
       />
+      <Schema schema={getLocalBusinessSchema()} />
       <Navbar />
       <main>
         {/* 1. Hero â€” full screen, video-ready */}

@@ -1,6 +1,7 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { SEO } from "@/components/SEO";
+import { Schema, getServiceSchema } from "@/components/Schema";
 import { WeddingHero } from "@/components/sections/weddings/WeddingHero";
 import { WeddingIntro } from "@/components/sections/weddings/WeddingIntro";
 import { WeddingMoments } from "@/components/sections/weddings/WeddingMoments";
@@ -14,6 +15,13 @@ export default function Weddings() {
       <SEO 
         title="Wedding Drone Shows in India | VertX Drone Light Show" 
         description="VertX creates custom wedding drone shows across India. Couple name reveals, grand entries, proposal moments, storytelling in the sky. Make your wedding unforgettable."
+      />
+      <Schema 
+        schema={getServiceSchema(
+          "Wedding Drone Light Shows",
+          "VertX creates custom wedding drone shows across India. Couple name reveals, grand entries, proposal moments, storytelling in the sky. Make your wedding unforgettable.",
+          "https://vertxdroneshow.in/weddings"
+        )}
       />
       <Navbar />
       <main>

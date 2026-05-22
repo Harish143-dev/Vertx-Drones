@@ -13,6 +13,7 @@ export interface BlogPost {
   metaTitle: string;
   metaDescription: string;
   content: () => React.JSX.Element;
+  faqs?: { question: string; answer: string }[];
 }
 
 export const blogData: BlogPost[] = [
@@ -25,6 +26,20 @@ export const blogData: BlogPost[] = [
     image: "https://images.unsplash.com/photo-1579820010410-c10411aaaa88?q=80&w=800&auto=format&fit=crop",
     metaTitle: "How Many Drones Do You Need for a Drone Show? A Simple Guide",
     metaDescription: "Not sure how many drones you need for your event? This guide explains what 100, 200, 300, and 400 drones look like in a real show.",
+    faqs: [
+      {
+        question: "What is the minimum drone count for a show?",
+        answer: "100 drones is the standard minimum to create recognizable shapes in the sky."
+      },
+      {
+        question: "Can I add more drones later?",
+        answer: "Yes, show designs can be scaled up during the planning phase."
+      },
+      {
+        question: "Does more drones always mean a better show?",
+        answer: "Not necessarily. A well-designed 200-drone show can outperform a poorly choreographed 500-drone show. It depends on the venue and the narrative."
+      }
+    ],
     content: () => (
       <>
         <h2>The direct answer</h2>
@@ -98,6 +113,20 @@ export const blogData: BlogPost[] = [
     image: fireworkImage,
     metaTitle: "Drone Show vs Fireworks India: Which Should You Choose?",
     metaDescription: "Drone show or fireworks for your event in India? We compare cost, safety, regulations, and visual impact to help you decide.",
+    faqs: [
+      {
+        question: "Can you combine a drone show with fireworks?",
+        answer: "Yes, synchronized shows are increasingly popular for massive events."
+      },
+      {
+        question: "Which is better for a wedding?",
+        answer: "Drone shows are preferred due to silence, safety, and personalization."
+      },
+      {
+        question: "Which is safer?",
+        answer: "Drone shows carry zero fire risk and are heavily regulated by aviation standards."
+      }
+    ],
     content: () => (
       <>
         <h2>The short answer</h2>
@@ -172,6 +201,20 @@ export const blogData: BlogPost[] = [
     image: "https://images.unsplash.com/photo-1508614589041-895b88991e3e?q=80&w=800&auto=format&fit=crop",
     metaTitle: "Drone Show Cost in India: What Affects the Price? (2025)",
     metaDescription: "What does a drone show cost in India? We break down every factor that affects pricing — drone count, location, complexity, and lead time.",
+    faqs: [
+      {
+        question: "Is there a minimum price for a drone show in India?",
+        answer: "Pricing scales with requirements. Contact us for a baseline estimate."
+      },
+      {
+        question: "Do prices vary by city?",
+        answer: "Yes, primarily due to logistics and freight differences."
+      },
+      {
+        question: "What is included in the quote?",
+        answer: "Full production, crew, permits, and execution. No hidden fees."
+      }
+    ],
     content: () => (
       <>
         <h2>The honest answer</h2>
