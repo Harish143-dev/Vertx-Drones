@@ -2,23 +2,16 @@ import { useState, useEffect, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Clock, MapPin, Play, Target, Users, X, Zap } from "lucide-react";
 
-import imgSkyline from "@/assets/images/portfolio/skyline-symphony.webp";
-import imgEternal from "@/assets/images/portfolio/eternal-vows.webp";
-import imgRhythm from "@/assets/images/portfolio/rhythm-of-light.webp";
-import imgVictory from "@/assets/images/portfolio/victory-formation.webp";
-import imgHeritage from "@/assets/images/portfolio/heritage-glow.webp";
-import imgNeon from "@/assets/images/portfolio/neon-horizons.webp";
-import imgStarlight from "@/assets/images/portfolio/starlight-romance.webp";
-import imgBeats from "@/assets/images/portfolio/beats-from-above.webp";
-import imgChampions from "@/assets/images/portfolio/champions-crown.webp";
-import imgTemple from "@/assets/images/portfolio/temple-of-light.webp";
+import newyear from "@/assets/images/gallery/newYear.webp"
+import drug from "@/assets/images/gallery/drug.webp"
+import corporate from "@/assets/images/gallery/hitachi.webp"
+import wedding from "@/assets/images/gallery/wedding.webp"
 
 import video100 from "@/assets/videos/gallery/Pondicherry.mp4";
 import video200 from "@/assets/videos/showcase/200drones.mp4";
 import video300 from "@/assets/videos/showcase/400drones.mp4";
 import video400 from "@/assets/videos/showcase/400drones.mp4";
 
-import political_1 from "@/assets/videos/gallery/Poltical_1.mp4";
 
 const ORANGE = "#F97316";
 
@@ -47,7 +40,7 @@ const projects: Project[] = [
     drones: "150",
     location: "Pondicherry",
     duration: "10 min",
-    image: imgBeats,
+    image: newyear,
     video: video100,
     description: "A spectacular public celebration for the Pondicherry Government, marking the arrival of the New Year with synchronized aerial displays.",
     clientName: "Pondicherry Government",
@@ -63,7 +56,7 @@ const projects: Project[] = [
     drones: "50",
     location: "Besant Nagar, Chennai",
     duration: "8 min",
-    image: imgNeon,
+    image: drug,
     video: video200,
     description: "Drive public engagement for a national drug awareness campaign through visual storytelling.",
     clientName: "Narcotics Control Bureau (NCB)",
@@ -78,7 +71,7 @@ const projects: Project[] = [
     drones: "50",
     location: "Mahabalipuram",
     duration: "10 min",
-    image: imgChampions,
+    image: corporate,
     video: video300,
     description: "A high-impact brand activation for Four Points by Sheraton, showcasing synchronized branding and logo reveals.",
     clientName: "Four Points by Sheraton",
@@ -93,7 +86,7 @@ const projects: Project[] = [
     drones: "100-150",
     location: "Hyderabad",
     duration: "8 min",
-    image: imgStarlight,
+    image: wedding,
     video: video400,
     description: "A personalized aerial story for a grand wedding in Hyderabad, featuring couple name reveals and cinematic entries.",
     clientName: "Private Wedding",
@@ -109,7 +102,7 @@ const projects: Project[] = [
     drones: "100",
     location: "Chennai",
     duration: "10 min",
-    image: imgTemple,
+    image: drug,
     description: "Engage a large student audience during the annual cultural festival with dynamic aerial visuals.",
     clientName: "Sathyabama Institute",
     objective: "Engage student audience",
@@ -129,7 +122,7 @@ export function PortfolioGallery() {
     if (!video) return;
     if (play) {
       video.currentTime = 0;
-      video.play().catch(() => {});
+      video.play().catch(() => { });
     } else {
       video.pause();
     }

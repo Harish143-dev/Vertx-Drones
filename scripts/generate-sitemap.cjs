@@ -3,44 +3,90 @@ const path = require('path');
 
 const siteUrl = 'https://vertxdroneshow.in';
 
-// Define static routes with changefreq and priority
-const staticRoutes = [
-  { path: '', changefreq: 'daily', priority: '1.0' },
-  { path: 'portfolio', changefreq: 'weekly', priority: '0.9' },
-  { path: 'corporate', changefreq: 'weekly', priority: '0.8' },
-  { path: 'weddings', changefreq: 'weekly', priority: '0.8' },
-  { path: 'design', changefreq: 'monthly', priority: '0.7' },
-  { path: 'about', changefreq: 'monthly', priority: '0.6' },
-  { path: 'partners', changefreq: 'monthly', priority: '0.6' },
-  { path: 'blog', changefreq: 'daily', priority: '0.8' },
-  { path: 'contact', changefreq: 'monthly', priority: '0.5' },
-];
-
-console.log('Generating sitemap...');
+console.log('Generating dynamic sitemap...');
 
 try {
-  // Read and parse dynamic blog posts from src/data/blogData.tsx
+  // 1. Read and parse routes from src/App.tsx
+  const appPath = path.join(__dirname, '../src/App.tsx');
+  const appContent = fs.readFileSync(appPath, 'utf8');
+
+  // Regex to match <Route path="something" ... /> or <Route path='something' ... />
+  const routeRegex = /<Route\s+[^>]*\bpath=["']([^"']+)["']/g;
+  const foundPaths = [];
+  let routeMatch;
+
+  while ((routeMatch = routeRegex.exec(appContent)) !== null) {
+    foundPaths.push(routeMatch[1]);
+  }
+
+  console.log(`Found routes in App.tsx:`, foundPaths);
+
+  // 2. Read and parse dynamic blog posts from src/data/blogData.tsx
   const blogDataPath = path.join(__dirname, '../src/data/blogData.tsx');
   const blogDataContent = fs.readFileSync(blogDataPath, 'utf8');
   
-  // Regex to extract slug property values
+  // Regex to extract slug property values from blogData
   const slugRegex = /slug:\s*["']([^"']+)["']/g;
-  const blogRoutes = [];
-  let match;
+  const blogSlugs = [];
+  let slugMatch;
   
-  while ((match = slugRegex.exec(blogDataContent)) !== null) {
-    const slug = match[1];
-    blogRoutes.push({
-      path: `blog/${slug}`,
-      changefreq: 'weekly',
-      priority: '0.7'
-    });
+  while ((slugMatch = slugRegex.exec(blogDataContent)) !== null) {
+    blogSlugs.push(slugMatch[1]);
   }
 
-  console.log(`Found ${blogRoutes.length} blog posts.`);
+  console.log(`Found ${blogSlugs.length} blog posts in blogData.tsx.`);
 
-  // Combine static and dynamic routes
-  const allRoutes = [...staticRoutes, ...blogRoutes];
+  // 3. Resolve all routes dynamically
+  const allRoutes = [];
+
+  // Map known routes to specific priority and changefreq
+  const routeMetadata = {
+    '/': { changefreq: 'daily', priority: '1.0' },
+    '/portfolio': { changefreq: 'weekly', priority: '0.9' },
+    '/corporate': { changefreq: 'weekly', priority: '0.8' },
+    '/weddings': { changefreq: 'weekly', priority: '0.8' },
+    '/design': { changefreq: 'monthly', priority: '0.7' },
+    '/about': { changefreq: 'monthly', priority: '0.6' },
+    '/partners': { changefreq: 'monthly', priority: '0.6' },
+    '/blog': { changefreq: 'daily', priority: '0.8' },
+    '/contact': { changefreq: 'monthly', priority: '0.5' },
+  };
+
+  foundPaths.forEach((routePath) => {
+    // Skip if it contains route parameters unless it is '/blog/:slug'
+    if (routePath.includes(':')) {
+      if (routePath === '/blog/:slug') {
+        // Expand the blog slugs
+        blogSlugs.forEach((slug) => {
+          allRoutes.push({
+            path: `blog/${slug}`,
+            changefreq: 'weekly',
+            priority: '0.7'
+          });
+        });
+      }
+      return;
+    }
+
+    // Process static route
+    const cleanPath = routePath === '/' ? '' : routePath.replace(/^\//, '');
+    
+    // Check if we have specific metadata for this route
+    if (routeMetadata[routePath]) {
+      allRoutes.push({
+        path: cleanPath,
+        ...routeMetadata[routePath]
+      });
+    } else {
+      // Default metadata for any new pages that the user adds
+      console.log(`Discovered new static route: ${routePath}. Assigning default metadata.`);
+      allRoutes.push({
+        path: cleanPath,
+        changefreq: 'weekly',
+        priority: '0.7'
+      });
+    }
+  });
 
   // Build the XML string
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';

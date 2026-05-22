@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'wouter';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import fireworkImage from "@/assets/images/blog/blog1.jpeg"
+import drone1 from "@/assets/images/blog/blog2.jpeg"
 
 export interface BlogPost {
   slug: string;
@@ -23,7 +24,7 @@ export const blogData: BlogPost[] = [
     category: "Planning Guide",
     date: "March 15, 2025",
     readTime: "5 min",
-    image: "https://images.unsplash.com/photo-1579820010410-c10411aaaa88?q=80&w=800&auto=format&fit=crop",
+    image: drone1,
     metaTitle: "How Many Drones Do You Need for a Drone Show? A Simple Guide",
     metaDescription: "Not sure how many drones you need for your event? This guide explains what 100, 200, 300, and 400 drones look like in a real show.",
     faqs: [

@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { fadeUp } from "@/lib/motion";
-import weddingImg from "@/assets/images/use-cases/weddings.png";
+import weddingImg from "@/assets/images/use-cases/weddings.webp";
 import imgEternal from "@/assets/images/portfolio/eternal-vows.webp";
 import imgStarlight from "@/assets/images/portfolio/starlight-romance.webp";
 import imgRhythm from "@/assets/images/portfolio/rhythm-of-light.webp";

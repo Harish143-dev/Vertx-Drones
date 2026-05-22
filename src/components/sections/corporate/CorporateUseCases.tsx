@@ -2,10 +2,10 @@ import { motion } from "framer-motion";
 import { fadeUp } from "@/lib/motion";
 import { CircularCarousel } from "@/components/ui/circular-carousel";
 
-import imgLaunches from "@/assets/images/use-cases/corporate-launches.png";
-import imgBranding from "@/assets/images/use-cases/corporate-branding.png";
-import imgCelebration from "@/assets/images/use-cases/corporate-celebration.png";
-import imgTourism from "@/assets/images/use-cases/corporate-tourism.png";
+import imgLaunches from "@/assets/images/use-cases/corporate-launches.webp";
+import imgBranding from "@/assets/images/use-cases/corporate-branding.webp";
+import imgCelebration from "@/assets/images/use-cases/corporate-celebration.webp";
+import imgTourism from "@/assets/images/use-cases/corporate-tourism.webp";
 
 const useCases = [
   {

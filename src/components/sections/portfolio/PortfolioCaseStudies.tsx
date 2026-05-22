@@ -6,6 +6,7 @@ import imgChampions from "@/assets/images/portfolio/champions-crown.webp";
 import imgStarlight from "@/assets/images/portfolio/starlight-romance.webp";
 import imgTemple from "@/assets/images/portfolio/temple-of-light.webp";
 import imgBeats from "@/assets/images/portfolio/beats-from-above.webp";
+import political from "@/assets/images/portfolio/political.webp"
 
 const ORANGE = "#F97316";
 
@@ -62,7 +63,7 @@ const caseStudies = [
     eventType: "Government / Political",
     objective: "Bring stories, symbols, and campaign spirit to life through a synchronized drone light show experience",
     location: "Panakudi, Tamil Nadu",
-    image: imgBeats,
+    image: political,
   },
   {
     id: 6,
