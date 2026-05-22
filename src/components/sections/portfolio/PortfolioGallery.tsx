@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Clock, MapPin, Play, Target, Users, X, Zap } from "lucide-react";
 
@@ -122,6 +122,18 @@ const categories = ["All", "Government", "Corporate", "Weddings", "Festivals", "
 
 export function PortfolioGallery() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const hoverVideoRefs = useRef<Array<HTMLVideoElement | null>>([]);
+
+  const handleHoverPlay = (index: number, play: boolean) => {
+    const video = hoverVideoRefs.current[index];
+    if (!video) return;
+    if (play) {
+      video.currentTime = 0;
+      video.play().catch(() => {});
+    } else {
+      video.pause();
+    }
+  };
 
   // Deep linking to project via query param
   useEffect(() => {
@@ -167,7 +179,7 @@ export function PortfolioGallery() {
           className="grid grid-cols-1 gap-4 sm:grid-cols-2"
         >
           <AnimatePresence mode="popLayout">
-            {projects.map((project) => (
+            {projects.map((project, i) => (
               <motion.div
                 key={project.id}
                 layout
@@ -175,23 +187,27 @@ export function PortfolioGallery() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+                onMouseEnter={() => handleHoverPlay(i, true)}
+                onMouseLeave={() => handleHoverPlay(i, false)}
                 className="group relative cursor-pointer overflow-hidden aspect-[4/3] sm:aspect-[16/9] rounded-lg"
                 onClick={() => setSelectedProject(project)}
               >
-                {project.video ? (
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  loading="lazy"
+                  className="absolute inset-0 h-full w-full object-cover opacity-70 transition-transform duration-700 group-hover:scale-110 group-hover:opacity-90"
+                />
+
+                {project.video && (
                   <video
+                    ref={(el) => { hoverVideoRefs.current[i] = el; }}
                     src={project.video}
                     muted
                     loop
                     playsInline
-                    autoPlay
-                    className="absolute inset-0 h-full w-full object-cover opacity-70 transition-transform duration-700 group-hover:scale-110 group-hover:opacity-90"
-                  />
-                ) : (
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="absolute inset-0 h-full w-full object-cover opacity-70 transition-transform duration-700 group-hover:scale-110 group-hover:opacity-90"
+                    preload="none"
+                    className="absolute inset-0 h-full w-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-700"
                   />
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/95 via-[#0a0a0a]/30 to-transparent" />

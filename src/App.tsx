@@ -1,13 +1,4 @@
-import { Home } from "@/pages/Home";
-import Portfolio from "@/pages/Portfolio";
-import Corporate from "@/pages/Corporate";
-import Weddings from "@/pages/Weddings";
-import Simulator from "@/pages/Simulator";
-import About from "@/pages/About";
-import Partners from "@/pages/Partners";
-import Blog from "@/pages/Blog";
-import BlogPost from "@/pages/BlogPost";
-import { Contact } from "@/pages/Contact";
+import { lazy, Suspense } from "react";
 import { Switch, Route, Router as WouterRouter, useLocation } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
@@ -16,7 +7,18 @@ import { WhatsAppSticky } from "@/components/ui/WhatsAppSticky";
 import { CustomCursor } from "@/components/ui/CustomCursor";
 import { HelmetProvider } from "react-helmet-async";
 import { useEffect } from "react";
-import NotFound from "@/pages/not-found";
+
+const Home = lazy(() => import("@/pages/Home").then(m => ({ default: m.Home })));
+const Portfolio = lazy(() => import("@/pages/Portfolio"));
+const Corporate = lazy(() => import("@/pages/Corporate"));
+const Weddings = lazy(() => import("@/pages/Weddings"));
+const Simulator = lazy(() => import("@/pages/Simulator"));
+const About = lazy(() => import("@/pages/About"));
+const Partners = lazy(() => import("@/pages/Partners"));
+const Blog = lazy(() => import("@/pages/Blog"));
+const BlogPost = lazy(() => import("@/pages/BlogPost"));
+const Contact = lazy(() => import("@/pages/Contact").then(m => ({ default: m.Contact })));
+const NotFound = lazy(() => import("@/pages/not-found"));
 
 const queryClient = new QueryClient();
 
@@ -37,19 +39,21 @@ function ScrollToTop() {
 
 function Router() {
   return (
-    <Switch>
-      <Route path="/" component={Home} />
-      <Route path="/portfolio" component={Portfolio} />
-      <Route path="/corporate" component={Corporate} />
-      <Route path="/weddings" component={Weddings} />
-      <Route path="/design" component={Simulator} />
-      <Route path="/about" component={About} />
-      <Route path="/partners" component={Partners} />
-      <Route path="/blog" component={Blog} />
-      <Route path="/blog/:slug" component={BlogPost} />
-      <Route path="/contact" component={Contact} />
-      <Route component={NotFound} />
-    </Switch>
+    <Suspense fallback={null}>
+      <Switch>
+        <Route path="/" component={Home} />
+        <Route path="/portfolio" component={Portfolio} />
+        <Route path="/corporate" component={Corporate} />
+        <Route path="/weddings" component={Weddings} />
+        <Route path="/design" component={Simulator} />
+        <Route path="/about" component={About} />
+        <Route path="/partners" component={Partners} />
+        <Route path="/blog" component={Blog} />
+        <Route path="/blog/:slug" component={BlogPost} />
+        <Route path="/contact" component={Contact} />
+        <Route component={NotFound} />
+      </Switch>
+    </Suspense>
   );
 }
 

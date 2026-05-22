@@ -1,42 +1,66 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 export const CustomCursor = () => {
   const droneRef = useRef<HTMLDivElement>(null);
   const dotRef = useRef<HTMLDivElement>(null);
   const pos = useRef({ x: -100, y: -100 });
   const target = useRef({ x: -100, y: -100 });
-  const [hovering, setHovering] = useState(false);
-  const [visible, setVisible] = useState(false);
+  const hoveringRef = useRef(false);
+  const visibleRef = useRef(false);
 
   useEffect(() => {
+    const droneEl = droneRef.current;
+    const dotEl = dotRef.current;
+
     const onMove = (e: MouseEvent) => {
       target.current.x = e.clientX;
       target.current.y = e.clientY;
-      if (!visible) setVisible(true);
+
+      if (!visibleRef.current) {
+        visibleRef.current = true;
+        if (droneEl) droneEl.style.opacity = "1";
+        if (dotEl) dotEl.style.opacity = "1";
+      }
+
       const el = e.target as HTMLElement;
       const interactive = el.closest(
         "a, button, [role='button'], input, textarea, select, label, .interactive"
       );
-      setHovering(!!interactive);
-    };
-    const onLeave = () => setVisible(false);
 
-    window.addEventListener("mousemove", onMove);
+      const isInteractive = !!interactive;
+      if (hoveringRef.current !== isInteractive) {
+        hoveringRef.current = isInteractive;
+        if (isInteractive) {
+          droneEl?.classList.add("hovering");
+          dotEl?.classList.add("hovering");
+        } else {
+          droneEl?.classList.remove("hovering");
+          dotEl?.classList.remove("hovering");
+        }
+      }
+    };
+
+    const onLeave = () => {
+      visibleRef.current = false;
+      if (droneEl) droneEl.style.opacity = "0";
+      if (dotEl) dotEl.style.opacity = "0";
+    };
+
+    window.addEventListener("mousemove", onMove, { passive: true });
     window.addEventListener("mouseleave", onLeave);
 
     let raf = 0;
     const tick = () => {
-      // Smooth follow (lerp)
       pos.current.x += (target.current.x - pos.current.x) * 0.18;
       pos.current.y += (target.current.y - pos.current.y) * 0.18;
 
-      if (droneRef.current) {
-        droneRef.current.style.transform = `translate(${pos.current.x}px, ${pos.current.y}px) translate(-50%, -50%) ${
-          hovering ? "scale(1.25)" : "scale(1)"
+      if (droneEl) {
+        droneEl.style.transform = `translate(${pos.current.x}px, ${pos.current.y}px) translate(-50%, -50%) ${
+          hoveringRef.current ? "scale(1.25)" : "scale(1)"
         }`;
       }
-      if (dotRef.current) {
-        dotRef.current.style.transform = `translate(${target.current.x}px, ${target.current.y}px) translate(-50%, -50%)`;
+      if (dotEl) {
+        dotEl.style.transform = `translate(${target.current.x}px, ${target.current.y}px) translate(-50%, -50%)`;
       }
       raf = requestAnimationFrame(tick);
     };
@@ -47,7 +71,7 @@ export const CustomCursor = () => {
       window.removeEventListener("mouseleave", onLeave);
       cancelAnimationFrame(raf);
     };
-  }, [hovering, visible]);
+  }, []);
 
   return (
     <>
@@ -80,7 +104,8 @@ export const CustomCursor = () => {
           pointer-events: none;
           z-index: 9999;
           transform: translate(-50%, -50%);
-          transition: transform 0.08s ease-out, opacity 0.2s, background-color 0.2s, border-color 0.2s;
+          opacity: 0;
+          transition: opacity 0.2s, background-color 0.2s, border-color 0.2s;
           animation: color-cycle 6s linear infinite;
         }
 
@@ -118,6 +143,7 @@ export const CustomCursor = () => {
           pointer-events: none;
           z-index: 9999;
           transform: translate(-50%, -50%);
+          opacity: 0;
           animation: color-cycle 6s linear infinite;
           transition: width 0.2s, height 0.2s, box-shadow 0.2s;
         }
@@ -137,17 +163,18 @@ export const CustomCursor = () => {
 
       <div
         ref={droneRef}
-        className={`drone-cursor ${hovering ? "hovering" : ""}`}
-        style={{ opacity: visible ? 1 : 0, position: "fixed", left: 0, top: 0 }}
+        className="drone-cursor"
+        style={{ position: "fixed", left: 0, top: 0 }}
         aria-hidden
       />
       <div
         ref={dotRef}
-        className={`drone-cursor-dot ${hovering ? "hovering" : ""}`}
-        style={{ opacity: visible ? 1 : 0, position: "fixed", left: 0, top: 0 }}
+        className="drone-cursor-dot"
+        style={{ position: "fixed", left: 0, top: 0 }}
         aria-hidden
       />
     </>
   );
 };
+
 
