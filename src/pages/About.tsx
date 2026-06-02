@@ -21,6 +21,7 @@ export default function About() {
       <SEO
         title="About VertX | Drone Light Show Company India"
         description="VertX is a drone light show company based in Chennai. In-house production, 1,000-drone fleet, shows delivered for government bodies, corporate brands, and weddings across India."
+        keywords="drone light show company India, about VertX drone show, drone show company Chennai, drone show company India, best drone show company India"
       />
       <Navbar />
       <main>

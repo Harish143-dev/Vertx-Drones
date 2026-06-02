@@ -62,6 +62,7 @@ export default function Portfolio() {
       <SEO 
         title="Drone Light Show Portfolio | VertX Drone Shows India" 
         description="Real footage from real VertX drone light shows across India. Government events, corporate activations, weddings and national celebrations. Watch our work."
+        keywords="drone light show portfolio India, drone show videos India, drone light show case studies India, drone show formations India, drone show government events India, wedding drone show India, corporate drone show India"
       />
       <script type="application/ld+json">
         {JSON.stringify(schemaOrgJSONLD)}

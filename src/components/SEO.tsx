@@ -6,6 +6,7 @@ interface SEOProps {
   canonical?: string;
   type?: string;
   image?: string;
+  keywords?: string;
 }
 
 export const SEO = ({ 
@@ -13,7 +14,8 @@ export const SEO = ({
   description = "Vertx Drones - Leading drone light show company providing spectacular aerial displays for corporate events, weddings, and special celebrations.", 
   canonical,
   type = "website",
-  image = "/og-image.jpg" // Default OG image
+  image = "/og-image.jpg", // Default OG image
+  keywords
 }: SEOProps) => {
   const siteTitle = "Vertx Drones";
   
@@ -34,6 +36,7 @@ export const SEO = ({
       {/* Basic Meta Tags */}
       <title>{fullTitle}</title>
       <meta name="description" content={description} />
+      {keywords && <meta name="keywords" content={keywords} />}
       <link rel="canonical" href={finalCanonical} />
 
       {/* Open Graph / Facebook */}

@@ -17,6 +17,7 @@ export default function Simulator() {
       <SEO
         title="Design Your Drone Show | VertX Drone Light Show India"
         description="Preview your drone show before you book it. Pick your drone count, shapes, and camera view. 100 to 500 drones. See exactly what your sky will look like."
+        keywords="drone show simulator India, design drone show India, how many drones for a drone show India, drone show formations India, drone show preview India, drone show shapes India, what is included in a drone show India"
       />
       <Navbar />
       <main>

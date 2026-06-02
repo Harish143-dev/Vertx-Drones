@@ -15,6 +15,7 @@ export default function Weddings() {
       <SEO 
         title="Wedding Drone Shows in India | VertX Drone Light Show" 
         description="VertX creates custom wedding drone shows across India. Couple name reveals, grand entries, proposal moments, storytelling in the sky. Make your wedding unforgettable."
+        keywords="wedding drone show India, drone show for wedding India, wedding drone light show India, couple name reveal drone show India, drone show for wedding entry India, wedding drone show Hyderabad, wedding drone show Bangalore, wedding drone show Jaipur, wedding drone show Udaipur"
       />
       <Schema 
         schema={getServiceSchema(

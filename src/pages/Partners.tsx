@@ -20,6 +20,7 @@ export default function Partners() {
       <SEO 
         title="Drone Show Partner Program India | VertX Drone Light Show" 
         description="Partner with VertX to offer drone light shows to your clients. Reseller and Official Partner programs for event companies and agencies across India."
+        keywords="drone show partner program India, drone show partnership India, reseller drone show India, event company drone show partner India, drone show business partnership India"
       />
       <Navbar />
       <main>

@@ -16,6 +16,7 @@ export default function Corporate() {
       <SEO 
         title="Corporate Drone Shows in India | VertX Drone Light Show" 
         description="VertX delivers corporate drone shows across India. Brand activations, product launches, corporate celebrations. High engagement. Viral content. Premium brand positioning."
+        keywords="corporate drone show India, drone show for brand activation India, drone show product launch India, corporate event drone show India, government drone show India, drone show for corporate events"
       />
       <Schema 
         schema={getServiceSchema(

@@ -18,6 +18,7 @@ export default function Blog() {
       <SEO
         title="Drone Show Insights and Guides | VertX Blog"
         description="Guides, comparisons, and case studies about drone light shows in India. Pricing, planning, and everything in between."
+        keywords="drone light show blog India, drone show news India, drone show updates India, latest drone show trends"
       />
       <Navbar />
 
