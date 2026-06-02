@@ -117,8 +117,8 @@ export function Navbar() {
             exit={{ opacity: 0, scale: 0.95 }}
             className="fixed inset-0 z-[-1] bg-black/95 backdrop-blur-3xl flex flex-col items-center justify-center pt-20"
           >
-            <nav className="flex flex-col items-center space-y-10">
-              {navLinksData.map((link, i) => (
+            <nav className="flex flex-col items-center space-y-6">
+              {[{ label: 'Home', href: '/' }, ...navLinksData].map((link, i) => (
                 <motion.div
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
@@ -128,7 +128,7 @@ export function Navbar() {
                   <Link
                     href={link.href}
                     onClick={() => setIsOpen(false)}
-                    className={`text-xl font-bold uppercase tracking-[0.4em] ${location === link.href ? 'text-[#F97316]' : 'text-white/40 hover:text-white'}`}
+                    className={`text-base font-bold uppercase tracking-[0.2em] ${location === link.href ? 'text-[#F97316]' : 'text-white/40 hover:text-white'}`}
                   >
                     {link.label}
                   </Link>
@@ -138,7 +138,7 @@ export function Navbar() {
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.6 }}
-                className="pt-8"
+                className="pt-4"
               >
                 <Button asChild size="lg" className="w-64">
                   <Link href="/contact" onClick={() => setIsOpen(false)}>

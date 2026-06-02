@@ -25,7 +25,8 @@ export const SEO = ({
     
   const siteUrl = "https://vertxdroneshow.in";
   const currentPath = typeof window !== 'undefined' ? window.location.pathname : '';
-  const finalCanonical = canonical || `${siteUrl}${currentPath === '/' ? '' : currentPath}`;
+  const normalizedPath = currentPath === '' || currentPath === '/' ? '/' : currentPath;
+  const finalCanonical = canonical || `${siteUrl}${normalizedPath}`;
   const finalImage = image.startsWith('http') ? image : `${siteUrl}${image}`;
 
   return (

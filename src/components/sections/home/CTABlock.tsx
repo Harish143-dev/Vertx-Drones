@@ -42,7 +42,7 @@ export function CTABlock() {
 
             <Button asChild variant="outline" size="lg" className="group border-white/20 text-white/70 hover:border-[#25D366] hover:text-[#25D366] hover:bg-transparent shadow-none">
               <a
-                href="https://wa.me/917358598707"
+                href="https://wa.me/917358598707?text=Hi%20VertX!%20I%20would%20like%20to%20inquire%20about%20booking%20a%20drone%20show."
                 target="_blank"
                 rel="noopener noreferrer"
               >
