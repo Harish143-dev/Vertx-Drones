@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import { useLocation } from "wouter";
 
 interface SEOProps {
   title?: string;
@@ -7,17 +8,20 @@ interface SEOProps {
   type?: string;
   image?: string;
   keywords?: string;
+  robots?: string;
 }
 
 export const SEO = ({ 
   title, 
-  description = "Vertx Drones - Leading drone light show company providing spectacular aerial displays for corporate events, weddings, and special celebrations.", 
+  description = "VertX Drones - Leading drone light show company providing spectacular aerial displays for corporate events, weddings, and special celebrations.", 
   canonical,
   type = "website",
-  image = "/og-image.jpg", // Default OG image
-  keywords
+  image = "/512.png",
+  keywords,
+  robots = "index, follow"
 }: SEOProps) => {
-  const siteTitle = "Vertx Drones";
+  const [location] = useLocation();
+  const siteTitle = "VertX Drones";
   
   // Only append siteTitle if the title doesn't already contain "Vertx" or "VertX"
   const needsSuffix = title && !title.toLowerCase().includes("vertx");
@@ -26,7 +30,7 @@ export const SEO = ({
     : siteTitle;
     
   const siteUrl = "https://vertxdroneshow.in";
-  const currentPath = typeof window !== 'undefined' ? window.location.pathname : '';
+  const currentPath = location;
   const normalizedPath = currentPath === '' || currentPath === '/' ? '/' : currentPath;
   const finalCanonical = canonical || `${siteUrl}${normalizedPath}`;
   const finalImage = image.startsWith('http') ? image : `${siteUrl}${image}`;
@@ -53,7 +57,7 @@ export const SEO = ({
       <meta name="twitter:image" content={finalImage} />
 
       {/* Additional SEO */}
-      <meta name="robots" content="index, follow" />
+      <meta name="robots" content={robots} />
     </Helmet>
   );
 };

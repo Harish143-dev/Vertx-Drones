@@ -10,7 +10,7 @@ import { fadeUp } from "@/lib/motion";
 export default function NotFound() {
   return (
     <div className="min-h-screen bg-background text-foreground font-sans flex flex-col justify-between overflow-hidden">
-      <SEO title="404 - Page Not Found | VertX Drones" />
+      <SEO title="404 - Page Not Found | VertX Drones" robots="noindex, nofollow" />
       <Navbar />
 
       <main className="flex-grow pt-32 pb-24 lg:pt-40 lg:pb-32 flex items-center justify-center relative">

@@ -5,6 +5,7 @@ import { PortfolioGallery } from "@/components/sections/portfolio/PortfolioGalle
 import { PortfolioCaseStudies } from "@/components/sections/portfolio/PortfolioCaseStudies";
 import { PortfolioCTA } from "@/components/sections/portfolio/PortfolioCTA";
 import { SEO } from "@/components/SEO";
+import { Schema } from "@/components/Schema";
 
 export default function Portfolio() {
   const schemaOrgJSONLD = {
@@ -50,9 +51,9 @@ export default function Portfolio() {
         "@type": "VideoObject",
         "name": "VertX Drone Light Show Portfolio",
         "description": "Real footage from real VertX drone light shows across India.",
-        "thumbnailUrl": "https://vertx-drones.com/og-image.jpg",
+        "thumbnailUrl": "https://vertxdroneshow.in/512.png",
         "uploadDate": "2024-01-01T08:00:00+08:00",
-        "contentUrl": "https://vertx-drones.com/portfolio"
+        "contentUrl": "https://vertxdroneshow.in/portfolio"
       }
     ]
   };
@@ -64,9 +65,7 @@ export default function Portfolio() {
         description="Real footage from real VertX drone light shows across India. Government events, corporate activations, weddings and national celebrations. Watch our work."
         keywords="drone light show portfolio India, drone show videos India, drone light show case studies India, drone show formations India, drone show government events India, wedding drone show India, corporate drone show India"
       />
-      <script type="application/ld+json">
-        {JSON.stringify(schemaOrgJSONLD)}
-      </script>
+      <Schema schema={schemaOrgJSONLD} />
       <Navbar />
       <main>
         {/* 1. Hero — cinematic header */}
