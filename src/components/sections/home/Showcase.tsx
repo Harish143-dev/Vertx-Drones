@@ -5,9 +5,9 @@ import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 
 // Import real assets
-import imgBeats from "@/assets/images/portfolio/beats-from-above.webp";
-import hitachi from "@/assets/images/gallery/hitachi.webp";
-import imgNeon from "@/assets/images/portfolio/neon-horizons.webp";
+import imgNewYear from "@/assets/new-portfolio/5. New Year Drone Light Show.webp";
+import imgHitachi from "@/assets/new-portfolio/7. Hitachi Corporate Brand Activation.webp";
+import imgWedding from "@/assets/new-portfolio/8. Wedding Drone Show.webp";
 
 type Item = {
   id: number;
@@ -22,14 +22,13 @@ type Item = {
 const SAMPLE = "/mp_.mp4"; // Using the local video we found earlier
 
 const items: Item[] = [
-  { id: 11, src: imgBeats, video: SAMPLE, title: "New Year Drone Light Show", category: "Public celebration", location: "Pondicherry Government", drones: "150" },
-  { id: 12, src: hitachi, video: SAMPLE, title: "Hitachi Corporate Event", category: "Synchronized branding", location: "Four Points by Sheraton", drones: "50" },
-  { id: 13, src: imgNeon, video: SAMPLE, title: "Wedding Drone Show", category: "Personalized aerial story", location: "Hyderabad", drones: "100 to 150" },
+  { id: 1, src: imgNewYear, video: SAMPLE, title: "New Year Drone Light Show", category: "Public celebration", location: "Pondicherry Government", drones: "150" },
+  { id: 3, src: imgHitachi, video: SAMPLE, title: "Hitachi Corporate Event", category: "Synchronized branding", location: "Four Points by Sheraton", drones: "50" },
+  { id: 4, src: imgWedding, video: SAMPLE, title: "Wedding Drone Show", category: "Personalized aerial story", location: "Hyderabad", drones: "100 to 150" },
 ];
 
 export const Showcase = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const hoverVideoRefs = useRef<Array<HTMLVideoElement | null>>([]);
 
   // Scroll-driven parallax on each card image
   useEffect(() => {
@@ -55,17 +54,6 @@ export const Showcase = () => {
       window.removeEventListener("resize", onScroll);
     };
   }, []);
-
-  const handleHoverPlay = (i: number, play: boolean) => {
-    const v = hoverVideoRefs.current[i];
-    if (!v) return;
-    if (play) {
-      v.currentTime = 0;
-      v.play().catch(() => { });
-    } else {
-      v.pause();
-    }
-  };
 
   // Editorial asymmetric layout per card index
   const layout = [
@@ -118,8 +106,6 @@ export const Showcase = () => {
             <Link key={i} href={`/portfolio?project=${it.id}`} className={`block ${layout[i]}`}>
               <article
                 data-parallax
-                onMouseEnter={() => handleHoverPlay(i, true)}
-                onMouseLeave={() => handleHoverPlay(i, false)}
                 className="group relative h-full w-full overflow-hidden rounded-lg border border-white/10 bg-white/5 cursor-pointer"
               >
                 <div className="absolute inset-0 overflow-hidden">
@@ -129,16 +115,6 @@ export const Showcase = () => {
                     alt={`${it.title} — ${it.category} drone show in ${it.location}`}
                     loading="lazy"
                     className="h-full w-full object-cover scale-[1.15] transition-transform duration-[1.2s] ease-out group-hover:scale-[1.22]"
-                  />
-                  {/* Hover video preview */}
-                  <video
-                    ref={(el) => { hoverVideoRefs.current[i] = el; }}
-                    src={it.video}
-                    muted
-                    loop
-                    playsInline
-                    preload="none"
-                    className="absolute inset-0 h-full w-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-700"
                   />
                 </div>
 
