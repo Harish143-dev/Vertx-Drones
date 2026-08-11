@@ -1,12 +1,12 @@
 import { motion } from "framer-motion";
 import { MapPin, Users } from "lucide-react";
 
-import imgNeon from "@/assets/images/portfolio/neon-horizons.webp";
-import imgChampions from "@/assets/images/portfolio/champions-crown.webp";
-import imgStarlight from "@/assets/images/portfolio/starlight-romance.webp";
-import imgTemple from "@/assets/images/portfolio/temple-of-light.webp";
-import imgBeats from "@/assets/images/portfolio/beats-from-above.webp";
-import political from "@/assets/images/portfolio/political.webp"
+import imgDrugCS from "@/assets/new-portfolio/10. Drug Awareness Drone Show.webp";
+import imgHitachiCS from "@/assets/new-portfolio/11. Hitachi Corporate Brand Activation.webp";
+import imgWeddingCS from "@/assets/new-portfolio/12. Wedding Drone Show.webp";
+import imgCulturalCS from "@/assets/new-portfolio/13. Cultural Fest Show.webp";
+import imgPoliticalCS from "@/assets/new-portfolio/14. Political Campaign Show.webp";
+import imgNewYearCS from "@/assets/new-portfolio/15. Public New Year Celebration.webp";
 
 const ORANGE = "#F97316";
 
@@ -20,7 +20,7 @@ const caseStudies = [
     eventType: "Government / Social Awareness",
     location: "Besant Nagar, Chennai",
     impact: "20,000+ people reached",
-    image: imgNeon,
+    image: imgDrugCS,
   },
   {
     id: 2,
@@ -31,7 +31,7 @@ const caseStudies = [
     eventType: "Corporate Event",
     location: "Mahabalipuram",
     impact: "500+ people attended",
-    image: imgChampions,
+    image: imgHitachiCS,
   },
   {
     id: 3,
@@ -42,7 +42,7 @@ const caseStudies = [
     eventType: "Wedding",
     location: "Hyderabad and Karnataka",
     impact: "500 guests",
-    image: imgStarlight,
+    image: imgWeddingCS,
   },
   {
     id: 4,
@@ -53,7 +53,7 @@ const caseStudies = [
     eventType: "Educational / Cultural Event",
     location: "Chennai",
     impact: "5,000+ students and faculty",
-    image: imgTemple,
+    image: imgCulturalCS,
   },
   {
     id: 5,
@@ -63,7 +63,7 @@ const caseStudies = [
     eventType: "Government / Political",
     objective: "Bring stories, symbols, and campaign spirit to life through a synchronized drone light show experience",
     location: "Panakudi, Tamil Nadu",
-    image: political,
+    image: imgPoliticalCS,
   },
   {
     id: 6,
@@ -73,7 +73,7 @@ const caseStudies = [
     objective: "Create a high-impact visual experience to engage large crowds and celebrate New Year festivities through synchronized drone storytelling",
     location: "Besant Nagar, Chennai",
     impact: "10000+ people",
-    image: imgBeats,
+    image: imgNewYearCS,
   }
 ];
 

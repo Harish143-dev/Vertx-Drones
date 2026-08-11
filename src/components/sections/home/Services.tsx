@@ -3,10 +3,10 @@ import {
   ExpandingCards,
   type CardItem,
 } from "@/components/ui/expanding-cards";
-import corporateImg from "../../../assets/images/use-cases/corporate.webp";
-import weddingsImg from "../../../assets/images/use-cases/weddings.webp";
-import festivalsImg from "../../../assets/images/use-cases/festivals.webp";
-import sportsImg from "../../../assets/images/use-cases/sports.webp";
+import corporateImg from "@/assets/new-portfolio/1. Corporate Events.webp";
+import weddingsImg from "@/assets/new-portfolio/2. wedding.webp";
+import festivalsImg from "@/assets/new-portfolio/3. National Celebrations and Festivals.webp";
+import sportsImg from "@/assets/new-portfolio/4. Sports Events.webp";
 
 const useCases: CardItem[] = [
   {

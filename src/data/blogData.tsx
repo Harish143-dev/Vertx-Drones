@@ -1,8 +1,11 @@
 import React from 'react';
 import { Link } from 'wouter';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import fireworkImage from "@/assets/images/blog/blog1.jpeg"
-import drone1 from "@/assets/images/blog/blog2.jpeg"
+import blogImg1 from "@/assets/new-portfolio/24. How Many Drones Do You Actually Need for a Show.webp";
+import blogImg2 from "@/assets/new-portfolio/25. Drone Shows vs Fireworks Which Is Right for Your Event.webp";
+import blogImg3 from "@/assets/new-portfolio/26. How Much Does a Drone Show Cost in India.webp";
+import blogImg4 from "@/assets/new-portfolio/27. Why Drone Shows Are Changing Brand Events.webp";
+import blogImg5 from "@/assets/new-portfolio/28. How VertX Delivered a 150-Drone New Year Show.webp";
 
 export interface BlogPost {
   slug: string;
@@ -24,7 +27,7 @@ export const blogData: BlogPost[] = [
     category: "Planning Guide",
     date: "March 15, 2025",
     readTime: "5 min",
-    image: drone1,
+    image: blogImg1,
     metaTitle: "How Many Drones Do You Need for a Drone Show? A Simple Guide",
     metaDescription: "Not sure how many drones you need for your event? This guide explains what 100, 200, 300, and 400 drones look like in a real show.",
     faqs: [
@@ -111,7 +114,7 @@ export const blogData: BlogPost[] = [
     category: "Comparison",
     date: "March 10, 2025",
     readTime: "6 min",
-    image: fireworkImage,
+    image: blogImg2,
     metaTitle: "Drone Show vs Fireworks India: Which Should You Choose?",
     metaDescription: "Drone show or fireworks for your event in India? We compare cost, safety, regulations, and visual impact to help you decide.",
     faqs: [
@@ -199,7 +202,7 @@ export const blogData: BlogPost[] = [
     category: "Pricing Guide",
     date: "February 28, 2025",
     readTime: "7 min",
-    image: "https://images.unsplash.com/photo-1508614589041-895b88991e3e?q=80&w=800&auto=format&fit=crop",
+    image: blogImg3,
     metaTitle: "Drone Show Cost in India: What Affects the Price? (2025)",
     metaDescription: "What does a drone show cost in India? We break down every factor that affects pricing — drone count, location, complexity, and lead time.",
     faqs: [
@@ -287,7 +290,7 @@ export const blogData: BlogPost[] = [
     category: "Event Marketing",
     date: "February 15, 2025",
     readTime: "5 min",
-    image: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=800&auto=format&fit=crop",
+    image: blogImg4,
     metaTitle: "Drone Shows and Event Marketing: Why Brands in India Are Making the Switch",
     metaDescription: "Brands across India are replacing traditional event entertainment with drone shows. Here is why it works for marketing, content, and brand recall.",
     content: () => (
@@ -328,7 +331,7 @@ export const blogData: BlogPost[] = [
     category: "Case Study",
     date: "January 5, 2025",
     readTime: "4 min",
-    image: "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?q=80&w=800&auto=format&fit=crop",
+    image: blogImg5,
     metaTitle: "Case Study: 150-Drone New Year Show for the Pondicherry Government",
     metaDescription: "How VertX planned and delivered a 150-drone New Year drone show for the Pondicherry Government — from airspace clearance to live execution.",
     content: () => (

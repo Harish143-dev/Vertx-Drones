@@ -78,6 +78,20 @@
     "@react-three/postprocessing": "^3.0.4",
     "playwright": "^1.60.0",
     "react-helmet-async": "^3.0.0",
+    "sharp": "^0.35.3",
     "three": "^0.184.0"
-  }
+  },
+  "description": "��#\u0000 \u0000V\u0000e\u0000r\u0000t\u0000x\u0000-\u0000D\u0000r\u0000o\u0000n\u0000e\u0000s\u0000\r\u0000 \u0000",
+  "main": "test-seo.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eyeleveltech/Vertx-Drones.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eyeleveltech/Vertx-Drones/issues"
+  },
+  "homepage": "https://github.com/eyeleveltech/Vertx-Drones#readme"
 }

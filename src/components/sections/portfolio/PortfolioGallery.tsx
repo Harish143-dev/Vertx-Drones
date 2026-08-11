@@ -2,10 +2,11 @@ import { useState, useEffect, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Clock, MapPin, Play, Target, Users, X, Zap } from "lucide-react";
 
-import newyear from "@/assets/images/gallery/newYear.webp"
-import drug from "@/assets/images/gallery/drug.webp"
-import corporate from "@/assets/images/gallery/hitachi.webp"
-import wedding from "@/assets/images/gallery/wedding.webp"
+import imgNewYear from "@/assets/new-portfolio/5. New Year Drone Light Show.webp";
+import imgDrug from "@/assets/new-portfolio/6. Drug Awareness Drone Show.webp";
+import imgHitachi from "@/assets/new-portfolio/7. Hitachi Corporate Brand Activation.webp";
+import imgWedding from "@/assets/new-portfolio/8. Wedding Drone Show.webp";
+import imgCultural from "@/assets/new-portfolio/9. Cultural Fest Drone Show.webp";
 
 import video100 from "@/assets/videos/gallery/Pondicherry.mp4";
 import video200 from "@/assets/videos/showcase/200drones.mp4";
@@ -23,7 +24,7 @@ interface Project {
   location: string;
   duration: string;
   image: string;
-  video?: string;
+  media?: string;
   description: string;
   clientName: string;
   objective: string;
@@ -40,8 +41,8 @@ const projects: Project[] = [
     drones: "150",
     location: "Pondicherry",
     duration: "10 min",
-    image: newyear,
-    video: video100,
+    image: imgNewYear,
+    media: video100,
     description: "A spectacular public celebration for the Pondicherry Government, marking the arrival of the New Year with synchronized aerial displays.",
     clientName: "Pondicherry Government",
     objective: "Public New Year celebration and tourism promotion.",
@@ -56,8 +57,8 @@ const projects: Project[] = [
     drones: "50",
     location: "Besant Nagar, Chennai",
     duration: "8 min",
-    image: drug,
-    video: video200,
+    image: imgDrug,
+    media: video200,
     description: "Drive public engagement for a national drug awareness campaign through visual storytelling.",
     clientName: "Narcotics Control Bureau (NCB)",
     objective: "Social Awareness",
@@ -71,8 +72,8 @@ const projects: Project[] = [
     drones: "50",
     location: "Mahabalipuram",
     duration: "10 min",
-    image: corporate,
-    video: video300,
+    image: imgHitachi,
+    media: video300,
     description: "A high-impact brand activation for Four Points by Sheraton, showcasing synchronized branding and logo reveals.",
     clientName: "Four Points by Sheraton",
     objective: "Corporate brand visibility and guest engagement.",
@@ -86,8 +87,8 @@ const projects: Project[] = [
     drones: "100-150",
     location: "Hyderabad",
     duration: "8 min",
-    image: wedding,
-    video: video400,
+    image: imgWedding,
+    media: video400,
     description: "A personalized aerial story for a grand wedding in Hyderabad, featuring couple name reveals and cinematic entries.",
     clientName: "Private Wedding",
     objective: "Create a memorable sky moment for a high-profile wedding.",
@@ -102,7 +103,8 @@ const projects: Project[] = [
     drones: "100",
     location: "Chennai",
     duration: "10 min",
-    image: drug,
+    image: imgCultural,
+    media: video200,
     description: "Engage a large student audience during the annual cultural festival with dynamic aerial visuals.",
     clientName: "Sathyabama Institute",
     objective: "Engage student audience",
@@ -115,18 +117,6 @@ const categories = ["All", "Government", "Corporate", "Weddings", "Festivals", "
 
 export function PortfolioGallery() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const hoverVideoRefs = useRef<Array<HTMLVideoElement | null>>([]);
-
-  const handleHoverPlay = (index: number, play: boolean) => {
-    const video = hoverVideoRefs.current[index];
-    if (!video) return;
-    if (play) {
-      video.currentTime = 0;
-      video.play().catch(() => { });
-    } else {
-      video.pause();
-    }
-  };
 
   // Deep linking to project via query param
   useEffect(() => {
@@ -172,7 +162,7 @@ export function PortfolioGallery() {
           className="grid grid-cols-1 gap-4 sm:grid-cols-2"
         >
           <AnimatePresence mode="popLayout">
-            {projects.map((project, i) => (
+            {projects.map((project) => (
               <motion.div
                 key={project.id}
                 layout
@@ -180,8 +170,6 @@ export function PortfolioGallery() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
-                onMouseEnter={() => handleHoverPlay(i, true)}
-                onMouseLeave={() => handleHoverPlay(i, false)}
                 className="group relative cursor-pointer overflow-hidden aspect-[4/3] sm:aspect-[16/9] rounded-lg"
                 onClick={() => setSelectedProject(project)}
               >
@@ -192,21 +180,10 @@ export function PortfolioGallery() {
                   className="absolute inset-0 h-full w-full object-cover opacity-70 transition-transform duration-700 group-hover:scale-110 group-hover:opacity-90"
                 />
 
-                {project.video && (
-                  <video
-                    ref={(el) => { hoverVideoRefs.current[i] = el; }}
-                    src={project.video}
-                    muted
-                    loop
-                    playsInline
-                    preload="none"
-                    className="absolute inset-0 h-full w-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-700"
-                  />
-                )}
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/95 via-[#0a0a0a]/30 to-transparent" />
                 <div className="absolute inset-0 bg-[#0a0a0a]/40 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
-                {project.video && (
+                {project.media && (
                   <div className="absolute top-4 right-4 z-10 flex items-center gap-2 rounded-full bg-black/50 px-3 py-1.5 backdrop-blur-md transition-colors group-hover:bg-[#F97316]/90">
                     <Play size={10} fill="currentColor" className="text-white group-hover:text-black" />
                     <span className="text-[9px] font-bold uppercase tracking-widest text-white group-hover:text-black">Watch</span>
@@ -267,9 +244,9 @@ export function PortfolioGallery() {
               </button>
 
               <div className="relative aspect-video">
-                {selectedProject.video ? (
+                {selectedProject.media ? (
                   <video
-                    src={selectedProject.video}
+                    src={selectedProject.media}
                     controls
                     autoPlay
                     className="h-full w-full object-cover"

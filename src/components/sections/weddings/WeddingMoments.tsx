@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
 import { fadeUp } from "@/lib/motion";
-import weddingImg from "@/assets/images/use-cases/weddings.webp";
-import imgEternal from "@/assets/images/portfolio/eternal-vows.webp";
-import imgStarlight from "@/assets/images/portfolio/starlight-romance.webp";
-import imgRhythm from "@/assets/images/portfolio/rhythm-of-light.webp";
+import imgEternal from "@/assets/new-portfolio/20. Couple Name Reveals.webp";
+import imgStarlight from "@/assets/new-portfolio/21. Proposal Moments.webp";
+import imgRhythm from "@/assets/new-portfolio/22.Storytelling in the Sky.webp";
+import weddingImg from "@/assets/new-portfolio/23. Grand Wedding Entries.webp";
 
 const moments = [
   {
