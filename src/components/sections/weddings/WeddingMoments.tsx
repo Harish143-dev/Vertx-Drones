@@ -57,7 +57,7 @@ export function WeddingMoments() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                  className={`relative aspect-[4/3] w-full overflow-hidden rounded-lg border border-border bg-card ${isEven ? 'md:order-1' : 'md:order-2'}`}
+                  className={`relative aspect-4/3 w-full overflow-hidden rounded-lg border border-border bg-card ${isEven ? 'md:order-1' : 'md:order-2'}`}
                 >
                   <img
                     src={moment.image}

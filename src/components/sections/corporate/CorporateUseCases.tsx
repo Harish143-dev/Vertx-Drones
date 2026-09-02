@@ -45,7 +45,7 @@ export function CorporateUseCases() {
   return (
     <section className="bg-[#050505] py-24 md:py-32 relative overflow-hidden border-b border-white/5">
       {/* Background ambient glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-[#F97316]/3 rounded-full blur-[180px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-175 h-175 bg-[#F97316]/3 rounded-full blur-[180px] pointer-events-none" />
 
       <div className="container mx-auto px-6 md:px-12 relative z-10">
         {/* Section Heading at the top */}

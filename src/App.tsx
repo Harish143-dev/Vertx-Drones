@@ -18,6 +18,7 @@ const Partners = lazy(() => import("@/pages/Partners"));
 const Blog = lazy(() => import("@/pages/Blog"));
 const BlogPost = lazy(() => import("@/pages/BlogPost"));
 const Contact = lazy(() => import("@/pages/Contact").then(m => ({ default: m.Contact })));
+const ThankYou = lazy(() => import("@/pages/ThankYou").then(m => ({ default: m.ThankYou })));
 const NotFound = lazy(() => import("@/pages/not-found"));
 
 const queryClient = new QueryClient();
@@ -51,6 +52,7 @@ function Router() {
         <Route path="/blog" component={Blog} />
         <Route path="/blog/:slug" component={BlogPost} />
         <Route path="/contact" component={Contact} />
+        <Route path="/thank-you" component={ThankYou} />
         <Route component={NotFound} />
       </Switch>
     </Suspense>
