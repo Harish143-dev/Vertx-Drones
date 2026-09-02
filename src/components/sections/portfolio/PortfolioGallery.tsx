@@ -170,7 +170,7 @@ export function PortfolioGallery() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
-                className="group relative cursor-pointer overflow-hidden aspect-[4/3] sm:aspect-[16/9] rounded-lg"
+                className="group relative cursor-pointer overflow-hidden aspect-4/3 sm:aspect-video rounded-lg"
                 onClick={() => setSelectedProject(project)}
               >
                 <img
@@ -180,7 +180,7 @@ export function PortfolioGallery() {
                   className="absolute inset-0 h-full w-full object-cover opacity-70 transition-transform duration-700 group-hover:scale-110 group-hover:opacity-90"
                 />
 
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/95 via-[#0a0a0a]/30 to-transparent" />
+                <div className="absolute inset-0 bg-linear-to-t from-[#0a0a0a]/95 via-[#0a0a0a]/30 to-transparent" />
                 <div className="absolute inset-0 bg-[#0a0a0a]/40 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
                 {project.media && (
@@ -191,7 +191,7 @@ export function PortfolioGallery() {
                 )}
 
                 <div className="absolute bottom-0 left-0 right-0 z-10 p-5 md:p-6">
-                  <h3 className="mb-2 text-lg font-bold text-white transition-transform duration-500 group-hover:translate-y-[-2px] md:text-xl">
+                  <h3 className="mb-2 text-lg font-bold text-white transition-transform duration-500 group-hover:-translate-y-0.5 md:text-xl">
                     {project.title}
                   </h3>
                   <div className="flex flex-wrap items-center gap-4 text-xs font-light text-white/60">
@@ -222,7 +222,7 @@ export function PortfolioGallery() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8"
+            className="fixed inset-0 z-100 flex items-center justify-center p-4 md:p-8"
             onClick={() => setSelectedProject(null)}
           >
             <div className="absolute inset-0 bg-black/85 backdrop-blur-sm" />

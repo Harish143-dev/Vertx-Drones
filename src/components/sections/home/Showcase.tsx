@@ -88,7 +88,7 @@ export const Showcase = () => {
 
       {/* Decorative glow + top divider */}
       {/* <div className="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 w-[900px] h-[900px] radial-blue opacity-60" /> */}
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#F97316]/40 to-transparent" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-[#F97316]/40 to-transparent" />
 
       <div className="container mx-auto px-6 md:px-12 relative">
         {/* Header */}
@@ -101,7 +101,7 @@ export const Showcase = () => {
         </div>
 
         {/* Grid */}
-        <div ref={containerRef} className="mt-20 grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-[30px]">
+        <div ref={containerRef} className="mt-20 grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-7.5">
           {items.map((it, i) => (
             <Link key={i} href={`/portfolio?project=${it.id}`} className={`block ${layout[i]}`}>
               <article
@@ -119,8 +119,8 @@ export const Showcase = () => {
                 </div>
 
                 {/* Veils */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/20 to-transparent" />
-                <div className="absolute inset-0 bg-gradient-to-br from-[#F97316]/0 via-transparent to-[#F97316]/0 group-hover:from-[#F97316]/10 group-hover:to-[#F97316]/5 transition-all duration-700" />
+                <div className="absolute inset-0 bg-linear-to-t from-[#050505] via-[#050505]/20 to-transparent" />
+                <div className="absolute inset-0 bg-linear-to-br from-[#F97316]/0 via-transparent to-[#F97316]/0 group-hover:from-[#F97316]/10 group-hover:to-[#F97316]/5 transition-all duration-700" />
 
                 {/* Top meta */}
                 <div className="absolute top-5 left-5 right-5 flex items-center justify-between text-[10px] tracking-[0.3em] uppercase text-white/70">

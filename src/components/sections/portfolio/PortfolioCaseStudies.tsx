@@ -103,16 +103,16 @@ export function PortfolioCaseStudies() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.45, delay: index * 0.07 }}
-              className="group flex flex-col bg-[#111] border border-white/[0.05] hover:border-white/[0.1] transition-all duration-400 overflow-hidden rounded-lg"
+              className="group flex flex-col bg-[#111] border border-white/5 hover:border-white/10 transition-all duration-400 overflow-hidden rounded-lg"
             >
               {/* Image on top */}
-              <div className="relative aspect-[16/9] overflow-hidden">
+              <div className="relative aspect-video overflow-hidden">
                 <img
                   src={study.image}
                   alt={study.title}
                   className="w-full h-full object-cover opacity-75 group-hover:opacity-100 group-hover:scale-105 transition-all duration-600"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#111] via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-linear-to-t from-[#111] via-transparent to-transparent" />
 
                 {/* Drone Count Badge */}
                 {study.droneCount && (
@@ -126,7 +126,7 @@ export function PortfolioCaseStudies() {
               </div>
 
               {/* Content below */}
-              <div className="p-6 flex flex-col flex-grow -mt-4 relative z-10">
+              <div className="p-6 flex flex-col grow -mt-4 relative z-10">
                 {study.eventType && (
                   <p
                     className="text-[9px] font-bold uppercase tracking-[0.22em] mb-2"
@@ -146,7 +146,7 @@ export function PortfolioCaseStudies() {
                 )}
 
                 {/* Bottom stats */}
-                <div className="flex flex-wrap items-center gap-x-5 gap-y-2 mt-auto pt-4 border-t border-white/[0.05]">
+                <div className="flex flex-wrap items-center gap-x-5 gap-y-2 mt-auto pt-4 border-t border-white/5">
                   <span className="flex items-center gap-1.5 text-[10px] text-white/45">
                     <MapPin size={10} style={{ color: ORANGE }} />
                     {study.location}

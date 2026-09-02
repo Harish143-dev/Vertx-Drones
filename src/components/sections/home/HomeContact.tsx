@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useLocation } from "wouter";
 import { motion } from "framer-motion";
 import { ArrowRight, Phone } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
@@ -6,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { fadeUp } from "@/lib/motion";
 
 export function HomeContact() {
+  const [, setLocation] = useLocation();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
@@ -25,7 +27,7 @@ export function HomeContact() {
       });
 
       if (response.ok) {
-        setIsSubmitted(true);
+        setLocation("/thank-you");
       } else {
         setErrorMsg("Something went wrong. Please try again.");
       }
